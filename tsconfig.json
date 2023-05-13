@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "target": "es6",
+    "moduleResolution": "node",
+    "removeComments": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "esModuleInterop": true
+  },
+  "include": ["global.d.ts", "src", "test"],
+  "exclude": ["node_modules", "**/dist"]
+}
