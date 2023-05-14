@@ -59,7 +59,10 @@ export default (_: any, opts: Options = {}): PluginObj => {
     return node.leadingComments
       ? node.leadingComments.some((comment) => {
           const ignored = comment.value.trim() === content;
-          comment.ignore = true;
+          
+          // Removes comments for ignoring
+          comment.ignore = ignored;
+
           return ignored;
         })
       : false;
