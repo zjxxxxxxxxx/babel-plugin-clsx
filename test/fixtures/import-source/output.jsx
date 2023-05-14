@@ -1,17 +1,17 @@
-import clsx_ from 'clsx';
+import _clsx from 'classnames';
 <>
   <div className="c1 c2"></div>
   <div className={'c1 c2'}></div>
-  <div className={clsx_(['c1', 'c2'])}></div>
-  <div className={clsx_(['c1', ['c2']])}></div>
+  <div className={_clsx(['c1', 'c2'])}></div>
+  <div className={_clsx(['c1', ['c2']])}></div>
   <div
-    className={clsx_({
+    className={_clsx({
       c1: true,
       c2: true,
     })}
   ></div>
   <div
-    className={clsx_([
+    className={_clsx([
       'c1',
       {
         c2: true,

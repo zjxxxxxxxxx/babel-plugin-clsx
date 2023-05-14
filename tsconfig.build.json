@@ -4,6 +4,8 @@
     "rootDir": "./src",
     "outDir": "./lib",
     "module": "commonjs",
-    "noEmit": false
-  }
+    "noEmit": false,
+    "sourceMap": true
+  },
+  "include": ["global.d.ts", "src"]
 }

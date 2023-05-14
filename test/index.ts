@@ -2,19 +2,16 @@ import { expect, test } from '@jest/globals';
 import { readFileSync, readdirSync } from 'fs';
 import { format, resolveConfig } from 'prettier';
 import { transformSync } from '@babel/core';
-import transformClsx from '../src/index';
+import clsx from '../src/index';
 
 const fixturesPath = `${process.cwd()}/test/fixtures`;
 const formatConfig = Object.assign({}, resolveConfig.sync(process.cwd()), {
   parser: 'babel',
 });
 
+tester();
 
-runner();
-
- 
-
-function runner() {
+function tester() {
   test.each(readdirSync(fixturesPath))('%s', (name) => {
     const { actual, expected } = getCodes(name);
     expect(actual).toBe(expected);
@@ -26,8 +23,7 @@ function getCodes(name: string) {
   const input = readCode(name, 'input.jsx');
   const output = readCode(name, 'output.jsx');
   const result = transformSync(input, {
-    babelrc: true,
-    plugins: [[transformClsx, options]],
+    plugins: [[clsx, options]],
   });
   const resultCode = result ? result.code || '' : '';
 
