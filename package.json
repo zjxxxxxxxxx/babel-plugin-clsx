@@ -29,7 +29,7 @@
   "scripts": {
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "format": "prettier -w **/*.ts",
+    "format": "prettier -w **/*.ts **/*.jsx",
     "build": "tsc -p tsconfig.build.json",
     "release": "pnpm build && pnpm test && standard-version"
   },

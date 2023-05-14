@@ -1,7 +1,11 @@
+// This comment should remain
 <div className="c1 c2" />;
 <div className={'c1 c2'} />;
 <div className={['c1', 'c2']} />;
-<div className={['c1', ['c2']]} />;
+<div
+  // This comment should remain
+  className={['c1', ['c2']]}
+/>;
 <div
   className={{
     c1: true,

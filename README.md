@@ -35,7 +35,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-<div className={['c1', 'c2']} />
+<div className={['c1', 'c2']} />;
 ```
 
 After compilation
@@ -69,7 +69,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-<div className={['c1', 'c2']} />
+<div className={['c1', 'c2']} />;
 ```
 
 After compilation
@@ -102,7 +102,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-<div className={['c1', 'c2']} />
+<div className={['c1', 'c2']} />;
 ```
 
 After compilation
@@ -136,7 +136,7 @@ Your code
   className={['c1', 'c2']}
   headerClassName={['c1', 'c2']}
   footerClassName={['c1', 'c2']}
-/>
+/>;
 ```
 
 After compilation

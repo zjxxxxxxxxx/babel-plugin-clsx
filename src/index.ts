@@ -43,7 +43,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
   function isDynamicClassName(node: t.JSXAttribute) {
     return (
       classNameRE.test(node.name.name as string) &&
-      // exclude <div className='...' /> & <div className={'...'} />
+      // exclude <div className='...' /> & <div className={'...'} />;
       t.isJSXExpressionContainer(node.value) &&
       !t.isStringLiteral(node.value.expression)
     );
@@ -53,13 +53,13 @@ export default (_: any, opts: Options = {}): PluginObj => {
    * <div
    *  // @clsx-ignore
    *  className={customClsx('c1', 'c2')}
-   * />
+   * />;
    */
   function isIgnored(node: t.Node, content = CLSX_IGNORE) {
     return node.leadingComments
       ? node.leadingComments.some((comment) => {
           const ignored = comment.value.trim() === content;
-          
+
           // Removes comments for ignoring
           comment.ignore = ignored;
 
@@ -80,8 +80,8 @@ export default (_: any, opts: Options = {}): PluginObj => {
     }
   }
 
-  // original <div className={['className1', 'className2']} />
-  // to       <div className={clsx_(['className1', 'className2'])} />
+  // code <div className={['className1', 'className2']} />;
+  // to   <div className={clsx_(['className1', 'className2'])} />;
   function replaceNode(path: NodePath<t.Node>) {
     const callExpr = t.callExpression(callId, [path.node] as Parameters<
       typeof t.callExpression
