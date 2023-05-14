@@ -1,4 +1,3 @@
-// @clsx-ignore-global
 <>
   <div className="c1 c2"></div>
   <div className={'c1 c2'}></div>

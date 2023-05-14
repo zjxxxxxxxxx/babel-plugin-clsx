@@ -57,7 +57,11 @@ export default (_: any, opts: Options = {}): PluginObj => {
    */
   function isIgnored(node: t.Node, content = CLSX_IGNORE) {
     return node.leadingComments
-      ? node.leadingComments.some((comment) => comment.value.trim() === content)
+      ? node.leadingComments.some((comment) => {
+          const ignored = comment.value.trim() === content;
+          comment.ignore = true;
+          return ignored;
+        })
       : false;
   }
 

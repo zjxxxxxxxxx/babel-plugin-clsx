@@ -81,7 +81,7 @@ import _clsx from 'classnames';
 
 ### `options.importName`
 
-If your custom import source does not have a default export, you can specify the import name with `importName`.
+If your custom import source does not have a default export available, you can specify the import name with `importName`.
 
 Add the [babel](https://babel.dev/docs/plugins) configuration
 
