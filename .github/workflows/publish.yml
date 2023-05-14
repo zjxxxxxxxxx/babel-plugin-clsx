@@ -1,12 +1,12 @@
-name: CI
+name: Publish NPM
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - v*
 
 jobs:
-  ci:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,8 +26,11 @@ jobs:
       - name: Install
         run: pnpm i
 
-      - name: Test
-        run: pnpm test
+      - name: Build
+        run: pnpm build
 
-      - name: Typecheck
-        run: pnpm typecheck
+      - name: Set .npmrc for publish
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ./.npmrc
+
+      - name: Publish
+        run: pnpm publish

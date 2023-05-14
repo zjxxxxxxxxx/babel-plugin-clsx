@@ -2,10 +2,12 @@ import type { BabelFile, NodePath, PluginObj, PluginPass } from '@babel/core';
 import syntaxJSX from '@babel/plugin-syntax-jsx';
 import { types as t } from '@babel/core';
 
+const CLSX_IGNORE_GLOBAL_TOKEN = '@clsx-ignore-global';
+const CLSX_IGNORE_TOKEN = '@clsx-ignore';
+
 const CLASS_NAME_STRICT_RE = /^className$/;
-const CLASS_NAME_COMMON_RE = /^(className|\w+ClassName)$/;
-const CLSX_IGNORE_GLOBAL = '@clsx-ignore-global';
-const CLSX_IGNORE = '@clsx-ignore';
+const CLASS_NAME_RE = /^(className|\w+ClassName)$/;
+
 const IMPORT_SOURCE = 'clsx';
 const IMPORT_NAME = 'default';
 const IMPORT_NAMESPACE = '_clsx';
@@ -35,11 +37,33 @@ export default (_: any, opts: Options = {}): PluginObj => {
     t.stringLiteral(opts.importSource),
   );
 
-  function getFileBody(file: BabelFile) {
-    return file.path.node.body;
+  /*
+   * // @clsx-ignore-global
+   * <div className={customClsx('c1', 'c2')} />;
+   */
+  function isIgnoredGlobal(nodes: t.Node[]) {
+    return nodes.some((item) => isIgnored(item, CLSX_IGNORE_GLOBAL_TOKEN));
   }
 
-  const classNameRE = opts.strict ? CLASS_NAME_STRICT_RE : CLASS_NAME_COMMON_RE;
+  /*
+   * <div
+   *  // @clsx-ignore
+   *  className={customClsx('c1', 'c2')}
+   * />;
+   */
+  function isIgnored(node: t.Node, token = CLSX_IGNORE_TOKEN) {
+    return node.leadingComments
+      ? node.leadingComments.some((comment) => {
+          const ignored = comment.value.trim() === token;
+          // Removes comments for ignoring
+          if (ignored) comment.ignore = ignored;
+
+          return ignored;
+        })
+      : false;
+  }
+
+  const classNameRE = opts.strict ? CLASS_NAME_STRICT_RE : CLASS_NAME_RE;
   function isDynamicClassName(node: t.JSXAttribute) {
     return (
       classNameRE.test(node.name.name as string) &&
@@ -49,35 +73,17 @@ export default (_: any, opts: Options = {}): PluginObj => {
     );
   }
 
-  /*
-   * <div
-   *  // @clsx-ignore
-   *  className={customClsx('c1', 'c2')}
-   * />;
-   */
-  function isIgnored(node: t.Node, content = CLSX_IGNORE) {
-    return node.leadingComments
-      ? node.leadingComments.some((comment) => {
-          const ignored = comment.value.trim() === content;
-
-          // Removes comments for ignoring
-          comment.ignore = ignored;
-
-          return ignored;
-        })
-      : false;
-  }
-
-  function isIgnoredGlobal(nodes: t.Node[]) {
-    return nodes.some((item) => isIgnored(item, CLSX_IGNORE_GLOBAL));
-  }
-
   // add import clsx_ from 'clsx'
   function importLibrary(state: PluginPass) {
-    if (!state.imported) {
-      state.imported = true;
+    if (!state.clsxImported) {
+      state.clsxImported = true;
+
       getFileBody(state.file).unshift(importDecl);
     }
+  }
+
+  function getFileBody(file: BabelFile) {
+    return file.path.node.body;
   }
 
   // code <div className={['className1', 'className2']} />;
@@ -94,7 +100,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
     inherits: syntaxJSX,
 
     pre(file) {
-      this.ignoreGlobal = isIgnoredGlobal(getFileBody(file));
+      this.clsxIgnoreGlobal = isIgnoredGlobal(getFileBody(file));
     },
 
     visitor: {
@@ -102,7 +108,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
         if (
           isDynamicClassName(path.node) &&
           !isIgnored(path.node) &&
-          !this.ignoreGlobal
+          !this.clsxIgnoreGlobal
         ) {
           importLibrary(this);
           replaceNode(path.get('value').get('expression') as NodePath<t.Node>);

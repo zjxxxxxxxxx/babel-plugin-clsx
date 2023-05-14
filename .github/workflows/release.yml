@@ -26,5 +26,11 @@ jobs:
       - name: Install
         run: pnpm i
 
-      - name: Build Release Assets
-        run: pnpm build:assets
+      - name: Create Release
+        uses: yyx990803/release-tag@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          body: |
+            Please refer to [CHANGELOG.md](https://github.com/zjx0905/babel-plugin-clsx/blob/main/CHANGELOG.md) for details.

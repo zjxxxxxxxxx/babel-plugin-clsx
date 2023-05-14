@@ -11,6 +11,6 @@
     "skipDefaultLibCheck": true,
     "esModuleInterop": true
   },
-  "include": ["global.d.ts", "src", "test"],
+  "include": ["./global.d.ts", "./src", "./test", "./scripts"],
   "exclude": ["node_modules", "**/dist"]
 }

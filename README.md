@@ -35,7 +35,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-<div className={['c1', 'c2']} />;
+<div className={['c1', 'c2']} />
 ```
 
 After compilation
@@ -48,6 +48,8 @@ import _clsx from 'clsx';
 ## Custom option
 
 ### `options.importSource`
+
+Default: `'clsx'`
 
 [clsx](https://github.com/lukeed/clsx) is the supported library by default, and if you have your choice, you can replace it with `importSource`.
 
@@ -69,7 +71,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-<div className={['c1', 'c2']} />;
+<div className={['c1', 'c2']} />
 ```
 
 After compilation
@@ -80,6 +82,8 @@ import _clsx from 'classnames';
 ```
 
 ### `options.importName`
+
+Default: `'default'`
 
 If your custom import source does not have a default export available, you can specify the import name with `importName`.
 
@@ -102,7 +106,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-<div className={['c1', 'c2']} />;
+<div className={['c1', 'c2']} />
 ```
 
 After compilation
@@ -113,6 +117,8 @@ import { classNames as _clsx } from '@/utils';
 ```
 
 ### `options.strict`
+
+Default: `true`
 
 Strict mode is turned on by default, and you can turn it off if you want to add [clsx](https://github.com/lukeed/clsx) to any attribute suffixed by `ClassName`.
 
@@ -136,7 +142,7 @@ Your code
   className={['c1', 'c2']}
   headerClassName={['c1', 'c2']}
   footerClassName={['c1', 'c2']}
-/>;
+/>
 ```
 
 After compilation

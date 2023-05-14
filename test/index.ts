@@ -2,7 +2,7 @@ import { expect, test } from '@jest/globals';
 import { readFileSync, readdirSync } from 'fs';
 import { format, resolveConfig } from 'prettier';
 import { transformSync } from '@babel/core';
-import clsx from '../src/index';
+import clsx from '../src';
 
 const fixturesPath = `${process.cwd()}/test/fixtures`;
 const formatConfig = Object.assign({}, resolveConfig.sync(process.cwd()), {
