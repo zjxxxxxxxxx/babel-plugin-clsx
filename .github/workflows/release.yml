@@ -27,10 +27,11 @@ jobs:
         run: pnpm i
 
       - name: Create Release
-        uses: yyx990803/release-tag@master
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           body: |
             Please refer to [CHANGELOG.md](https://github.com/zjx0905/babel-plugin-clsx/blob/main/CHANGELOG.md) for details.

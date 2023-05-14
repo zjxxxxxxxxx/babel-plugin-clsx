@@ -1,4 +1,4 @@
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { ExecSyncOptions, execSync } from 'node:child_process';
 import path from 'node:path';
@@ -8,7 +8,7 @@ import consola from 'consola';
 
 export const __dirname = fileURLToPath(new URL('../', import.meta.url));
 export const pkgPath = path.resolve(__dirname, 'package.json');
-const pkg = require(pkgPath);
+const pkg = JSON.parse(readFileSync(pkgPath, { encoding: 'utf-8' }));
 const { version: currentVersion } = pkg;
 
 main().catch((err) => exit(err.message));
