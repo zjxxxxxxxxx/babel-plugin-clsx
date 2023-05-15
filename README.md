@@ -24,7 +24,7 @@ pnpm add --save-dev babel-plugin-clsx
 
 ## Usage
 
-<!-- Please install [clsx](https://github.com/lukeed/clsx) first. -->
+Before doing so, install [clsx](https://github.com/lukeed/clsx) or any other available className handlers.
 
 Add the [babel](https://babel.dev/docs/plugins) configuration
 

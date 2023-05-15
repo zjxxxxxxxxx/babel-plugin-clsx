@@ -27,10 +27,6 @@
   },
   "homepage": "https://github.com/zjx0905/babel-plugin-clsx#readme",
   "license": "MIT",
-  "engines": {
-    "node": ">=16",
-    "pnpm": ">=7"
-  },
   "scripts": {
     "cz": "simple-git-hooks & esno ./scripts/commit.ts",
     "test": "jest",
@@ -43,11 +39,7 @@
     "release": "esno ./scripts/release.ts"
   },
   "dependencies": {
-    "@babel/plugin-syntax-jsx": "^7.21.4",
-    "clsx": "^1.2.1"
-  },
-  "peerDependencies": {
-    "@babel/core": "^7.0.0-0"
+    "@babel/plugin-syntax-jsx": "^7.21.4"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
