@@ -1,3 +1,12 @@
+## [0.1.2](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.1...v0.1.2) (2023-05-15)
+
+
+### Bug Fixes
+
+* Fixed plugin-syntax-jsx missing ([e987795](https://github.com/zjx0905/babel-plugin-clsx/commit/e987795fc361addd5185c2178b4623a25af94d37))
+
+
+
 ## [0.1.1](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.0...v0.1.1) (2023-05-15)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-clsx",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Automatically add clsx for className",
   "type": "commonjs",
   "main": "./lib/index.js",
