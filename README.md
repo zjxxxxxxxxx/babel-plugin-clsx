@@ -1,6 +1,8 @@
 # babel-plugin-clsx
 
-Automatically adds [clsx](https://github.com/lukeed/clsx) for className, You can enjoy the joy of importing without importing.
+Automatically adds [clsx](https://github.com/lukeed/clsx) for `className`, You can enjoy the joy of importing without importing.
+
+> Before doing so, make sure that [clsx](https://github.com/lukeed/clsx) is installed or another available `className` handler exists for your project.
 
 ## Install
 
@@ -24,8 +26,6 @@ pnpm add --save-dev babel-plugin-clsx
 
 ## Usage
 
-Before doing so, install [clsx](https://github.com/lukeed/clsx) or any other available className handlers.
-
 Add the [babel](https://babel.dev/docs/plugins) configuration
 
 ```json
@@ -47,7 +47,7 @@ import _clsx from 'clsx';
 <div className={_clsx(['c1', 'c2'])} />;
 ```
 
-## Custom option
+## Options
 
 ### `options.importSource`
 
@@ -122,7 +122,7 @@ import { classNames as _clsx } from '@/utils';
 
 Default: `true`
 
-Strict mode is turned on by default, and you can turn it off if you want to add [clsx](https://github.com/lukeed/clsx) to any attribute suffixed by `ClassName`.
+Strict mode is turned on by default, and you can turn it off if you want to add [clsx](https://github.com/lukeed/clsx) to any attribute suffixed by `className`.
 
 Add the [babel](https://babel.dev/docs/plugins) configuration
 

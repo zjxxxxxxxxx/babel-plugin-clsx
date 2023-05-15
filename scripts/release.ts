@@ -1,13 +1,11 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 import { ExecSyncOptions, execSync } from 'node:child_process';
 import path from 'node:path';
 import semver from 'semver';
 import enquirer from 'enquirer';
 import consola from 'consola';
 
-export const __dirname = fileURLToPath(new URL('../', import.meta.url));
-export const pkgPath = path.resolve(__dirname, 'package.json');
+export const pkgPath = path.resolve('package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
 const { version: currentVersion } = pkg;
 
@@ -84,7 +82,7 @@ async function inputVersion() {
   const { yes: confirmRelease } = await enquirer.prompt<{ yes: boolean }>({
     type: 'confirm',
     name: 'yes',
-    message: `Confirm release: v${targetVersion} ？`,
+    message: `Confirm release: v${targetVersion}?`,
   });
 
   if (!confirmRelease) {

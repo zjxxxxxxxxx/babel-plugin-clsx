@@ -1,10 +1,11 @@
 import { readFileSync, readdirSync } from 'node:fs';
+import path from 'node:path';
 import { expect, test } from '@jest/globals';
 import { transformSync } from '@babel/core';
 import { format, resolveConfig } from 'prettier';
 import clsx from '../src';
 
-const fixturesPath = `${process.cwd()}/test/fixtures`;
+const fixturesPath = path.resolve('test/fixtures');
 const formatConfig = Object.assign({}, resolveConfig.sync(process.cwd()), {
   parser: 'babel',
 });
