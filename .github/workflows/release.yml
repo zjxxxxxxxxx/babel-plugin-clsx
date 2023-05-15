@@ -1,5 +1,7 @@
 name: Release Github
 
+permissions: write-all
+
 on:
   push:
     tags:
