@@ -1,7 +1,7 @@
+import { readFileSync, readdirSync } from 'node:fs';
 import { expect, test } from '@jest/globals';
-import { readFileSync, readdirSync } from 'fs';
-import { format, resolveConfig } from 'prettier';
 import { transformSync } from '@babel/core';
+import { format, resolveConfig } from 'prettier';
 import clsx from '../src';
 
 const fixturesPath = `${process.cwd()}/test/fixtures`;
@@ -35,5 +35,5 @@ function getCodes(name: string) {
 
 function readCode(name: string, filename: string) {
   const path = `${fixturesPath}/${name}/${filename}`;
-  return readFileSync(path).toString('utf-8');
+  return readFileSync(path, 'utf-8');
 }

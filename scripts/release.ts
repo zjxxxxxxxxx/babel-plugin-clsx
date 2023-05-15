@@ -8,7 +8,7 @@ import consola from 'consola';
 
 export const __dirname = fileURLToPath(new URL('../', import.meta.url));
 export const pkgPath = path.resolve(__dirname, 'package.json');
-const pkg = JSON.parse(readFileSync(pkgPath, { encoding: 'utf-8' }));
+const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
 const { version: currentVersion } = pkg;
 
 main().catch((err) => exit(err.message));
@@ -45,7 +45,7 @@ function checkBranch() {
     .trim();
 
   if (currentBranch !== releaseBranch) {
-    exit(`请切回 ${releaseBranch} 分支进行发版！`);
+    exit(`Please switch back to ${releaseBranch} branch for distribution.`);
   }
 }
 
@@ -56,7 +56,7 @@ async function inputVersion() {
   const { release } = await enquirer.prompt<{ release: string }>({
     type: 'select',
     name: 'release',
-    message: '请选择版本类型',
+    message: 'Please select the version type',
     choices: [...releases, 'custom'],
   });
 
@@ -66,7 +66,7 @@ async function inputVersion() {
     }>({
       type: 'input',
       name: 'version',
-      message: '请输入自定义版本号',
+      message: 'Enter a custom version number',
       initial: currentVersion,
     });
     targetVersion = version;
@@ -78,17 +78,17 @@ async function inputVersion() {
     !semver.valid(targetVersion) ||
     !semver.lt(currentVersion, targetVersion)
   ) {
-    exit(`无效的版本号: ${targetVersion}`);
+    exit(`Invalid version number: ${targetVersion}`);
   }
 
   const { yes: confirmRelease } = await enquirer.prompt<{ yes: boolean }>({
     type: 'confirm',
     name: 'yes',
-    message: `确定发版: v${targetVersion} ？`,
+    message: `Confirm release: v${targetVersion} ？`,
   });
 
   if (!confirmRelease) {
-    exit(`取消发版: v${targetVersion}`);
+    exit(`Cancel release: v${targetVersion}`);
   }
 
   return targetVersion;
@@ -113,7 +113,7 @@ function createReleases() {
 
 function exit(msg: string) {
   updateVersion(currentVersion);
-  consola.error(msg || '已退出');
+  consola.error(msg || 'exit');
   process.exit();
 }
 

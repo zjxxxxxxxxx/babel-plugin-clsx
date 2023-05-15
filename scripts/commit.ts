@@ -10,7 +10,7 @@ async function main() {
     const { type } = await enquirer.prompt<{ type: string }>({
       type: 'select',
       name: 'type',
-      message: 'Please select the commit type:',
+      message: 'Select the commit type',
       choices: metadata.map((item) => ({
         name: item.type,
         value: item.type,
@@ -23,7 +23,7 @@ async function main() {
     }>({
       type: 'input',
       name: 'content',
-      message: 'Please enter the change description:',
+      message: 'Please enter the change description',
     });
 
     if (!content.trim()) {
@@ -36,7 +36,7 @@ async function main() {
       stdio: 'inherit',
     });
   } catch {
-    consola.error('已退出');
+    consola.error('exit');
     process.exit();
   }
 }

@@ -2,8 +2,8 @@ import type { BabelFile, NodePath, PluginObj, PluginPass } from '@babel/core';
 import { types as t } from '@babel/core';
 import syntaxJSX from '@babel/plugin-syntax-jsx';
 
-const _clsxIGNORE_GLOBAL_TOKEN = '@clsx-ignore-global';
-const _clsxIGNORE_TOKEN = '@clsx-ignore';
+const CLSX_IGNORE_GLOBAL_TOKEN = '@clsx-ignore-global';
+const CLSX_IGNORE_TOKEN = '@clsx-ignore';
 
 const CLASS_NAME_STRICT_RE = /^className$/;
 const CLASS_NAME_RE = /^(className|\w+ClassName)$/;
@@ -42,7 +42,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
    * <div className={customClsx('c1', 'c2')} />;
    */
   function isIgnoredGlobal(nodes: t.Node[]) {
-    return nodes.some((item) => isIgnored(item, _clsxIGNORE_GLOBAL_TOKEN));
+    return nodes.some((item) => isIgnored(item, CLSX_IGNORE_GLOBAL_TOKEN));
   }
 
   /*
@@ -51,7 +51,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
    *  className={customClsx('c1', 'c2')}
    * />;
    */
-  function isIgnored(node: t.Node, token = _clsxIGNORE_TOKEN) {
+  function isIgnored(node: t.Node, token = CLSX_IGNORE_TOKEN) {
     return node.leadingComments
       ? node.leadingComments.some((comment) => {
           const ignored = comment.value.trim() === token;
