@@ -14,7 +14,6 @@ specifiers:
   esno: ^0.16.3
   jest: ^29.5.0
   prettier: ^2.8.8
-  simple-git: ^3.17.0
   simple-git-hooks: ^2.8.1
   ts-jest: ^29.1.0
   ts-node: ^10.9.1
@@ -36,7 +35,6 @@ devDependencies:
   esno: 0.16.3
   jest: 29.5.0_w7nra54zc7xdisk4sfupsmmssu
   prettier: 2.8.8
-  simple-git: 3.17.0
   simple-git-hooks: 2.8.1
   ts-jest: 29.1.0_dywjbwoysgpe5pkqw6owlxitka
   ts-node: 10.9.1_7d6xsihq32xp7hx6ta4a3u7eky
@@ -1734,18 +1732,6 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.15
-    dev: true
-
-  /@kwsites/file-exists/1.1.1:
-    resolution: {integrity: sha512-m9/5YGR18lIwxSFDwfE3oA7bWuq9kdau6ugN4H2rJeyhFQZcG9AgSHkQtSD15a8WvTgfz9aikZMrKPHvbpqFiw==}
-    dependencies:
-      debug: 4.3.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /@kwsites/promise-deferred/1.1.1:
-    resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
     dev: true
 
   /@sinclair/typebox/0.25.24:
@@ -3964,16 +3950,6 @@ packages:
     resolution: {integrity: sha512-DYpcVR1AGtSfFUNzlBdHrQGPsOhuuEJ/FkmPOOlFysP60AHd3nsEpkGq/QEOdtUyT1Qhk7w9oLmFoMG+75BDog==}
     hasBin: true
     requiresBuild: true
-    dev: true
-
-  /simple-git/3.17.0:
-    resolution: {integrity: sha512-JozI/s8jr3nvLd9yn2jzPVHnhVzt7t7QWfcIoDcqRIGN+f1IINGv52xoZti2kkYfoRhhRvzMSNPfogHMp97rlw==}
-    dependencies:
-      '@kwsites/file-exists': 1.1.1
-      '@kwsites/promise-deferred': 1.1.1
-      debug: 4.3.4
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /sisteransi/1.0.5:
