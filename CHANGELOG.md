@@ -1,3 +1,17 @@
+## [0.1.1](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.0...v0.1.1) (2023-05-15)
+
+
+### Bug Fixes
+
+* package type error ([3c0a3a8](https://github.com/zjx0905/babel-plugin-clsx/commit/3c0a3a83b16a84cf6ddb01246931096c76fcd677))
+
+
+### Features
+
+* Compact package size ([a8233b6](https://github.com/zjx0905/babel-plugin-clsx/commit/a8233b62c1b408bfc5e4d7ff09db0ce7a7e3d6e2))
+
+
+
 # 0.1.0 (2023-05-14)
 
 
