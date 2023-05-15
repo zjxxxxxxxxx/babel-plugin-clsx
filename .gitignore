@@ -7,6 +7,7 @@ node_modules
 
 # Bundle
 lib/
+es/
 
 # Typescript build file
 *.tsbuildinfo

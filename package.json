@@ -2,6 +2,7 @@
   "name": "babel-plugin-clsx",
   "version": "0.1.1",
   "description": "Automatically add clsx for className",
+  "type": "commonjs",
   "main": "./lib/index.js",
   "files": [
     "lib",
@@ -12,7 +13,6 @@
     "type": "git",
     "url": "git+https://github.com/zjx0905/babel-plugin-clsx.git"
   },
-  "type": "commonjs",
   "keywords": [
     "babel",
     "babel-plugin",
@@ -37,17 +37,20 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier -w **/*.ts **/*.jsx",
     "build": "pnpm build:cjs",
-    "build:esm": "tsc -p tsconfig.build.json --module esnext --outDir ./lib/esm",
+    "build:esm": "tsc -p tsconfig.build.json --module esnext --outDir ./es",
     "build:cjs": "tsc -p tsconfig.build.json --module commonjs --outDir ./lib",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release": "esno ./scripts/release.ts"
   },
   "dependencies": {
+    "@babel/plugin-syntax-jsx": "^7.21.4",
     "clsx": "^1.2.1"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0-0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
-    "@babel/plugin-syntax-jsx": "^7.21.4",
     "@babel/preset-env": "^7.21.5",
     "@jest/globals": "^29.5.0",
     "@types/babel__core": "^7.20.0",

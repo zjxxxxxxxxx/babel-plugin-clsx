@@ -24,6 +24,8 @@ pnpm add --save-dev babel-plugin-clsx
 
 ## Usage
 
+<!-- Please install [clsx](https://github.com/lukeed/clsx) first. -->
+
 Add the [babel](https://babel.dev/docs/plugins) configuration
 
 ```json
