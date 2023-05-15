@@ -3,7 +3,8 @@
   "compilerOptions": {
     "rootDir": "./src",
     "noEmit": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "esModuleInterop": false
   },
   "include": ["global.d.ts", "src"]
 }
