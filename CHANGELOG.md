@@ -1,3 +1,12 @@
+## [0.1.3](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.2...v0.1.3) (2023-05-15)
+
+
+### Bug Fixes
+
+* Remove clsx that is not actually useful ([f187d73](https://github.com/zjx0905/babel-plugin-clsx/commit/f187d73999b1dc817388a80e481ff6b2358467a7))
+
+
+
 ## [0.1.2](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.1...v0.1.2) (2023-05-15)
 
 
