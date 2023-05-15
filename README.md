@@ -127,10 +127,12 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 ```json
 {
   "plugins": [
-    "clsx",
-    {
-      "strict": false
-    }
+    [
+      "clsx",
+      {
+        "strict": false
+      }
+    ]
   ]
 }
 ```

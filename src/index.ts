@@ -1,9 +1,9 @@
 import type { BabelFile, NodePath, PluginObj, PluginPass } from '@babel/core';
-import syntaxJSX from '@babel/plugin-syntax-jsx';
 import { types as t } from '@babel/core';
+import syntaxJSX from '@babel/plugin-syntax-jsx';
 
-const CLSX_IGNORE_GLOBAL_TOKEN = '@clsx-ignore-global';
-const CLSX_IGNORE_TOKEN = '@clsx-ignore';
+const _clsxIGNORE_GLOBAL_TOKEN = '@clsx-ignore-global';
+const _clsxIGNORE_TOKEN = '@clsx-ignore';
 
 const CLASS_NAME_STRICT_RE = /^className$/;
 const CLASS_NAME_RE = /^(className|\w+ClassName)$/;
@@ -24,16 +24,16 @@ export default (_: any, opts: Options = {}): PluginObj => {
   opts.importName = opts.importName || IMPORT_NAME;
 
   const callId = t.identifier(IMPORT_NAMESPACE);
-  // default: clsx_
-  // custom:  { importName as clsx_ }
-  const importId =
+  // default: _clsx
+  // custom:  { importName as _clsx }
+  const importSpec =
     opts.importName === IMPORT_NAME
       ? t.importDefaultSpecifier(callId)
       : t.importSpecifier(callId, t.identifier(opts.importName));
-  // default: import clsx_ form 'clsx'
-  // custom:  import clsx_ form importSource or import { importName as clsx_ } from importSource
+  // default: import _clsx form 'clsx'
+  // custom:  import _clsx form importSource or import { importName as _clsx } from importSource
   const importDecl = t.importDeclaration(
-    [importId],
+    [importSpec],
     t.stringLiteral(opts.importSource),
   );
 
@@ -42,7 +42,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
    * <div className={customClsx('c1', 'c2')} />;
    */
   function isIgnoredGlobal(nodes: t.Node[]) {
-    return nodes.some((item) => isIgnored(item, CLSX_IGNORE_GLOBAL_TOKEN));
+    return nodes.some((item) => isIgnored(item, _clsxIGNORE_GLOBAL_TOKEN));
   }
 
   /*
@@ -51,7 +51,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
    *  className={customClsx('c1', 'c2')}
    * />;
    */
-  function isIgnored(node: t.Node, token = CLSX_IGNORE_TOKEN) {
+  function isIgnored(node: t.Node, token = _clsxIGNORE_TOKEN) {
     return node.leadingComments
       ? node.leadingComments.some((comment) => {
           const ignored = comment.value.trim() === token;
@@ -73,7 +73,7 @@ export default (_: any, opts: Options = {}): PluginObj => {
     );
   }
 
-  // add import clsx_ from 'clsx'
+  // add import _clsx from 'clsx'
   function importLibrary(state: PluginPass) {
     if (!state.clsxImported) {
       state.clsxImported = true;
@@ -86,8 +86,8 @@ export default (_: any, opts: Options = {}): PluginObj => {
     return file.path.node.body;
   }
 
-  // code <div className={['className1', 'className2']} />;
-  // to   <div className={clsx_(['className1', 'className2'])} />;
+  // code <div className={['c1', 'c2']} />;
+  // to   <div className={_clsx(['c1', 'c2'])} />;
   function replaceNode(path: NodePath<t.Node>) {
     const callExpr = t.callExpression(callId, [path.node] as Parameters<
       typeof t.callExpression
