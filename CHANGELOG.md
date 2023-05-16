@@ -1,3 +1,17 @@
+# [0.2.0](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.3...v0.2.0) (2023-05-16)
+
+
+### Features
+
+* Static mode supported ([552d321](https://github.com/zjx0905/babel-plugin-clsx/commit/552d32139cde29d77f68cb0c73dbbc45396fe6e5))
+
+
+### Performance Improvements
+
+* Improve the efficiency of clsx ignore global search ([d7e9407](https://github.com/zjx0905/babel-plugin-clsx/commit/d7e9407f9dd82a93420a76d6d7756a6d5a8063e2))
+
+
+
 ## [0.1.3](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.2...v0.1.3) (2023-05-15)
 
 
