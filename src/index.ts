@@ -69,18 +69,22 @@ export default (_: any, opts: Options = {}): PluginObj => {
       : false;
   }
 
-  function isNeedTransform(exper: t.JSXExpressionContainer) {
+  function isNeedTransform(cont: t.JSXExpressionContainer) {
     if (opts.static) {
-      // include <div className={['c1', 'c2']} /> or <div className={{ c1: true, c2: true }} />
+      // include <div className={['c1', 'c2']} />
+      // include <div className={{ c1: true, c2: true }} />
       return (
-        t.isArrayExpression(exper.expression) ||
-        t.isObjectExpression(exper.expression)
+        t.isArrayExpression(cont.expression) ||
+        t.isObjectExpression(cont.expression)
       );
     } else {
-      // exclude <div className={} /> or <div className={'c1 c2'} />
+      // exclude <div className={} />
+      // exclude <div className={'c1 c2'} />
+      // exclude <div className={fn('c1','c2')} />
       return (
-        !t.isJSXEmptyExpression(exper.expression) &&
-        !t.isStringLiteral(exper.expression)
+        !t.isJSXEmptyExpression(cont.expression) &&
+        !t.isStringLiteral(cont.expression) &&
+        !t.isCallExpression(cont.expression)
       );
     }
   }

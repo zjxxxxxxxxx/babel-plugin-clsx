@@ -1,11 +1,12 @@
 import _clsx from 'clsx';
-const classNames1 = ['c1', 'c2'];
-const classNames2 = ['c1', ['c2']];
-const classNames3 = {
+import classNames from 'classnames';
+const className1 = ['c1', 'c2'];
+const className2 = ['c1', ['c2']];
+const className3 = {
   c1: true,
   c2: true,
 };
-const classNames4 = [
+const className4 = [
   'c1',
   {
     c2: true,
@@ -13,7 +14,8 @@ const classNames4 = [
 ];
 <div className="c1 c2" />;
 <div className={'c1 c2'} />;
-<div className={_clsx(classNames1)} />;
-<div className={_clsx(classNames2)} />;
-<div className={_clsx(classNames3)} />;
-<div className={_clsx(classNames4)} />;
+<div className={classNames('c1', 'c2')} />;
+<div className={_clsx(className1)} />;
+<div className={_clsx(className2)} />;
+<div className={_clsx(className3)} />;
+<div className={_clsx(className4)} />;

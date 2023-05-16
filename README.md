@@ -77,16 +77,16 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-const classNames = ['c1', 'c2'];
-<div className={classNames} />;
+const className = ['c1', 'c2'];
+<div className={className} />;
 ```
 
 After compilation
 
 ```js
 import _clsx from 'clsx';
-const classNames = ['c1', 'c2'];
-<div className={_clsx(classNames)} />;
+const className = ['c1', 'c2'];
+<div className={_clsx(className)} />;
 ```
 
 In an existing project, there may be a lot of code like this, and if you turn off static mode, there will be a lot of duplication.
@@ -95,8 +95,12 @@ Your code
 
 ```js
 import classNames from 'clsx';
+
+// 👎 This will repeat the process
 const className = classNames('c1', 'c2');
 <div className={className} />;
+
+// 👍 This does not repeat the process
 <div className={classNames('c1', 'c2')} />;
 ```
 
@@ -105,9 +109,13 @@ After compilation
 ```js
 import _clsx from 'clsx';
 import classNames from 'clsx';
+
+// 👎 This will repeat the process
 const className = classNames('c1', 'c2');
 <div className={_clsx(className)} />;
-<div className={_clsx(classNames('c1', 'c2'))} />;
+
+// 👍 This does not repeat the process
+<div className={classNames('c1', 'c2')} />;
 ```
 
 ### `options.strict`
