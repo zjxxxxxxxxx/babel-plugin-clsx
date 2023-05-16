@@ -37,20 +37,23 @@ export default (_: any, opts: Options = {}): PluginObj => {
     t.stringLiteral(opts.importSource),
   );
 
-  /*
-   * // @clsx-ignore-global
-   * <div className={customClsx('c1', 'c2')} />;
-   */
+  // @clsx-ignore-global
   function isIgnoredGlobal(nodes: t.Node[]) {
-    return nodes.some((item) => isIgnored(item, CLSX_IGNORE_GLOBAL_TOKEN));
+    if (nodes.length) {
+      for (const node of nodes) {
+        // Comments are considered to be from the top of the file before any import
+        if (t.isImportDeclaration(node)) {
+          if (isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN)) return true;
+        } else {
+          // Comments are considered to be at the top of the file before the first line of expression
+          return isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN);
+        }
+      }
+    }
+    return false;
   }
 
-  /*
-   * <div
-   *  // @clsx-ignore
-   *  className={customClsx('c1', 'c2')}
-   * />;
-   */
+  // @clsx-ignore
   function isIgnored(node: t.Node, token = CLSX_IGNORE_TOKEN) {
     return node.leadingComments
       ? node.leadingComments.some((comment) => {

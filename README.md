@@ -49,78 +49,11 @@ import _clsx from 'clsx';
 
 ## Options
 
-### `options.importSource`
-
-Default: `'clsx'`
-
-[clsx](https://github.com/lukeed/clsx) is the supported library by default, and if you have your choice, you can replace it with `importSource`.
-
-Add the [babel](https://babel.dev/docs/plugins) configuration
-
-```json
-{
-  "plugins": [
-    [
-      "clsx",
-      {
-        "importSource": "classnames"
-      }
-    ]
-  ]
-}
-```
-
-Your code
-
-```js
-<div className={['c1', 'c2']} />
-```
-
-After compilation
-
-```js
-import _clsx from 'classnames';
-<div className={_clsx(['c1', 'c2'])} />;
-```
-
-### `options.importName`
-
-Default: `'default'`
-
-If your custom import source does not have a default export available, you can specify the import name with `importName`.
-
-Add the [babel](https://babel.dev/docs/plugins) configuration
-
-```json
-{
-  "plugins": [
-    [
-      "clsx",
-      {
-        "importSource": "@/utils",
-        "importName": "classNames"
-      }
-    ]
-  ]
-}
-```
-
-Your code
-
-```js
-<div className={['c1', 'c2']} />
-```
-
-After compilation
-
-```js
-import { classNames as _clsx } from '@/utils';
-<div className={_clsx(['c1', 'c2'])} />;
-```
-
 ### `options.strict`
 
-Default: `true`
+| Type      | Default value |
+| --------- | ------------- |
+| `boolean` | `true`        |   
 
 Strict mode is turned on by default, and you can turn it off if you want to add [clsx](https://github.com/lukeed/clsx) to any attribute suffixed by `className`.
 
@@ -160,13 +93,86 @@ import _clsx from 'clsx';
 />;
 ```
 
+### `options.importSource`
+
+| Type     | Default value |
+| -------- | ------------- |
+| `string` | `'clsx'`      |  
+
+[clsx](https://github.com/lukeed/clsx) is the supported library by default, and if you have your choice, you can replace it with `importSource`.
+
+Add the [babel](https://babel.dev/docs/plugins) configuration
+
+```json
+{
+  "plugins": [
+    [
+      "clsx",
+      {
+        "importSource": "classnames"
+      }
+    ]
+  ]
+}
+```
+
+Your code
+
+```js
+<div className={['c1', 'c2']} />
+```
+
+After compilation
+
+```js
+import _clsx from 'classnames';
+<div className={_clsx(['c1', 'c2'])} />;
+```
+
+### `options.importName`
+
+| Type     | Default value |
+| -------- | ------------- |
+| `string` | `'default'`   |  
+
+If your custom import source does not have a default export available, you can specify the import name with `importName`.
+
+Add the [babel](https://babel.dev/docs/plugins) configuration
+
+```json
+{
+  "plugins": [
+    [
+      "clsx",
+      {
+        "importSource": "@/utils",
+        "importName": "classNames"
+      }
+    ]
+  ]
+}
+```
+
+Your code
+
+```js
+<div className={['c1', 'c2']} />
+```
+
+After compilation
+
+```js
+import { classNames as _clsx } from '@/utils';
+<div className={_clsx(['c1', 'c2'])} />;
+```
+
 ## Ignore
 
 If you feel that there is an unnecessary transformation, you can add a comment so that it is ignored during the transformation.
 
 ### Local ignore
 
-You can add comments to a single line of code.
+You can ignore the conversion of this line by adding a comment above.
 
 Your code
 
@@ -188,7 +194,7 @@ import _clsx from 'clsx';
 
 ### Global ignore
 
-You can add comments to the entire file.
+You can omit the conversion of the entire file by adding a comment at the top of the file.
 
 Your code
 
