@@ -37,23 +37,84 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```js
-<div className={['c1', 'c2']} />
+<div className={['c1', 'c2']} />;
+<div className={{ c1: true, c2: true }} />;
 ```
 
 After compilation
 
 ```js
 import _clsx from 'clsx';
-<div className={_clsx(['c1', 'c2'])} />;
+<div className={_clsx('c1', 'c2')} />;
+<div className={_clsx({ c1: true, c2: true })} />;
 ```
 
 ## Options
 
+### `options.static`
+
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
+
+By default, static mode is enabled, in which only `array` and `object` are converted, effectively avoiding duplicate processing of `className`. Of course, although it is not recommended to do so, you can still turn off this option, and after that, it will be up to you to handle or ignore unnecessary transformations.
+
+Add the [babel](https://babel.dev/docs/plugins) configuration
+
+```json
+{
+  "plugins": [
+    [
+      "clsx",
+      {
+        "static": false
+      }
+    ]
+  ]
+}
+```
+
+Your code
+
+```js
+const classNames = ['c1', 'c2'];
+<div className={classNames} />;
+```
+
+After compilation
+
+```js
+import _clsx from 'clsx';
+const classNames = ['c1', 'c2'];
+<div className={_clsx(classNames)} />;
+```
+
+In an existing project, there may be a lot of code like this, and if you turn off static mode, there will be a lot of duplication.
+
+Your code
+
+```js
+import classNames from 'clsx';
+const className = classNames('c1', 'c2');
+<div className={className} />;
+<div className={classNames('c1', 'c2')} />;
+```
+
+After compilation
+
+```js
+import _clsx from 'clsx';
+import classNames from 'clsx';
+const className = classNames('c1', 'c2');
+<div className={_clsx(className)} />;
+<div className={_clsx(classNames('c1', 'c2'))} />;
+```
+
 ### `options.strict`
 
-| Type      | Default value |
-| --------- | ------------- |
-| `boolean` | `true`        |   
+| Type      | Default |
+| --------- | ------- |
+| `boolean` | `true`  |
 
 Strict mode is turned on by default, and you can turn it off if you want to add [clsx](https://github.com/lukeed/clsx) to any attribute suffixed by `className`.
 
@@ -87,17 +148,17 @@ After compilation
 ```js
 import _clsx from 'clsx';
 <Component
-  className={_clsx(['c1', 'c2'])}
-  headerClassName={_clsx(['c1', 'c2'])}
-  footerClassName={_clsx(['c1', 'c2'])}
+  className={_clsx('c1', 'c2')}
+  headerClassName={_clsx('c1', 'c2')}
+  footerClassName={_clsx('c1', 'c2')}
 />;
 ```
 
 ### `options.importSource`
 
-| Type     | Default value |
-| -------- | ------------- |
-| `string` | `'clsx'`      |  
+| Type     | Default  |
+| -------- | -------- |
+| `string` | `'clsx'` |
 
 [clsx](https://github.com/lukeed/clsx) is the supported library by default, and if you have your choice, you can replace it with `importSource`.
 
@@ -126,14 +187,14 @@ After compilation
 
 ```js
 import _clsx from 'classnames';
-<div className={_clsx(['c1', 'c2'])} />;
+<div className={_clsx('c1', 'c2')} />;
 ```
 
 ### `options.importName`
 
-| Type     | Default value |
-| -------- | ------------- |
-| `string` | `'default'`   |  
+| Type     | Default     |
+| -------- | ----------- |
+| `string` | `'default'` |
 
 If your custom import source does not have a default export available, you can specify the import name with `importName`.
 
@@ -163,7 +224,7 @@ After compilation
 
 ```js
 import { classNames as _clsx } from '@/utils';
-<div className={_clsx(['c1', 'c2'])} />;
+<div className={_clsx('c1', 'c2')} />;
 ```
 
 ## Ignore
@@ -180,7 +241,7 @@ Your code
 <div className={['c1', 'c2']} />;
 <div
   // @clsx-ignore
-  className={['c1', 'c2'].join(' ')}
+  className={['c1', 'c2']}
 />;
 ```
 
@@ -188,8 +249,8 @@ After compilation
 
 ```js
 import _clsx from 'clsx';
-<div className={_clsx(['c1', 'c2'])} />;
-<div className={['c1', 'c2'].join(' ')} />;
+<div className={_clsx('c1', 'c2')} />;
+<div className={['c1', 'c2']} />;
 ```
 
 ### Global ignore
@@ -200,13 +261,13 @@ Your code
 
 ```js
 // @clsx-ignore-global
-<div className={['c1', 'c2'].join(' ')} />;
-<div className={['c1', 'c2'].join(' ')} />;
+<div className={['c1', 'c2']} />;
+<div className={['c1', 'c2']} />;
 ```
 
 After compilation
 
 ```js
-<div className={['c1', 'c2'].join(' ')} />;
-<div className={['c1', 'c2'].join(' ')} />;
+<div className={['c1', 'c2']} />;
+<div className={['c1', 'c2']} />;
 ```

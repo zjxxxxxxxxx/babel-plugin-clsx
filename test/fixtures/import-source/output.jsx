@@ -1,8 +1,8 @@
 import _clsx from 'classnames';
 <div className="c1 c2" />;
 <div className={'c1 c2'} />;
-<div className={_clsx(['c1', 'c2'])} />;
-<div className={_clsx(['c1', ['c2']])} />;
+<div className={_clsx('c1', 'c2')} />;
+<div className={_clsx('c1', ['c2'])} />;
 <div
   className={_clsx({
     c1: true,
@@ -10,10 +10,7 @@ import _clsx from 'classnames';
   })}
 />;
 <div
-  className={_clsx([
-    'c1',
-    {
-      c2: true,
-    },
-  ])}
+  className={_clsx('c1', {
+    c2: true,
+  })}
 />;

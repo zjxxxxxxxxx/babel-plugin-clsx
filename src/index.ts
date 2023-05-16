@@ -13,12 +13,14 @@ const IMPORT_NAME = 'default';
 const IMPORT_NAMESPACE = '_clsx';
 
 export interface Options {
+  static?: boolean;
   strict?: boolean;
   importSource?: string;
   importName?: string;
 }
 
 export default (_: any, opts: Options = {}): PluginObj => {
+  opts.static = typeof opts.static === 'boolean' ? opts.static : true;
   opts.strict = typeof opts.strict === 'boolean' ? opts.strict : true;
   opts.importSource = opts.importSource || IMPORT_SOURCE;
   opts.importName = opts.importName || IMPORT_NAME;
@@ -44,8 +46,9 @@ export default (_: any, opts: Options = {}): PluginObj => {
         // Comments are considered to be from the top of the file before any import
         if (t.isImportDeclaration(node)) {
           if (isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN)) return true;
-        } else {
-          // Comments are considered to be at the top of the file before the first line of expression
+        }
+        // Comments are considered to be at the top of the file before the first line of expression
+        else {
           return isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN);
         }
       }
@@ -66,13 +69,28 @@ export default (_: any, opts: Options = {}): PluginObj => {
       : false;
   }
 
+  function isNeedTransform(exper: t.JSXExpressionContainer) {
+    if (opts.static) {
+      // include <div className={['c1', 'c2']} /> or <div className={{ c1: true, c2: true }} />
+      return (
+        t.isArrayExpression(exper.expression) ||
+        t.isObjectExpression(exper.expression)
+      );
+    } else {
+      // exclude <div className={} /> or <div className={'c1 c2'} />
+      return (
+        !t.isJSXEmptyExpression(exper.expression) &&
+        !t.isStringLiteral(exper.expression)
+      );
+    }
+  }
+
   const classNameRE = opts.strict ? CLASS_NAME_STRICT_RE : CLASS_NAME_RE;
+  // <div className={...} />
   function isDynamicClassName(node: t.JSXAttribute) {
     return (
       classNameRE.test(node.name.name as string) &&
-      // exclude <div className='...' /> & <div className={'...'} />;
-      t.isJSXExpressionContainer(node.value) &&
-      !t.isStringLiteral(node.value.expression)
+      t.isJSXExpressionContainer(node.value)
     );
   }
 
@@ -90,11 +108,14 @@ export default (_: any, opts: Options = {}): PluginObj => {
   }
 
   // code <div className={['c1', 'c2']} />;
-  // to   <div className={_clsx(['c1', 'c2'])} />;
+  // to   <div className={_clsx('c1', 'c2')} />;
+  // code <div className={{ c1: true, c2: true }} />;
+  // to   <div className={_clsx({ c1: true, c2: true })} />;
   function replaceNode(path: NodePath<t.Node>) {
-    const callExpr = t.callExpression(callId, [path.node] as Parameters<
-      typeof t.callExpression
-    >[1]);
+    const args = (
+      t.isArrayExpression(path.node) ? path.node.elements : [path.node]
+    ) as t.Expression[];
+    const callExpr = t.callExpression(callId, args);
     path.replaceWith(callExpr);
   }
 
@@ -111,7 +132,8 @@ export default (_: any, opts: Options = {}): PluginObj => {
         if (
           isDynamicClassName(path.node) &&
           !isIgnored(path.node) &&
-          !this.clsxIgnoreGlobal
+          !this.clsxIgnoreGlobal &&
+          isNeedTransform(path.node.value as t.JSXExpressionContainer)
         ) {
           importLibrary(this);
           replaceNode(path.get('value').get('expression') as NodePath<t.Node>);

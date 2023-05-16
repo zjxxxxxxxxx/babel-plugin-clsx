@@ -1,5 +1,7 @@
+const classNames = 'c1 c2';
 <div className="c1 c2" />;
 <div className={'c1 c2'} />;
+<div className={classNames} />;
 <div className={['c1', 'c2']} />;
 <div className={['c1', ['c2']]} />;
 <div className={{ c1: true, c2: true }} />;

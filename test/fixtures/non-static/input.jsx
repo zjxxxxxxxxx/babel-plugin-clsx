@@ -1,0 +1,10 @@
+const classNames1 = ['c1', 'c2'];
+const classNames2 = ['c1', ['c2']];
+const classNames3 = { c1: true, c2: true };
+const classNames4 = ['c1', { c2: true }];
+<div className="c1 c2" />;
+<div className={'c1 c2'} />;
+<div className={classNames1} />;
+<div className={classNames2} />;
+<div className={classNames3} />;
+<div className={classNames4} />;
