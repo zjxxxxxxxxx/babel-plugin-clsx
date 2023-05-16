@@ -1,3 +1,17 @@
+## [0.2.1](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.2.0...v0.2.1) (2023-05-16)
+
+
+### Features
+
+* Function calls are ignored in nonstatic mode ([612652c](https://github.com/zjx0905/babel-plugin-clsx/commit/612652c3f68b2f8df019eef8c5238fb0a62e254b))
+
+
+### Performance Improvements
+
+* Removes handling of JSXEmptyExpression ([76114d5](https://github.com/zjx0905/babel-plugin-clsx/commit/76114d57a4b6ad1c388719d33efbc0b7d344e29c))
+
+
+
 # [0.2.0](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.1.3...v0.2.0) (2023-05-16)
 
 
