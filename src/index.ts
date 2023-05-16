@@ -41,18 +41,17 @@ export default (_: any, opts: Options = {}): PluginObj => {
 
   // @clsx-ignore-global
   function isIgnoredGlobal(nodes: t.Node[]) {
-    if (nodes.length) {
-      for (const node of nodes) {
-        // Comments are considered to be from the top of the file before any import
-        if (t.isImportDeclaration(node)) {
-          if (isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN)) return true;
-        }
-        // Comments are considered to be at the top of the file before the first line of expression
-        else {
-          return isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN);
-        }
+    for (const node of nodes) {
+      // Comments are considered to be from the top of the file before any import
+      if (t.isImportDeclaration(node)) {
+        if (isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN)) return true;
+      }
+      // Comments are considered to be at the top of the file before the first line of expression
+      else {
+        return isIgnored(node, CLSX_IGNORE_GLOBAL_TOKEN);
       }
     }
+    // empty
     return false;
   }
 
@@ -69,22 +68,20 @@ export default (_: any, opts: Options = {}): PluginObj => {
       : false;
   }
 
-  function isNeedTransform(cont: t.JSXExpressionContainer) {
+  function isNeedTransform(jsxExpr: t.JSXExpressionContainer) {
     if (opts.static) {
       // include <div className={['c1', 'c2']} />
       // include <div className={{ c1: true, c2: true }} />
       return (
-        t.isArrayExpression(cont.expression) ||
-        t.isObjectExpression(cont.expression)
+        t.isArrayExpression(jsxExpr.expression) ||
+        t.isObjectExpression(jsxExpr.expression)
       );
     } else {
-      // exclude <div className={} />
+      // exclude <div className={classNameHandler('c1', 'c2')} />
       // exclude <div className={'c1 c2'} />
-      // exclude <div className={fn('c1','c2')} />
       return (
-        !t.isJSXEmptyExpression(cont.expression) &&
-        !t.isStringLiteral(cont.expression) &&
-        !t.isCallExpression(cont.expression)
+        !t.isCallExpression(jsxExpr.expression) &&
+        !t.isStringLiteral(jsxExpr.expression)
       );
     }
   }
