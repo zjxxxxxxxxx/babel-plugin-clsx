@@ -1,4 +1,6 @@
-# babel-plugin-clsx
+# babel-plugin-clsx <a href='https://www.npmjs.com/package/babel-plugin-clsx'><img alt="npm" src="https://img.shields.io/npm/v/babel-plugin-clsx?style=social"></a> 
+
+[![CI](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml/badge.svg)](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml) ![GitHub](https://img.shields.io/github/license/zjx0905/babel-plugin-clsx)
 
 Automatically adds [clsx](https://github.com/lukeed/clsx) for `className`, You can enjoy the joy of importing without importing.
 
@@ -279,3 +281,8 @@ After compilation
 <div className={['c1', 'c2']} />;
 <div className={['c1', 'c2']} />;
 ```
+
+
+## Typescript
+
+It is planned and will be supported soon.
