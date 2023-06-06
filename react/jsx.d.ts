@@ -5,7 +5,6 @@ type CustomClassName<P = {}> = {
     ? unknown
     : P[K];
 };
-
 type CustomClassNameElements<P = {}> = {
   [K in keyof P]: CustomClassName<P[K]>;
 };
