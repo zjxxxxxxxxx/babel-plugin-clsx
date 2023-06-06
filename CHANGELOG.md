@@ -1,3 +1,12 @@
+# [0.3.0-beta.0](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.2.1...v0.3.0-beta.0) (2023-06-06)
+
+
+### Features
+
+* Support Typescript ([5c4a3c0](https://github.com/zjx0905/babel-plugin-clsx/commit/5c4a3c0d05090965fee77ec1a5d4bf22891172f1))
+
+
+
 ## [0.2.1](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.2.0...v0.2.1) (2023-05-16)
 
 
