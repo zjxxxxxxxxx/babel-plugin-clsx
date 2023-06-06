@@ -285,4 +285,26 @@ After compilation
 
 ## Typescript
 
-It is planned and will be supported soon.
+You only need to make minor changes to `tsconfig.json` to support the use of the plug-in in `Typescript` projects.
+
+react-jsxdev
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsxdev",
+    "jsxImportSource": "babel-plugin-clsx/react"
+  }
+}
+```
+
+react-jsx
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "babel-plugin-clsx/react"
+  }
+}
+```

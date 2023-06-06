@@ -4,8 +4,10 @@ import { expect, test } from '@jest/globals';
 import { transformSync } from '@babel/core';
 import { format, resolveConfig } from 'prettier';
 import clsx from '../src';
+import { execSync } from 'node:child_process';
 
 const fixturesPath = path.resolve('test/fixtures');
+const typesPath = path.resolve('test/types');
 const formatConfig = Object.assign({}, resolveConfig.sync(process.cwd()), {
   parser: 'babel',
 });
@@ -16,6 +18,14 @@ function tester() {
   test.each(readdirSync(fixturesPath))('%s', (name) => {
     const { actual, expected } = getCodes(name);
     expect(actual).toBe(expected);
+  });
+  test.each(readdirSync(typesPath))('%s', (name) => {
+    execSync(
+      `pnpm tsc --project ${resolveTypesFileName(
+        name,
+        'tsconfig.json',
+      )} --outFile ${resolveTypesFileName(name, 'output.js')} --module amd`,
+    );
   });
 }
 
@@ -37,4 +47,8 @@ function getCodes(name: string) {
 function readCode(name: string, filename: string) {
   const path = `${fixturesPath}/${name}/${filename}`;
   return readFileSync(path, 'utf-8');
+}
+
+function resolveTypesFileName(name: string, filename: string) {
+  return `${typesPath}/${name}/${filename}`;
 }
