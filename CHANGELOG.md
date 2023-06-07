@@ -1,3 +1,17 @@
+# [0.3.0](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.3.0-beta.0...v0.3.0) (2023-06-07)
+
+
+### Features
+
+* JSX with react17 support ([b2a671e](https://github.com/zjx0905/babel-plugin-clsx/commit/b2a671e9b484a2c5147fc857241d9c39dbcf4194))
+
+
+### Performance Improvements
+
+* Clean up extra blank lines ([491b490](https://github.com/zjx0905/babel-plugin-clsx/commit/491b4904d203c560c08de664750bb1bb918d2bcb))
+
+
+
 # [0.3.0-beta.0](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.2.1...v0.3.0-beta.0) (2023-06-06)
 
 
