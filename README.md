@@ -1,4 +1,4 @@
-# babel-plugin-clsx <a href='https://www.npmjs.com/package/babel-plugin-clsx'><img alt="npm" src="https://img.shields.io/npm/v/babel-plugin-clsx?style=social"></a> 
+# babel-plugin-clsx <a href='https://www.npmjs.com/package/babel-plugin-clsx'><img alt="npm" src="https://img.shields.io/npm/v/babel-plugin-clsx?style=social"></a>
 
 [![CI](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml/badge.svg)](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml) ![GitHub](https://img.shields.io/github/license/zjx0905/babel-plugin-clsx)
 
@@ -282,18 +282,18 @@ After compilation
 <div className={['c1', 'c2']} />;
 ```
 
-
 ## Typescript
 
 You only need to make minor changes to `tsconfig.json` to support the use of the plug-in in `Typescript` projects.
 
-react-jsxdev
+preserve
 
 ```json
 {
   "compilerOptions": {
-    "jsx": "react-jsxdev",
-    "jsxImportSource": "babel-plugin-clsx/react"
+    "jsx": "preserve",
+    "jsxImportSource": "babel-plugin-clsx/react",
+    "isolatedModules": true
   }
 }
 ```
@@ -308,3 +308,28 @@ react-jsx
   }
 }
 ```
+
+react-jsxdev
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-jsxdev",
+    "jsxImportSource": "babel-plugin-clsx/react"
+  }
+}
+```
+
+react-native
+
+```json
+{
+  "compilerOptions": {
+    "jsx": "react-native",
+    "jsxImportSource": "babel-plugin-clsx/react",
+    "isolatedModules": true
+  }
+}
+```
+
+> It should be noted that `"babel-plugin-clsx/react"` is only used for type inference, to prevent `Typescript` errors, and has no practical significance.

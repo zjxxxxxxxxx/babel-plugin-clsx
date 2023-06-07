@@ -20,12 +20,14 @@ function tester() {
     expect(actual).toBe(expected);
   });
   test.each(readdirSync(typesPath))('%s', (name) => {
-    execSync(
-      `pnpm tsc --project ${resolveTypesFileName(
-        name,
-        'tsconfig.json',
-      )} --outFile ${resolveTypesFileName(name, 'output.js')} --module amd`,
-    );
+    const tsconfig = resolveTypesFileName(name, 'tsconfig.json');
+    const json = require(tsconfig);
+    let cmd = `pnpm tsc --project ${tsconfig}`;
+    if (!json.compilerOptions.isolatedModules) {
+      const output = resolveTypesFileName(name, 'output.js');
+      cmd += ` --outFile ${output} --module amd`;
+    }
+    execSync(cmd);
   });
 }
 

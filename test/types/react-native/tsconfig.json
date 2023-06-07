@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "jsx": "react-native",
+    "jsxImportSource": "../../../react",
+    "isolatedModules": true,
+    "skipLibCheck": true
+  }
+}

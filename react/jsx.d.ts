@@ -3,8 +3,8 @@ type CustomClassName<P = {}> = {
     ? unknown
     : P[K];
 };
-type CustomClassNameElements<P = {}> = {
-  [K in keyof P]: CustomClassName<P[K]>;
+type CustomClassNameElements<ES = {}> = {
+  [N in keyof ES]: CustomClassName<ES[N]>;
 };
 
 export namespace CustomJSX {
