@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "../../../react/jsx-runtime";
+import { jsx as _jsx } from "../../../jsx/jsx-runtime";
 _jsx("div", { className: "c1 c2" });
 _jsx("div", { className: 'c1 c2' });
 _jsx("div", { className: ['c1', 'c2'] });

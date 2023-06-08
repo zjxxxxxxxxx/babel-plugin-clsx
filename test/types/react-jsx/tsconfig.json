@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "react-jsx",
-    "jsxImportSource": "../../../react",
+    "jsxImportSource": "../../../jsx",
     "skipLibCheck": true
   }
 }

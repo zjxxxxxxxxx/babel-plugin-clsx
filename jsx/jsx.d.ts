@@ -1,13 +1,12 @@
-type CustomClassName<P = {}> = {
+declare type CustomClassName<P = {}> = {
   [K in keyof P]: K extends 'className' | `${infer _}ClassName`
     ? unknown
     : P[K];
 };
-type CustomClassNameElements<ES = {}> = {
-  [N in keyof ES]: CustomClassName<ES[N]>;
+declare type CustomClassNameElements<ES = {}> = {
+  [E in keyof ES]: CustomClassName<ES[E]>;
 };
-
-export namespace CustomJSX {
+declare namespace CustomJSX {
   interface Element extends JSX.Element {}
   interface ElementClass extends JSX.ElementClass {}
   interface ElementAttributesProperty extends JSX.ElementAttributesProperty {}
@@ -21,3 +20,4 @@ export namespace CustomJSX {
   interface IntrinsicElements
     extends CustomClassNameElements<JSX.IntrinsicElements> {}
 }
+export type { CustomJSX as JSX };

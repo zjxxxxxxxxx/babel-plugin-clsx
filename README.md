@@ -296,7 +296,7 @@ preserve
 {
   "compilerOptions": {
     "jsx": "preserve",
-    "jsxImportSource": "babel-plugin-clsx/react",
+    "jsxImportSource": "babel-plugin-clsx/jsx",
     "isolatedModules": true
   }
 }
@@ -308,7 +308,7 @@ react-jsx
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "babel-plugin-clsx/react"
+    "jsxImportSource": "babel-plugin-clsx/jsx"
   }
 }
 ```
@@ -319,7 +319,7 @@ react-jsxdev
 {
   "compilerOptions": {
     "jsx": "react-jsxdev",
-    "jsxImportSource": "babel-plugin-clsx/react"
+    "jsxImportSource": "babel-plugin-clsx/jsx"
   }
 }
 ```
@@ -330,10 +330,10 @@ react-native
 {
   "compilerOptions": {
     "jsx": "react-native",
-    "jsxImportSource": "babel-plugin-clsx/react",
+    "jsxImportSource": "babel-plugin-clsx/jsx",
     "isolatedModules": true
   }
 }
 ```
 
-> One thing to note is that `"babel-plugin-clsx/react"` only supports type inference, which prevents `Typescript` from throwing errors. It makes no logical sense, so remove it when using `tsc`.
+> One thing to note is that `"babel-plugin-clsx/jsx"` only supports type inference, which prevents `Typescript` from throwing errors. It makes no logical sense, so remove it when using `tsc`.

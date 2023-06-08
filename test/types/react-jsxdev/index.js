@@ -1,4 +1,4 @@
-import { jsxDEV as _jsxDEV } from "../../../react/jsx-dev-runtime";
+import { jsxDEV as _jsxDEV } from "../../../jsx/jsx-dev-runtime";
 const _jsxFileName = "/Users/fluff/Documents/github/babel-plugin-clsx/test/types/react-jsxdev/index.tsx";
 _jsxDEV("div", { className: "c1 c2" }, void 0, false, { fileName: _jsxFileName, lineNumber: 1, columnNumber: 1 }, this);
 _jsxDEV("div", { className: 'c1 c2' }, void 0, false, { fileName: _jsxFileName, lineNumber: 1, columnNumber: 27 }, this);
