@@ -1,1 +1,1 @@
-export type { CustomJSX as JSX } from './jsx.d.ts';
+export { CustomJSX as JSX } from './jsx';

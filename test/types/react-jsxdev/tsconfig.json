@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
     "jsx": "react-jsxdev",
     "jsxImportSource": "../../../react",
     "skipLibCheck": true

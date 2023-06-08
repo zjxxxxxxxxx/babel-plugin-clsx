@@ -21,13 +21,7 @@ function tester() {
   });
   test.each(readdirSync(typesPath))('%s', (name) => {
     const tsconfig = resolveTypesFileName(name, 'tsconfig.json');
-    const json = require(tsconfig);
-    let cmd = `pnpm tsc --project ${tsconfig}`;
-    if (!json.compilerOptions.isolatedModules) {
-      const output = resolveTypesFileName(name, 'output.js');
-      cmd += ` --outFile ${output} --module amd`;
-    }
-    execSync(cmd);
+    execSync(`pnpm tsc --project ${tsconfig}`);
   });
 }
 
