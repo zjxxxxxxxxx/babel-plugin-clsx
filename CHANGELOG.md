@@ -1,3 +1,12 @@
+## [0.3.2](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.3.1...v0.3.2) (2023-06-08)
+
+
+### Bug Fixes
+
+* JSX only supports Typescript4.7+ ([da39123](https://github.com/zjx0905/babel-plugin-clsx/commit/da391235649726007369d1384d2583550fbaec0e))
+
+
+
 ## [0.3.1](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.3.0...v0.3.1) (2023-06-08)
 
 
