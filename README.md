@@ -4,6 +4,8 @@
 
 Automatically adds [clsx](https://github.com/lukeed/clsx) for `className`, You can enjoy the joy of importing without importing.
 
+It is important to note that this library supports the use of `Typescript` projects. No other library of its kind has been found to do this.
+
 > Before doing so, make sure that [clsx](https://github.com/lukeed/clsx) is installed or another available `className` handler exists for your project.
 
 ## Install
@@ -285,6 +287,8 @@ After compilation
 ## Typescript
 
 You only need to make minor changes to `tsconfig.json` to support the use of the plug-in in `Typescript` projects.
+
+Only `react17+` and `Typescript4.7+` are supported due to the use of advanced syntax.
 
 preserve
 

@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-clsx",
   "version": "0.3.1",
-  "description": "Automatically add clsx for className",
+  "description": "Add `clsx()` automatically for `className` and support `Typescript`.",
   "type": "commonjs",
   "main": "./lib/index.js",
   "files": [
@@ -38,9 +38,6 @@
     "build:cjs": "tsc -p tsconfig.build.json --module commonjs --outDir ./lib",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release": "esno ./scripts/release.ts"
-  },
-  "peerDependencies": {
-    "react": ">=17"
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.21.4"
