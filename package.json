@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-clsx",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Add `clsx()` automatically for `className` and support `Typescript`.",
   "type": "commonjs",
   "main": "./lib/index.js",
