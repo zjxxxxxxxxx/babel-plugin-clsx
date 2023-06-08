@@ -1,3 +1,13 @@
+## [0.3.1](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.3.0...v0.3.1) (2023-06-08)
+
+
+### Features
+
+* Compatible with Typescript3.8 and below ([eb4d500](https://github.com/zjx0905/babel-plugin-clsx/commit/eb4d500471b121c732c8770a23c03ad0f1ca2d39))
+* JSX supports both preserve and react-native ([c0bad8d](https://github.com/zjx0905/babel-plugin-clsx/commit/c0bad8db789ca59ea629dbefd439240a9e2f97ee))
+
+
+
 # [0.3.0](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.3.0-beta.0...v0.3.0) (2023-06-07)
 
 
