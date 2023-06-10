@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "jsx": "preserve",
+    "jsxImportSource": "../../../jsx",
+    "isolatedModules": true,
+    "skipLibCheck": true
+  }
+}

@@ -16,7 +16,9 @@ es/
 *.test.js
 *.test.d.ts
 *.test.js.map
-.coverage
+ 
 
- 
- 
+# Tests
+.coverage
+test/types/**/*.jsx
+test/types/**/*.js

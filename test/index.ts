@@ -20,31 +20,25 @@ function tester() {
     expect(actual).toBe(expected);
   });
   test.each(readdirSync(typesPath))('%s', (name) => {
-    const tsconfig = resolveTypesFileName(name, 'tsconfig.json');
-    execSync(`pnpm tsc --project ${tsconfig}`);
+    execSync(`pnpm tsc --project ${typesPath}/${name}/tsconfig.json`);
   });
 }
 
 function getCodes(name: string) {
-  const options = JSON.parse(readCode(name, 'options.json'));
-  const input = readCode(name, 'input.jsx');
-  const output = readCode(name, 'output.jsx');
-  const result = transformSync(input, {
-    plugins: [[clsx, options]],
-  });
-  const resultCode = result ? result.code || '' : '';
+  const options = JSON.parse(readCodeString(name, 'options.json'));
+  const input = readCodeString(name, 'input.jsx');
+  const output = readCodeString(name, 'output.jsx');
+  const result =
+    transformSync(input, {
+      plugins: [[clsx, options]],
+    })?.code ?? '';
 
   return {
     actual: format(output, formatConfig),
-    expected: format(resultCode, formatConfig),
+    expected: format(result, formatConfig),
   };
 }
 
-function readCode(name: string, filename: string) {
-  const path = `${fixturesPath}/${name}/${filename}`;
-  return readFileSync(path, 'utf-8');
-}
-
-function resolveTypesFileName(name: string, filename: string) {
-  return `${typesPath}/${name}/${filename}`;
+function readCodeString(name: string, filename: string) {
+  return readFileSync(`${fixturesPath}/${name}/${filename}`, 'utf-8');
 }

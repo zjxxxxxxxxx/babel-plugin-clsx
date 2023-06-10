@@ -1,16 +1,15 @@
 import type { BabelFile, NodePath, PluginObj, PluginPass } from '@babel/core';
 import { types as t } from '@babel/core';
 import syntaxJSX from '@babel/plugin-syntax-jsx';
-
-const CLSX_IGNORE_GLOBAL_TOKEN = '@clsx-ignore-global';
-const CLSX_IGNORE_TOKEN = '@clsx-ignore';
-
-const CLASS_NAME_STRICT_RE = /^className$/;
-const CLASS_NAME_RE = /^(className|\w+ClassName)$/;
-
-const IMPORT_SOURCE = 'clsx';
-const IMPORT_NAME = 'default';
-const IMPORT_NAMESPACE = '_clsx';
+import {
+  CLSX_IGNORE_GLOBAL_TOKEN,
+  CLSX_IGNORE_TOKEN,
+  CLASS_NAME_STRICT_RE,
+  CLASS_NAME_RE,
+  IMPORT_SOURCE,
+  IMPORT_NAME,
+  IMPORT_NAMESPACE,
+} from './constants';
 
 export interface Options {
   static?: boolean;
