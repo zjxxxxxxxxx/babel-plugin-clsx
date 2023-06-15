@@ -1,4 +1,4 @@
-import type { BabelFile, NodePath, PluginObj, PluginPass } from '@babel/core';
+import type { NodePath, PluginObj } from '@babel/core';
 import { types as t } from '@babel/core';
 import syntaxJSX from '@babel/plugin-syntax-jsx';
 import {
@@ -18,7 +18,7 @@ export interface Options {
   importName?: string;
 }
 
-export default (_: any, opts: Options = {}): PluginObj => {
+export default (_: unknown, opts: Options = {}): PluginObj => {
   opts.static = typeof opts.static === 'boolean' ? opts.static : true;
   opts.strict = typeof opts.strict === 'boolean' ? opts.strict : true;
   opts.importSource = opts.importSource || IMPORT_SOURCE;
@@ -94,19 +94,6 @@ export default (_: any, opts: Options = {}): PluginObj => {
     );
   }
 
-  // add import _clsx from 'clsx'
-  function importLibrary(state: PluginPass) {
-    if (!state.clsxImported) {
-      state.clsxImported = true;
-
-      getFileBody(state.file).unshift(importDecl);
-    }
-  }
-
-  function getFileBody(file: BabelFile) {
-    return file.path.node.body;
-  }
-
   // code <div className={['c1', 'c2']} />;
   // to   <div className={_clsx('c1', 'c2')} />;
   // code <div className={{ c1: true, c2: true }} />;
@@ -121,21 +108,31 @@ export default (_: any, opts: Options = {}): PluginObj => {
 
   return {
     name: 'clsx',
+
     inherits: syntaxJSX,
 
-    pre(file) {
-      this.clsxIgnoreGlobal = isIgnoredGlobal(getFileBody(file));
-    },
-
     visitor: {
-      JSXAttribute(path) {
+      Program: {
+        enter(path, state) {
+          // `@clsx-ignore-global` exists in the header of the file
+          state.clsxIgnoreGlobal = isIgnoredGlobal(path.node.body);
+        },
+        exit(path, state) {
+          if (state.clsxImport) {
+            // add import _clsx from 'clsx'
+            path.node.body.unshift(importDecl);
+          }
+        },
+      },
+
+      JSXAttribute(path, state) {
         if (
           isDynamicClassName(path.node) &&
           !isIgnored(path.node) &&
-          !this.clsxIgnoreGlobal &&
+          !state.clsxIgnoreGlobal &&
           isNeedTransform(path.node.value as t.JSXExpressionContainer)
         ) {
-          importLibrary(this);
+          state.clsxImport = true;
           replaceNode(path.get('value').get('expression') as NodePath<t.Node>);
         }
       },
