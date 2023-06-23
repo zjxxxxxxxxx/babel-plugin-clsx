@@ -1,3 +1,17 @@
+## [0.3.4](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.3.3...v0.3.4) (2023-06-23)
+
+
+### Bug Fixes
+
+* Fixed bug when used in vite ([167d4e5](https://github.com/zjx0905/babel-plugin-clsx/commit/167d4e562e4862ae04c426b3d15d5d034d897612))
+
+
+### Performance Improvements
+
+* Optimize importing modules ([5a0aab7](https://github.com/zjx0905/babel-plugin-clsx/commit/5a0aab7b1889268b42623b1d21f89a771d28a21f))
+
+
+
 ## [0.3.3](https://github.com/zjx0905/babel-plugin-clsx/compare/v0.3.2...v0.3.3) (2023-06-08)
 
 
