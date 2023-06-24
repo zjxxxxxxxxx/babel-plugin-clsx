@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml/badge.svg)](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml) ![GitHub](https://img.shields.io/github/license/zjx0905/babel-plugin-clsx)
 
-Automatically adds [clsx](https://github.com/lukeed/clsx) for `className`, You can enjoy the joy of importing without importing.
+Automatically add [clsx](https://github.com/lukeed/clsx) for `className` in [React](https://react.dev) and have the same fun without importing and writing it.
 
 It is important to note that this library supports the use of `Typescript` projects. No other library of its kind has been found to do this.
 
