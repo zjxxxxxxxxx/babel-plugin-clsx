@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '@/styles/Home.module.css';
+import { useState } from 'react';
 
 export default function Home() {
+  const [gray, setGray] = useState(false);
+
   return (
     <>
       <Head>
@@ -11,7 +14,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={[styles.main, 'babel-plugin-clsx']}>
+      <main
+        className={[
+          styles.main,
+          'babel-plugin-clsx',
+          {
+            gray,
+          },
+        ]}
+        onClick={() => setGray((v) => !v)}
+      >
         <div className={[styles.description, 'babel-plugin-clsx']}>
           <p>
             Get started by editing&nbsp;
@@ -50,7 +62,13 @@ export default function Home() {
         </div>
 
         <a href="https://github.com/zjx0905/babel-plugin-clsx">
-          <h1>babel-plugin-clsx</h1>
+          <h1
+            className={{
+              'babel-plugin-clsx': true,
+            }}
+          >
+            babel-plugin-clsx
+          </h1>
         </a>
 
         <div className={[styles.grid, 'babel-plugin-clsx']}>

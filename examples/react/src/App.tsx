@@ -5,9 +5,18 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+  const [gray, setGray] = useState(false);
 
   return (
-    <>
+    <div
+      className={[
+        'main',
+        {
+          gray,
+        },
+      ]}
+      onClick={() => setGray((v) => !v)}
+    >
       <div>
         <a href="https://vitejs.dev" target="_blank">
           <img
@@ -38,7 +47,7 @@ function App() {
       <p className={['read-the-docs', 'babel-plugin-clsx']}>
         Click on the babel-plugin-clsx to learn more
       </p>
-    </>
+    </div>
   );
 }
 
