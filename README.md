@@ -337,3 +337,8 @@ react-native
 ```
 
 > One thing to note is that `"babel-plugin-clsx/jsx"` only supports type inference, which prevents `Typescript` from throwing errors. It makes no logical sense, so remove it when using `tsc`.
+
+## Example
+
+- [react](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/react)
+- [nextjs](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/nextjs)

@@ -2,7 +2,6 @@
   "name": "babel-plugin-clsx",
   "version": "0.3.4",
   "description": "Add 'clsx()' automatically to 'className' in 'React' and support 'Typescript'.",
-  "type": "commonjs",
   "main": "./lib/index.js",
   "files": [
     "lib",
@@ -32,12 +31,13 @@
     "cz": "simple-git-hooks & esno ./scripts/commit.ts",
     "test": "jest",
     "typecheck": "tsc --noEmit",
-    "format": "prettier -w **/*.ts **/*.jsx",
+    "format": "prettier -w {src,test,scripts}/**/*.{ts,tsx,js,jsx}",
     "build": "pnpm build:cjs",
     "build:esm": "tsc -p tsconfig.build.json --module esnext --outDir ./es",
     "build:cjs": "tsc -p tsconfig.build.json --module commonjs --outDir ./lib",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "esno ./scripts/release.ts"
+    "release": "esno ./scripts/release.ts",
+    "example": "esno ./scripts/example.ts"
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.21.4"

@@ -12,5 +12,5 @@
     "esModuleInterop": true
   },
   "include": ["./global.d.ts", "./src", "./test", "./scripts"],
-  "exclude": ["node_modules", "**/lib", "./test/types"]
+  "exclude": ["node_modules", "**/lib", "./test/types", "./examples"]
 }
