@@ -1,9 +1,7 @@
 {
+  "extends": "../../../tsconfig.test.json",
   "compilerOptions": {
-    "target": "ESNext",
     "jsx": "preserve",
-    "jsxImportSource": "../../../jsx",
-    "isolatedModules": true,
-    "skipLibCheck": true
+    "isolatedModules": true
   }
 }

@@ -286,6 +286,8 @@ After compilation
 
 ## Typescript
 
+Support `Typescript` with [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource).
+
 You only need to make minor changes to `tsconfig.json` to support the use of the plug-in in `Typescript` projects.
 
 Only `react17+` and `Typescript4.7+` are supported due to the use of advanced syntax.
@@ -336,9 +338,9 @@ react-native
 }
 ```
 
-> One thing to note is that `"babel-plugin-clsx/jsx"` only supports type inference, which prevents `Typescript` from throwing errors. It makes no logical sense, so remove it when using `tsc`.
+> One thing to note is that `"babel-plugin-clsx/jsx"` only supports type inference, which prevents `Typescript` from throwing errors.
 
-## Example
+## Examples
 
-- [react](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/react)
-- [nextjs](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/nextjs)
+- [React](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/react)
+- [Nextjs](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/nextjs)

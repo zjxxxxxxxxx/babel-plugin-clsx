@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "jsxImportSource": "jsx",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "disableSizeLimit": true
+  }
+}

@@ -5,8 +5,8 @@
     "module": "ESNext",
     "target": "es6",
     "moduleResolution": "node",
-    "removeComments": true,
     "noEmit": true,
+    "sourceMap": false,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "esModuleInterop": true

@@ -1,3 +1,3 @@
-# nextjs
+# Nextjs
 
-Use `babel-plugin-clsx` in `nextjs`.
+Use `babel-plugin-clsx` in `Nextjs`.

@@ -1,3 +1,3 @@
-# react
+# React
 
-Use `babel-plugin-clsx` in `react`.
+Use `babel-plugin-clsx` in `React`.

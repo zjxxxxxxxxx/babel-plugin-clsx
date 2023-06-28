@@ -8,7 +8,10 @@ main();
 
 async function main() {
   try {
-    const examples = readdirSync(path.resolve('./examples'));
+    const examplesName = 'examples';
+
+    const examplesPath = path.resolve(examplesName);
+    const examples = readdirSync(examplesPath);
     const { example } = await enquirer.prompt<{
       example: string;
     }>({
@@ -18,11 +21,8 @@ async function main() {
       choices: examples,
     });
 
-    const scripts = require(path.resolve(
-      './examples',
-      example,
-      'package.json',
-    )).scripts;
+    const packagePath = path.resolve(examplesName, example, 'package.json');
+    const { scripts } = require(packagePath);
     const { script } = await enquirer.prompt<{
       script: string;
     }>({
@@ -32,12 +32,12 @@ async function main() {
       choices: Object.entries(scripts).map(([name, content]) => ({
         name: name,
         value: name,
-        message: `${(name + ':').padEnd(10)}${content}`,
+        message: `${(name + ':').padEnd(9)}${content}`,
       })),
     });
 
     consola.info(`Run ${example}:${script}`);
-    execSync(`pnpm -C examples/${example} ${script}`, {
+    execSync(`pnpm -C ${examplesName}/${example} ${script}`, {
       stdio: 'inherit',
       encoding: 'utf-8',
     });

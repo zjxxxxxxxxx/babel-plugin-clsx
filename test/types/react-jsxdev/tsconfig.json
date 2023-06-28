@@ -1,8 +1,6 @@
 {
+  "extends": "../../../tsconfig.test.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "jsx": "react-jsxdev",
-    "jsxImportSource": "../../../jsx",
-    "skipLibCheck": true
+    "jsx": "react-jsxdev"
   }
 }

@@ -28,16 +28,16 @@
   "homepage": "https://github.com/zjx0905/babel-plugin-clsx#readme",
   "license": "MIT",
   "scripts": {
-    "cz": "simple-git-hooks & esno ./scripts/commit.ts",
-    "test": "jest",
-    "typecheck": "tsc --noEmit",
-    "format": "prettier -w {src,test,scripts}/**/*.{ts,tsx,js,jsx}",
     "build": "pnpm build:cjs",
-    "build:esm": "tsc -p tsconfig.build.json --module esnext --outDir ./es",
     "build:cjs": "tsc -p tsconfig.build.json --module commonjs --outDir ./lib",
+    "build:esm": "tsc -p tsconfig.build.json --module esnext --outDir ./es",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "cz": "simple-git-hooks & esno ./scripts/commit.ts",
+    "example": "esno ./scripts/example.ts",
+    "format": "prettier -w {src,test,scripts}/**/*.{ts,tsx,js,jsx}",
     "release": "esno ./scripts/release.ts",
-    "example": "esno ./scripts/example.ts"
+    "test": "jest",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.21.4"
