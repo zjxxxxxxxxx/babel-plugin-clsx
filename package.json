@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zjx0905/babel-plugin-clsx.git"
+    "url": "git+https://github.com/zjxxxxxxxxx/babel-plugin-clsx.git"
   },
   "keywords": [
     "babel",
@@ -21,11 +21,11 @@
     "clsx",
     "classnames"
   ],
-  "author": "zjx0905 <954270063@qq.com>",
+  "author": "zjxxxxxxxxx <954270063@qq.com>",
   "bugs": {
-    "url": "https://github.com/zjx0905/babel-plugin-clsx/issues"
+    "url": "https://github.com/zjxxxxxxxxx/babel-plugin-clsx/issues"
   },
-  "homepage": "https://github.com/zjx0905/babel-plugin-clsx#readme",
+  "homepage": "https://github.com/zjxxxxxxxxx/babel-plugin-clsx#readme",
   "license": "MIT",
   "scripts": {
     "build": "pnpm build:cjs",
@@ -33,7 +33,7 @@
     "build:esm": "tsc -p tsconfig.build.json --module esnext --outDir ./es",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "cz": "simple-git-hooks & esno ./scripts/commit.ts",
-    "example": "esno ./scripts/example.ts",
+    "play": "esno ./scripts/play.ts",
     "format": "prettier -w {src,test,scripts}/**/*.{ts,tsx,js,jsx}",
     "release": "esno ./scripts/release.ts",
     "test": "jest",

@@ -1,8 +1,8 @@
 import { readdirSync } from 'node:fs';
-import path from 'node:path';
+import { resolve } from 'node:path';
+import { execSync } from 'node:child_process';
 import enquirer from 'enquirer';
 import consola from 'consola';
-import { execSync } from 'node:child_process';
 
 main();
 
@@ -10,7 +10,7 @@ async function main() {
   try {
     const examplesName = 'examples';
 
-    const examplesPath = path.resolve(examplesName);
+    const examplesPath = resolve(examplesName);
     const examples = readdirSync(examplesPath);
     const { example } = await enquirer.prompt<{
       example: string;
@@ -21,7 +21,7 @@ async function main() {
       choices: examples,
     });
 
-    const packagePath = path.resolve(examplesName, example, 'package.json');
+    const packagePath = resolve(examplesName, example, 'package.json');
     const { scripts } = require(packagePath);
     const { script } = await enquirer.prompt<{
       script: string;
@@ -37,7 +37,11 @@ async function main() {
     });
 
     consola.info(`Run ${example}:${script}`);
-    execSync(`pnpm -C ${examplesName}/${example} ${script}`, {
+    execSync(`pnpm -C ${example}/${example} link '${resolve()}'`, {
+      stdio: 'inherit',
+      encoding: 'utf-8',
+    });
+    execSync(`pnpm --filter @examples/${example} ${script}`, {
       stdio: 'inherit',
       encoding: 'utf-8',
     });

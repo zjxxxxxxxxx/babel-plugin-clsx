@@ -61,7 +61,7 @@ export default function Home() {
           />
         </div>
 
-        <a href="https://github.com/zjx0905/babel-plugin-clsx">
+        <a href="https://github.com/zjxxxxxxxxx/babel-plugin-clsx">
           <h1
             className={{
               'babel-plugin-clsx': true,

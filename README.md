@@ -1,6 +1,6 @@
 # babel-plugin-clsx <a href='https://www.npmjs.com/package/babel-plugin-clsx'><img alt="npm" src="https://img.shields.io/npm/v/babel-plugin-clsx?style=social"></a>
 
-[![CI](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml/badge.svg)](https://github.com/zjx0905/babel-plugin-clsx/actions/workflows/ci.yml) ![GitHub](https://img.shields.io/github/license/zjx0905/babel-plugin-clsx)
+[![CI](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/actions/workflows/ci.yml/badge.svg)](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/actions/workflows/ci.yml) ![GitHub](https://img.shields.io/github/license/zjxxxxxxxxx/babel-plugin-clsx)
 
 Automatically add [clsx](https://github.com/lukeed/clsx) for `className` in [React](https://react.dev) and have the same fun without importing and writing it.
 
@@ -342,5 +342,5 @@ react-native
 
 ## Examples
 
-- [React](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/react)
-- [Nextjs](https://github.com/zjx0905/babel-plugin-clsx/tree/main/examples/nextjs)
+- React [ [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react) | [online](https://codesandbox.io/s/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react) ]
+- Nextjs [ [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs) | [online](https://codesandbox.io/s/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs) ]

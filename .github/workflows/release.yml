@@ -36,4 +36,4 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            Please refer to [CHANGELOG.md](https://github.com/zjx0905/babel-plugin-clsx/blob/main/CHANGELOG.md) for details.
+            Please refer to [CHANGELOG.md](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/blob/main/CHANGELOG.md) for details.

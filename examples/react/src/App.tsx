@@ -33,7 +33,7 @@ function App() {
           />
         </a>
       </div>
-      <a href="https://github.com/zjx0905/babel-plugin-clsx">
+      <a href="https://github.com/zjxxxxxxxxx/babel-plugin-clsx">
         <h1>babel-plugin-clsx</h1>
       </a>
       <div className={['card', 'babel-plugin-clsx']}>
