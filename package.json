@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-clsx",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Add `clsx()` automatically to `className` in `React` and support `Typescript`.",
   "main": "./lib/index.js",
   "files": [
