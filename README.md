@@ -342,5 +342,14 @@ react-native
 
 ## Examples
 
-- React [ [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react) | [online](https://codesandbox.io/s/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react) ]
-- Nextjs [ [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs) | [online](https://codesandbox.io/s/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs) ]
+### React
+
+- [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
+- [codesandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
+- [stackblitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
+
+### Nextjs
+
+- [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
+- [codesandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
+- [stackblitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
