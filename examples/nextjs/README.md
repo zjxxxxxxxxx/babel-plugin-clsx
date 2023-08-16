@@ -29,6 +29,6 @@ pnpm add --save-dev babel-plugin-clsx
 ```json
 {
   "presets": [["next/babel"]],
-  "plugins": [["clsx"]]
+  "plugins": [["clsx", {}]]
 }
 ```

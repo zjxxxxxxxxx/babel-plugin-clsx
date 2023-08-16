@@ -11,7 +11,7 @@ async function main() {
     const examplesName = 'examples';
 
     const examplesPath = resolve(examplesName);
-    const examples = readdirSync(examplesPath);
+    const examples = readdirSync(examplesPath).filter((i) => i !== '.DS_Store');
     const { example } = await enquirer.prompt<{
       example: string;
     }>({
@@ -37,7 +37,7 @@ async function main() {
     });
 
     consola.info(`Run ${example}:${script}`);
-    execSync(`pnpm -C ${example}/${example} link '${resolve()}'`, {
+    execSync(`pnpm -C ${examplesName}/${example} link ${resolve()}`, {
       stdio: 'inherit',
       encoding: 'utf-8',
     });

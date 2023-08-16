@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react({
       babel: {
-        plugins: [['clsx']],
+        plugins: [['clsx', {}]],
       },
     }),
   ],

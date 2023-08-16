@@ -48,7 +48,7 @@
     "@jest/globals": "^29.6.2",
     "@types/babel__core": "^7.20.1",
     "@types/node": "^20.5.0",
-    "@types/prettier": "^2.0.0",
+    "@types/prettier": "^2.7.3",
     "@types/react": "17.0.0",
     "consola": "^3.2.3",
     "conventional-changelog-cli": "^2.2.2",
