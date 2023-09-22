@@ -1,10 +1,10 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'node:child_process';
 import { expect, test } from '@jest/globals';
 import { transformSync } from '@babel/core';
 import { format, resolveConfig } from 'prettier';
 import clsx from '../src';
-import { execSync } from 'node:child_process';
 
 const fixturesPath = path.resolve('test/fixtures');
 const typesPath = path.resolve('test/types');

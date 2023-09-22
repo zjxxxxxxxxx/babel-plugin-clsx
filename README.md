@@ -55,11 +55,30 @@ import _clsx from 'clsx';
 
 ## Options
 
-### `options.static`
+options.[ [`static`](#optionsstatic) | [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
 
-| Type      | Default |
-| --------- | ------- |
-| `boolean` | `true`  |
+```ts
+interface Options {
+  /**
+   * @default true
+   */
+  static?: boolean;
+  /**
+   * @default true
+   */
+  strict?: boolean;
+  /**
+   * @default 'clsx'
+   */
+  importSource?: string;
+  /**
+   * @default 'default'
+   */
+  importName?: string;
+}
+```
+
+### `options.static`
 
 By default, static mode is enabled, in which only `array` and `object` are converted, effectively avoiding duplicate processing of `className`. Of course, although it is not recommended to do so, you can still turn off this option, and after that, it will be up to you to handle or ignore unnecessary transformations.
 
@@ -124,10 +143,6 @@ const className = classNames('c1', 'c2');
 
 ### `options.strict`
 
-| Type      | Default |
-| --------- | ------- |
-| `boolean` | `true`  |
-
 Strict mode is turned on by default, and you can turn it off if you want to add [clsx](https://github.com/lukeed/clsx) to any attribute suffixed by `className`.
 
 Add the [babel](https://babel.dev/docs/plugins) configuration
@@ -168,10 +183,6 @@ import _clsx from 'clsx';
 
 ### `options.importSource`
 
-| Type     | Default  |
-| -------- | -------- |
-| `string` | `'clsx'` |
-
 [clsx](https://github.com/lukeed/clsx) is the supported library by default, and if you have your choice, you can replace it with `importSource`.
 
 Add the [babel](https://babel.dev/docs/plugins) configuration
@@ -203,10 +214,6 @@ import _clsx from 'classnames';
 ```
 
 ### `options.importName`
-
-| Type     | Default     |
-| -------- | ----------- |
-| `string` | `'default'` |
 
 If your custom import source does not have a default export available, you can specify the import name with `importName`.
 
@@ -288,7 +295,7 @@ After compilation
 
 Support `Typescript` with [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource).
 
-You only need to make minor changes to `tsconfig.json` to support the use of the plug-in in `Typescript` projects.
+You only need to make minor changes to `tsconfig.json` to support the use of the plugin in `Typescript` projects.
 
 Only `react17+` and `Typescript4.7+` are supported due to the use of advanced syntax.
 
@@ -338,18 +345,18 @@ react-native
 }
 ```
 
-> One thing to note is that `"babel-plugin-clsx/jsx"` only supports type inference, which prevents `Typescript` from throwing errors.
+> One thing to note is that `babel-plugin-clsx/jsx` only supports type inference, which prevents `Typescript` from throwing errors.
 
 ## Examples
 
 ### React
 
-- [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
-- [codesandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
-- [stackblitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
+- [CodeSandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
 
 ### Nextjs
 
-- [source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
-- [codesandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
-- [stackblitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
+- [CodeSandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
