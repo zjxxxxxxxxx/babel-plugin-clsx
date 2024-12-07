@@ -4,13 +4,13 @@
 
 <a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a>
 
-Automatically add [clsx](https://github.com/lukeed/clsx) for `className` in [React](https://react.dev) and have the same fun without importing and writing it.
+在 [React](https://react.dev) 中为 `className` 自动添加 [clsx](https://github.com/lukeed/clsx)，无需导入和编写，享受同样的乐趣。
 
-It is important to note that this library supports the use of `Typescript` projects. No other library of its kind has been found to do this.
+值得注意的是，该库支持使用 `Typescript` 项目。目前尚未发现其他同类库可以做到这一点。
 
-> Before doing so, make sure that [clsx](https://github.com/lukeed/clsx) is installed or another available `className` handler exists for your project.
+> 在执行此操作之前，请确保已安装 [clsx](https://github.com/lukeed/clsx) 或项目存在其他可用的 `className` 处理程序。
 
-## Install
+## 安装
 
 npm
 
@@ -30,9 +30,9 @@ pnpm
 pnpm add babel-plugin-clsx -D
 ```
 
-## Usage
+## 使用
 
-Add the [babel](https://babel.dev/docs/plugins) configuration
+添加 [babel](https://babel.dev/docs/plugins) 配置
 
 ```json
 {
@@ -40,14 +40,14 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 }
 ```
 
-Your code
+您的代码
 
 ```js
 <div className={['c1', 'c2']} />;
 <div className={{ c1: true, c2: true }} />;
 ```
 
-After compilation
+编译之后
 
 ```js
 import _clsx from 'clsx';
@@ -55,7 +55,7 @@ import _clsx from 'clsx';
 <div className={_clsx({ c1: true, c2: true })} />;
 ```
 
-## Options
+## 选项
 
 options.[ [`static`](#optionsstatic) | [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
 
@@ -82,9 +82,9 @@ interface Options {
 
 ### `options.static`
 
-By default, static mode is enabled, in which only `array` and `object` are converted, effectively avoiding duplicate processing of `className`. Of course, although it is not recommended to do so, you can still turn off this option, and after that, it will be up to you to handle or ignore unnecessary transformations.
+默认情况下，启用静态模式，该模式下仅转换 `array` 和 `object`，有效避免了 `className` 的重复处理。当然，虽然不建议这样做，但你仍然可以关闭此选项，此后，由你来处理或忽略不必要的转换。
 
-Add the [babel](https://babel.dev/docs/plugins) configuration
+添加 [babel](https://babel.dev/docs/plugins) 配置
 
 ```json
 {
@@ -99,14 +99,14 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 }
 ```
 
-Your code
+您的代码
 
 ```js
 const className = ['c1', 'c2'];
 <div className={className} />;
 ```
 
-After compilation
+编译之后
 
 ```js
 import _clsx from 'clsx';
@@ -114,40 +114,40 @@ const className = ['c1', 'c2'];
 <div className={_clsx(className)} />;
 ```
 
-In an existing project, there may be a lot of code like this, and if you turn off static mode, there will be a lot of duplication.
+在现有的项目中，可能有很多这样的代码，如果关闭静态模式，就会有很多重复。
 
-Your code
+您的代码
 
 ```js
 import classNames from 'clsx';
 
-// 👎 This will repeat the process
+// 👎 这将重复该过程
 const className = classNames('c1', 'c2');
 <div className={className} />;
 
-// 👍 This does not repeat the process
+// 👍 这并不重复过程
 <div className={classNames('c1', 'c2')} />;
 ```
 
-After compilation
+编译之后
 
 ```js
 import _clsx from 'clsx';
 import classNames from 'clsx';
 
-// 👎 This will repeat the process
+// 👎 这将重复该过程
 const className = classNames('c1', 'c2');
 <div className={_clsx(className)} />;
 
-// 👍 This does not repeat the process
+// 👍 这并不重复过程
 <div className={classNames('c1', 'c2')} />;
 ```
 
 ### `options.strict`
 
-Strict mode is turned on by default, and you can turn it off if you want to add [clsx](https://github.com/lukeed/clsx) to any attribute suffixed by `className`.
+严格模式默认是开启的，如果你想要为任意以 `className` 为后缀的属性添加 [clsx](https://github.com/lukeed/clsx)，可以关闭该模式。
 
-Add the [babel](https://babel.dev/docs/plugins) configuration
+添加 [babel](https://babel.dev/docs/plugins) 配置
 
 ```json
 {
@@ -162,7 +162,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 }
 ```
 
-Your code
+您的代码
 
 ```js
 <Component
@@ -172,7 +172,7 @@ Your code
 />
 ```
 
-After compilation
+编译之后
 
 ```js
 import _clsx from 'clsx';
@@ -185,9 +185,9 @@ import _clsx from 'clsx';
 
 ### `options.importSource`
 
-[clsx](https://github.com/lukeed/clsx) is the supported library by default, and if you have your choice, you can replace it with `importSource`.
+[clsx](https://github.com/lukeed/clsx) 是默认支持的库，如果您有其他选择，你可以用 `importSource` 替换它。
 
-Add the [babel](https://babel.dev/docs/plugins) configuration
+添加 [babel](https://babel.dev/docs/plugins) 配置
 
 ```json
 {
@@ -202,13 +202,13 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 }
 ```
 
-Your code
+您的代码
 
 ```js
 <div className={['c1', 'c2']} />
 ```
 
-After compilation
+编译之后
 
 ```js
 import _clsx from 'classnames';
@@ -217,9 +217,9 @@ import _clsx from 'classnames';
 
 ### `options.importName`
 
-If your custom import source does not have a default export available, you can specify the import name with `importName`.
+如果您的自定义导入源没有可用的默认导出，您可以使用 `importName` 指定导入名称。
 
-Add the [babel](https://babel.dev/docs/plugins) configuration
+添加 [babel](https://babel.dev/docs/plugins) 配置
 
 ```json
 {
@@ -235,28 +235,28 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 }
 ```
 
-Your code
+您的代码
 
 ```js
 <div className={['c1', 'c2']} />
 ```
 
-After compilation
+编译之后
 
 ```js
 import { classNames as _clsx } from '@/utils';
 <div className={_clsx('c1', 'c2')} />;
 ```
 
-## Ignore
+## 忽略
 
-If you feel that there is an unnecessary transformation, you can add a comment so that it is ignored during the transformation.
+如果您觉得有不必要的转换，可以添加注释，以便在转换过程中忽略它。
 
-### Local ignore
+### 局部忽略
 
-You can ignore the conversion of this line by adding a comment above.
+您可以通过在上面添加注释来忽略此行的转换。
 
-Your code
+您的代码
 
 ```js
 <div className={['c1', 'c2']} />;
@@ -266,7 +266,7 @@ Your code
 />;
 ```
 
-After compilation
+编译之后
 
 ```js
 import _clsx from 'clsx';
@@ -274,11 +274,11 @@ import _clsx from 'clsx';
 <div className={['c1', 'c2']} />;
 ```
 
-### Global ignore
+### 全局忽略
 
-You can omit the conversion of the entire file by adding a comment at the top of the file.
+您可以通过在文件顶部添加注释来省略整个文件的转换。
 
-Your code
+您的代码
 
 ```js
 // @clsx-ignore-global
@@ -286,7 +286,7 @@ Your code
 <div className={['c1', 'c2']} />;
 ```
 
-After compilation
+编译之后
 
 ```js
 <div className={['c1', 'c2']} />;
@@ -295,11 +295,11 @@ After compilation
 
 ## Typescript
 
-Support `Typescript` with [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource).
+通过 [j​​sxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource) 支持 `Typescript`。
 
-You only need to make minor changes to `tsconfig.json` to support the use of the plugin in `Typescript` projects.
+只需要对`tsconfig.json`进行少量修改，即可支持在`Typescript`项目中使用该插件。
 
-Only `react17+` and `Typescript4.7+` are supported due to the use of advanced syntax.
+由于使用了高级语法，仅支持 `react17+` 和 `Typescript4.7+`。
 
 preserve
 
@@ -362,9 +362,9 @@ react-native
 }
 ```
 
-> One thing to note is that `babel-plugin-clsx/jsx` only supports type inference, which prevents `Typescript` from throwing errors.
+> 需要注意的一点是，`babel-plugin-clsx/jsx` 仅支持类型推断，这会阻止 `Typescript` 抛出错误。
 
-## Examples
+## 实例
 
 ### React
 

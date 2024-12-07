@@ -19,10 +19,10 @@ export interface Options {
 }
 
 export default (_: unknown, opts: Options = {}): PluginObj => {
-  opts.static = opts.static ?? true;
-  opts.strict = opts.strict ?? true;
-  opts.importSource = opts.importSource ?? IMPORT_SOURCE;
-  opts.importName = opts.importName ?? IMPORT_NAME;
+  opts.static ??= true;
+  opts.strict ??= true;
+  opts.importSource ??= IMPORT_SOURCE;
+  opts.importName ??= IMPORT_NAME;
 
   const callId = t.identifier(IMPORT_NAMESPACE);
   // default: `_clsx`
