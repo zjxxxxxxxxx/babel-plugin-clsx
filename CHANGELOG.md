@@ -1,3 +1,12 @@
+# [0.4.0-beta.2](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.0-beta.1...v0.4.0-beta.2) (2025-11-22)
+
+
+### Bug Fixes
+
+* output CommonJS to avoid .inherits must be a function error ([#5](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/issues/5)) ([ba048e7](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/commit/ba048e7514d40303b372c1fc4834b143e63b46c1))
+
+
+
 # [0.4.0-beta.1](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.0-beta.0...v0.4.0-beta.1) (2025-11-22)
 
 
