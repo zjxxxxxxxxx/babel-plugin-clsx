@@ -1,7 +1,15 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./",
+    "strict": true,
+    "lib": ["ESNext"],
+    "module": "ESNext",
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "outDir": "./lib",
+    "rootDir": "./src",
     "noEmit": false,
     "esModuleInterop": false,
     "removeComments": true

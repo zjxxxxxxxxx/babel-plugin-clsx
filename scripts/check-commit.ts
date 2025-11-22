@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import consola from 'consola';
+import { consola } from 'consola';
 import metadata from './metadata';
 
 const msgPath = path.resolve('.git/COMMIT_EDITMSG');

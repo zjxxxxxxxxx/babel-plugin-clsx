@@ -3,7 +3,7 @@ import { ExecSyncOptions, execSync } from 'node:child_process';
 import path from 'node:path';
 import semver from 'semver';
 import enquirer from 'enquirer';
-import consola from 'consola';
+import { consola } from 'consola';
 
 export const pkgPath = path.resolve('package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));

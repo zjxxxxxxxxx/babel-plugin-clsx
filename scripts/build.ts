@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
 import { cpSync } from 'node:fs';
-import consola from 'consola';
+import { consola } from 'consola';
 
 runBuild();
 
@@ -12,7 +12,7 @@ function runBuild() {
 
     console.log();
     consola.info('Run Build Plugin...');
-    execSync('tsc -p tsconfig.build.json --module commonjs --outDir ./lib', {
+    execSync('tsc -p tsconfig.build.json', {
       stdio: 'inherit',
       encoding: 'utf-8',
     });

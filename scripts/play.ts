@@ -2,7 +2,7 @@ import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { execSync } from 'node:child_process';
 import enquirer from 'enquirer';
-import consola from 'consola';
+import { consola } from 'consola';
 
 main();
 
