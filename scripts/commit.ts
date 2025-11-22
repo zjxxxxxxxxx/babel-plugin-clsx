@@ -1,6 +1,6 @@
 import { execSync } from 'node:child_process';
 import enquirer from 'enquirer';
-import consola from 'consola';
+import { consola } from 'consola';
 import metadata from './metadata';
 
 main();
