@@ -42,14 +42,14 @@ pnpm add babel-plugin-clsx -D
 
 您的代码
 
-```js
+```jsx
 <div className={['c1', 'c2']} />;
 <div className={{ c1: true, c2: true }} />;
 ```
 
 编译之后
 
-```js
+```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
 <div className={_clsx({ c1: true, c2: true })} />;
@@ -101,14 +101,14 @@ interface Options {
 
 您的代码
 
-```js
+```jsx
 const className = ['c1', 'c2'];
 <div className={className} />;
 ```
 
 编译之后
 
-```js
+```jsx
 import _clsx from 'clsx';
 const className = ['c1', 'c2'];
 <div className={_clsx(className)} />;
@@ -118,7 +118,7 @@ const className = ['c1', 'c2'];
 
 您的代码
 
-```js
+```jsx
 import classNames from 'clsx';
 
 // 👎 这将重复该过程
@@ -131,7 +131,7 @@ const className = classNames('c1', 'c2');
 
 编译之后
 
-```js
+```jsx
 import _clsx from 'clsx';
 import classNames from 'clsx';
 
@@ -164,7 +164,7 @@ const className = classNames('c1', 'c2');
 
 您的代码
 
-```js
+```jsx
 <Component
   className={['c1', 'c2']}
   headerClassName={['c1', 'c2']}
@@ -174,7 +174,7 @@ const className = classNames('c1', 'c2');
 
 编译之后
 
-```js
+```jsx
 import _clsx from 'clsx';
 <Component
   className={_clsx('c1', 'c2')}
@@ -204,13 +204,13 @@ import _clsx from 'clsx';
 
 您的代码
 
-```js
+```jsx
 <div className={['c1', 'c2']} />
 ```
 
 编译之后
 
-```js
+```jsx
 import _clsx from 'classnames';
 <div className={_clsx('c1', 'c2')} />;
 ```
@@ -237,13 +237,13 @@ import _clsx from 'classnames';
 
 您的代码
 
-```js
+```jsx
 <div className={['c1', 'c2']} />
 ```
 
 编译之后
 
-```js
+```jsx
 import { classNames as _clsx } from '@/utils';
 <div className={_clsx('c1', 'c2')} />;
 ```
@@ -258,7 +258,7 @@ import { classNames as _clsx } from '@/utils';
 
 您的代码
 
-```js
+```jsx
 <div className={['c1', 'c2']} />;
 <div
   // @clsx-ignore
@@ -268,7 +268,7 @@ import { classNames as _clsx } from '@/utils';
 
 编译之后
 
-```js
+```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
 <div className={['c1', 'c2']} />;
@@ -280,7 +280,7 @@ import _clsx from 'clsx';
 
 您的代码
 
-```js
+```jsx
 // @clsx-ignore-global
 <div className={['c1', 'c2']} />;
 <div className={['c1', 'c2']} />;
@@ -288,81 +288,72 @@ import _clsx from 'clsx';
 
 编译之后
 
-```js
+```jsx
 <div className={['c1', 'c2']} />;
 <div className={['c1', 'c2']} />;
 ```
 
 ## Typescript
 
-通过 [j​​sxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource) 支持 `Typescript`。
-
 只需要对`tsconfig.json`进行少量修改，即可支持在`Typescript`项目中使用该插件。
 
-由于使用了高级语法，仅支持 `react17+` 和 `Typescript4.7+`。
-
-preserve
+- react-jsx
 
 ```json
 {
   "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "babel-plugin-clsx/jsx",
-    "isolatedModules": true
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "paths": {
++     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
++   }
   }
 }
 ```
 
-react-jsx
+如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
 
 ```json
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "jsx": "react-jsx",
-    "jsxImportSource": "babel-plugin-clsx/jsx"
-  }
-}
-```
-
-or
-
-```json
-{
-  "compilerOptions": {
-    "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
     "paths": {
-      "react/jsx-runtime": [
-        "./node_modules/babel-plugin-clsx/jsx/jsx-runtime.d.ts"
-      ]
+      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
     }
   }
 }
 ```
 
-react-jsxdev
+- react-jsxdev
 
 ```json
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "jsx": "react-jsxdev",
-    "jsxImportSource": "babel-plugin-clsx/jsx"
++   "paths": {
++     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
++   }
   }
 }
 ```
 
-react-native
+如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
 
 ```json
 {
   "compilerOptions": {
-    "jsx": "react-native",
-    "jsxImportSource": "babel-plugin-clsx/jsx",
-    "isolatedModules": true
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
+    "paths": {
+      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
+    }
   }
 }
 ```
-
-> 需要注意的一点是，`babel-plugin-clsx/jsx` 仅支持类型推断，这会阻止 `Typescript` 抛出错误。
 
 ## 实例
 

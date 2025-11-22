@@ -1,15 +1,6 @@
 import type { NodePath, PluginObj } from '@babel/core';
 import { types as t } from '@babel/core';
 import syntaxJSX from '@babel/plugin-syntax-jsx';
-import {
-  CLSX_IGNORE_GLOBAL_TOKEN,
-  CLSX_IGNORE_TOKEN,
-  CLASS_NAME_STRICT_RE,
-  CLASS_NAME_RE,
-  IMPORT_SOURCE,
-  IMPORT_NAME,
-  IMPORT_NAMESPACE,
-} from './constants';
 
 export interface Options {
   static?: boolean;
@@ -18,6 +9,14 @@ export interface Options {
   importName?: string;
 }
 
+const CLSX_IGNORE_GLOBAL_TOKEN = '@clsx-ignore-global';
+const CLSX_IGNORE_TOKEN = '@clsx-ignore';
+const CLASS_NAME_STRICT_RE = /^className$/;
+const CLASS_NAME_RE = /^(className|\w+ClassName)$/;
+const IMPORT_SOURCE = 'clsx';
+const IMPORT_NAME = 'default';
+const IMPORT_NAMESPACE = '_clsx';
+
 export default (_: unknown, opts: Options = {}): PluginObj => {
   opts.static ??= true;
   opts.strict ??= true;
@@ -25,26 +24,21 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
   opts.importName ??= IMPORT_NAME;
 
   const callId = t.identifier(IMPORT_NAMESPACE);
-  // default: `_clsx`
-  // custom:  `{ importName as _clsx }`
-  const importSpec =
-    opts.importName === IMPORT_NAME
-      ? t.importDefaultSpecifier(callId)
-      : t.importSpecifier(callId, t.identifier(opts.importName));
   // default: `import _clsx form 'clsx'`
   // custom:  `import _clsx form '${importSource}'` or `import { importName as _clsx } from '${importSource}'`
   const importDecl = t.importDeclaration(
-    [importSpec],
+    [
+      opts.importName === IMPORT_NAME
+        ? t.importDefaultSpecifier(callId)
+        : t.importSpecifier(callId, t.identifier(opts.importName)),
+    ],
     t.stringLiteral(opts.importSource),
   );
 
   const classNameRE = opts.strict ? CLASS_NAME_STRICT_RE : CLASS_NAME_RE;
   // `<div className={...} />`
   function isDynamicClassName(node: t.JSXAttribute) {
-    return (
-      classNameRE.test(node.name.name as string) &&
-      t.isJSXExpressionContainer(node.value)
-    );
+    return classNameRE.test(node.name.name as string) && t.isJSXExpressionContainer(node.value);
   }
 
   // `@clsx-ignore-global`
@@ -94,9 +88,7 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
   // to   `<div className={_clsx({ c1: true, c2: true })} />`
   function replaceNode(path: NodePath<t.Node>) {
     const { node } = path;
-    const args = (
-      t.isArrayExpression(node) ? node.elements : [node]
-    ) as t.Expression[];
+    const args = (t.isArrayExpression(node) ? node.elements : [node]) as t.Expression[];
     const callExpr = t.callExpression(callId, args);
     path.replaceWith(callExpr);
   }

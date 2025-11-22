@@ -5,7 +5,9 @@
   "main": "./lib/index.js",
   "files": [
     "lib",
-    "jsx",
+    "jsx-runtime.d.ts",
+    "jsx-dev-runtime.d.ts",
+    "jsx-scope.d.ts",
     "LICENSE",
     "README.md",
     "README.zh-CN.md"
@@ -29,21 +31,20 @@
   "homepage": "https://github.com/zjxxxxxxxxx/babel-plugin-clsx#readme",
   "license": "MIT",
   "scripts": {
-    "build": "pnpm build:cjs",
-    "build:cjs": "tsc -p tsconfig.build.json --module commonjs --outDir ./lib",
-    "build:esm": "tsc -p tsconfig.build.json --module esnext --outDir ./es",
+    "build": "esno ./scripts/build.ts",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "cz": "simple-git-hooks & esno ./scripts/commit.ts",
     "play": "esno ./scripts/play.ts",
-    "format": "prettier -w {src,test,scripts}/**/*.{ts,tsx,js,jsx}",
+    "format": "prettier -w '{src,test,scripts}/**/*.{ts,tsx,js,jsx}'",
     "release": "esno ./scripts/release.ts",
     "test": "jest",
     "typecheck": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20",
+    "pnpm": ">=10"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.22.0",
   "dependencies": {
     "@babel/core": "^7.22.10",
     "@babel/plugin-syntax-jsx": "^7.22.5"
@@ -54,7 +55,7 @@
     "@types/babel__core": "^7.20.1",
     "@types/node": "^20.5.0",
     "@types/prettier": "^2.7.3",
-    "@types/react": "17.0.0",
+    "@types/react": "^19.2.6",
     "consola": "^3.2.3",
     "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.4.1",

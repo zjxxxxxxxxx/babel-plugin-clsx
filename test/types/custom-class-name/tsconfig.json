@@ -1,7 +1,6 @@
 {
   "extends": "../../../tsconfig.test.json",
   "compilerOptions": {
-    "jsx": "preserve",
-    "isolatedModules": true
-  }
+    "jsx": "react-jsx"
+  },
 }
