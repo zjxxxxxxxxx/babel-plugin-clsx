@@ -1,7 +1,7 @@
-import { execSync } from 'node:child_process';
 import enquirer from 'enquirer';
 import { consola } from 'consola';
 import metadata from './metadata';
+import { exec } from './exec';
 
 main();
 
@@ -32,9 +32,7 @@ async function main() {
     }
 
     consola.info('Git commit');
-    execSync(`git commit -m '${type}: ${content}'`, {
-      stdio: 'inherit',
-    });
+    exec(`git commit -m '${type}: ${content}'`);
   } catch {
     consola.error('exit');
     process.exit();

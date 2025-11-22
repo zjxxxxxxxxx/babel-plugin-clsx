@@ -1,30 +1,26 @@
 import { join } from 'node:path';
-import { execSync } from 'node:child_process';
-import { cpSync } from 'node:fs';
+import { cpSync, rmSync } from 'node:fs';
 import { consola } from 'consola';
+import { exec } from './exec';
 
 runBuild();
 
 function runBuild() {
   try {
-    const destDir = process.cwd();
-    const srcDir = join(destDir, './jsx');
+    const rootDir = process.cwd();
+    const libDir = join(rootDir, './lib');
+    const jsxDir = join(rootDir, './jsx');
 
-    console.log();
     consola.info('Run Build Plugin...');
-    execSync('tsc -p tsconfig.build.json', {
-      stdio: 'inherit',
-      encoding: 'utf-8',
-    });
+    exec('tsc -p tsconfig.build.json');
+    cpSync(libDir, rootDir, { recursive: true, force: true });
+    rmSync(libDir, { recursive: true });
 
-    console.log();
     consola.info('Run Build Jsx...');
-    cpSync(srcDir, destDir, { recursive: true, force: true });
+    cpSync(jsxDir, rootDir, { recursive: true, force: true });
 
-    console.log();
     consola.success('Build Success');
   } catch (err) {
-    console.log();
     consola.error('Build Failed', err);
   }
 }
