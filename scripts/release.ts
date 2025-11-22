@@ -1,9 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import { ExecSyncOptions, execSync } from 'node:child_process';
 import path from 'node:path';
 import semver from 'semver';
 import enquirer from 'enquirer';
 import { consola } from 'consola';
+import { exec } from './exec';
 
 export const pkgPath = path.resolve('package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
@@ -116,12 +116,4 @@ function updateVersion(version: string) {
   pkg.version = version;
 
   writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
-}
-
-function exec(command: string, options: ExecSyncOptions = {}) {
-  return execSync(command, {
-    stdio: 'inherit',
-    encoding: 'utf-8',
-    ...options,
-  });
 }

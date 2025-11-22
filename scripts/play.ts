@@ -1,8 +1,8 @@
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { execSync } from 'node:child_process';
 import enquirer from 'enquirer';
 import { consola } from 'consola';
+import { exec } from './exec';
 
 main();
 
@@ -37,14 +37,8 @@ async function main() {
     });
 
     consola.info(`Run ${example}:${script}`);
-    execSync(`pnpm -C ${examplesName}/${example} link ${resolve()}`, {
-      stdio: 'inherit',
-      encoding: 'utf-8',
-    });
-    execSync(`pnpm --filter @examples/${example} ${script}`, {
-      stdio: 'inherit',
-      encoding: 'utf-8',
-    });
+    exec(`pnpm -C ${examplesName}/${example} link ${resolve()}`);
+    exec(`pnpm --filter @examples/${example} ${script}`);
   } catch {
     consola.error('exit');
     process.exit();

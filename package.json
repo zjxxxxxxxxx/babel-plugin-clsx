@@ -1,10 +1,10 @@
 {
   "name": "babel-plugin-clsx",
   "version": "0.4.0-beta.2",
-  "description": "Add `clsx()` automatically to `className` in `React` and support `Typescript`.",
-  "main": "./lib/index.js",
+  "description": "Add clsx() automatically to className in React and support Typescript.",
+  "main": "./index.js",
   "files": [
-    "lib",
+    "index.js",
     "jsx-runtime.d.ts",
     "jsx-dev-runtime.d.ts",
     "jsx-scope.d.ts",
@@ -17,10 +17,9 @@
     "url": "git+https://github.com/zjxxxxxxxxx/babel-plugin-clsx.git"
   },
   "keywords": [
-    "babel",
     "babel-plugin",
     "react",
-    "jsx",
+    "react-jsx",
     "clsx",
     "classnames"
   ],
