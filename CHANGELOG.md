@@ -1,3 +1,12 @@
+# [0.4.0-beta.0](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.3.5...v0.4.0-beta.0) (2025-11-22)
+
+
+### Features
+
+* react v19 jsx types ([#2](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/issues/2)) ([645a043](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/commit/645a04346c92408e4cb60314b8571fbc3c4db9a0))
+
+
+
 ## 0.3.5 (2023-08-15)
 
 
