@@ -295,64 +295,7 @@ You only need to make minor changes to `tsconfig.json` to support the use of the
 
 - react-jsx
 
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "paths": {
-+     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-+   }
-  }
-}
-```
-
-- react-jsx
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "paths": {
-+     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-+   }
-  }
-}
-```
-
-如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-    }
-  }
-}
-```
-
-- react-jsxdev
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsxdev",
-+   "paths": {
-+     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-+   }
-  }
-}
-```
-
-- react-jsx
-
-```json
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
@@ -366,7 +309,7 @@ You only need to make minor changes to `tsconfig.json` to support the use of the
 
 If the React version you are currently using lacks React.JSX, you will need to add additional configuration.
 
-```json
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
@@ -381,7 +324,7 @@ If the React version you are currently using lacks React.JSX, you will need to a
 
 - react-jsxdev
 
-```json
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
@@ -395,62 +338,7 @@ If the React version you are currently using lacks React.JSX, you will need to a
 
 If the React version you are currently using lacks React.JSX, you will need to add additional configuration.
 
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-    }
-  }
-}
-```
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-    }
-  }
-}
-```
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-    }
-  }
-}
-```
-
-- react-jsxdev
-
-```json
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsxdev",
-+   "paths": {
-+     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-+   }
-  }
-}
-```
-
-如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
-
-```json
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",

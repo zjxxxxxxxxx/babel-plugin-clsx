@@ -299,7 +299,7 @@ import _clsx from 'clsx';
 
 - react-jsx
 
-```json
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
@@ -313,7 +313,7 @@ import _clsx from 'clsx';
 
 如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
 
-```json
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
@@ -328,7 +328,7 @@ import _clsx from 'clsx';
 
 - react-jsxdev
 
-```json
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
@@ -342,7 +342,7 @@ import _clsx from 'clsx';
 
 如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
 
-```json
+```diff 
 {
   "compilerOptions": {
     "baseUrl": "./",
