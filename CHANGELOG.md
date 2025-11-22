@@ -1,3 +1,7 @@
+# [0.4.0](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.0-beta.2...v0.4.0) (2025-11-22)
+
+
+
 # [0.4.0-beta.2](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.0-beta.1...v0.4.0-beta.2) (2025-11-22)
 
 
