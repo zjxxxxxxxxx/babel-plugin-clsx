@@ -42,14 +42,14 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 
 Your code
 
-```js
+```jsx
 <div className={['c1', 'c2']} />;
 <div className={{ c1: true, c2: true }} />;
 ```
 
 After compilation
 
-```js
+```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
 <div className={_clsx({ c1: true, c2: true })} />;
@@ -101,14 +101,14 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 
 Your code
 
-```js
+```jsx
 const className = ['c1', 'c2'];
 <div className={className} />;
 ```
 
 After compilation
 
-```js
+```jsx
 import _clsx from 'clsx';
 const className = ['c1', 'c2'];
 <div className={_clsx(className)} />;
@@ -118,7 +118,7 @@ In an existing project, there may be a lot of code like this, and if you turn of
 
 Your code
 
-```js
+```jsx
 import classNames from 'clsx';
 
 // 👎 This will repeat the process
@@ -131,7 +131,7 @@ const className = classNames('c1', 'c2');
 
 After compilation
 
-```js
+```jsx
 import _clsx from 'clsx';
 import classNames from 'clsx';
 
@@ -164,17 +164,13 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 
 Your code
 
-```js
-<Component
-  className={['c1', 'c2']}
-  headerClassName={['c1', 'c2']}
-  footerClassName={['c1', 'c2']}
-/>
+```jsx
+<Component className={['c1', 'c2']} headerClassName={['c1', 'c2']} footerClassName={['c1', 'c2']} />
 ```
 
 After compilation
 
-```js
+```jsx
 import _clsx from 'clsx';
 <Component
   className={_clsx('c1', 'c2')}
@@ -204,13 +200,13 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 
 Your code
 
-```js
+```jsx
 <div className={['c1', 'c2']} />
 ```
 
 After compilation
 
-```js
+```jsx
 import _clsx from 'classnames';
 <div className={_clsx('c1', 'c2')} />;
 ```
@@ -237,13 +233,13 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 
 Your code
 
-```js
+```jsx
 <div className={['c1', 'c2']} />
 ```
 
 After compilation
 
-```js
+```jsx
 import { classNames as _clsx } from '@/utils';
 <div className={_clsx('c1', 'c2')} />;
 ```
@@ -258,7 +254,7 @@ You can ignore the conversion of this line by adding a comment above.
 
 Your code
 
-```js
+```jsx
 <div className={['c1', 'c2']} />;
 <div
   // @clsx-ignore
@@ -268,7 +264,7 @@ Your code
 
 After compilation
 
-```js
+```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
 <div className={['c1', 'c2']} />;
@@ -280,7 +276,7 @@ You can omit the conversion of the entire file by adding a comment at the top of
 
 Your code
 
-```js
+```jsx
 // @clsx-ignore-global
 <div className={['c1', 'c2']} />;
 <div className={['c1', 'c2']} />;
@@ -288,92 +284,193 @@ Your code
 
 After compilation
 
-```js
+```jsx
 <div className={['c1', 'c2']} />;
 <div className={['c1', 'c2']} />;
 ```
 
 ## Typescript
 
-Support `Typescript` with [jsxImportSource](https://www.typescriptlang.org/tsconfig#jsxImportSource).
-
 You only need to make minor changes to `tsconfig.json` to support the use of the plugin in `Typescript` projects.
 
-Only `react17+` and `Typescript4.7+` are supported due to the use of advanced syntax.
-
-preserve
+- react-jsx
 
 ```json
 {
   "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "babel-plugin-clsx/jsx",
-    "isolatedModules": true
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "paths": {
++     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
++   }
   }
 }
 ```
 
-react-jsx
+- react-jsx
 
 ```json
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "jsx": "react-jsx",
-    "jsxImportSource": "babel-plugin-clsx/jsx"
++   "paths": {
++     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
++   }
   }
 }
 ```
 
-or
+如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
 
 ```json
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
     "paths": {
-      "react/jsx-runtime": [
-        "./node_modules/babel-plugin-clsx/jsx/jsx-runtime.d.ts"
-      ]
+      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
     }
   }
 }
 ```
 
-react-jsxdev
+- react-jsxdev
 
 ```json
 {
   "compilerOptions": {
+    "baseUrl": "./",
     "jsx": "react-jsxdev",
-    "jsxImportSource": "babel-plugin-clsx/jsx"
++   "paths": {
++     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
++   }
   }
 }
 ```
 
-react-native
+- react-jsx
 
 ```json
 {
   "compilerOptions": {
-    "jsx": "react-native",
-    "jsxImportSource": "babel-plugin-clsx/jsx",
-    "isolatedModules": true
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "paths": {
++     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
++   }
   }
 }
 ```
 
-> One thing to note is that `babel-plugin-clsx/jsx` only supports type inference, which prevents `Typescript` from throwing errors.
+If the React version you are currently using lacks React.JSX, you will need to add additional configuration.
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
+    "paths": {
+      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
+    }
+  }
+}
+```
+
+- react-jsxdev
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsxdev",
++   "paths": {
++     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
++   }
+  }
+}
+```
+
+If the React version you are currently using lacks React.JSX, you will need to add additional configuration.
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
+    "paths": {
+      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
+    }
+  }
+}
+```
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
+    "paths": {
+      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
+    }
+  }
+}
+```
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
+    "paths": {
+      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
+    }
+  }
+}
+```
+
+- react-jsxdev
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsxdev",
++   "paths": {
++     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
++   }
+  }
+}
+```
+
+如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "jsx": "react-jsx",
++   "types": ["babel-plugin-clsx/jsx-scope"],
+    "paths": {
+      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
+    }
+  }
+}
+```
 
 ## Examples
 
 ### React
 
 - [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
-- [CodeSandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
 - [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
 
 ### Nextjs
 
 - [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
-- [CodeSandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
 - [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)

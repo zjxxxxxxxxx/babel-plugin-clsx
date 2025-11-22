@@ -4,7 +4,7 @@ import { execSync } from 'node:child_process';
 import { expect, test } from '@jest/globals';
 import { transformSync } from '@babel/core';
 import { format, resolveConfig } from 'prettier';
-import clsx from '../src';
+import clsx from '../src/index';
 
 const fixturesPath = path.resolve('test/fixtures');
 const typesPath = path.resolve('test/types');
@@ -34,8 +34,8 @@ function getCodes(name: string) {
     })?.code ?? '';
 
   return {
-    actual: format(output, formatConfig),
-    expected: format(result, formatConfig),
+    actual: format(result, formatConfig),
+    expected: format(output, formatConfig),
   };
 }
 

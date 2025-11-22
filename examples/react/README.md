@@ -7,19 +7,19 @@ Use `babel-plugin-clsx` in `React`.
 npm
 
 ```bash
-npm i --save-dev babel-plugin-clsx
+npm i babel-plugin-clsx -D
 ```
 
 yarn
 
 ```bash
-yarn add --save-dev babel-plugin-clsx
+yarn add babel-plugin-clsx -D
 ```
 
 pnpm
 
 ```bash
-pnpm add --save-dev babel-plugin-clsx
+pnpm add babel-plugin-clsx -D
 ```
 
 ## Configuration

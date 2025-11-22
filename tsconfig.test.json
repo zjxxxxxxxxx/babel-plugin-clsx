@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "jsxImportSource": "jsx",
+    "paths": {
+      "react/jsx-runtime": ["./jsx/jsx-runtime"],
+      "react/jsx-dev-runtime": ["./jsx/jsx-dev-runtime"]
+    },
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "incremental": true,

@@ -72,10 +72,7 @@ async function inputVersion() {
     targetVersion = (release.match(/\((.+)\)/) as string[])[1];
   }
 
-  if (
-    !semver.valid(targetVersion) ||
-    !semver.lt(currentVersion, targetVersion)
-  ) {
+  if (!semver.valid(targetVersion) || !semver.lt(currentVersion, targetVersion)) {
     exit(`Invalid version number: ${targetVersion}`);
   }
 

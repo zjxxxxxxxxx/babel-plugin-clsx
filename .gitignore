@@ -22,3 +22,7 @@ es/
 .coverage
 test/types/**/*.jsx
 test/types/**/*.js
+
+/jsx-runtime.d.ts
+/jsx-dev-runtime.d.ts
+/jsx-scope.d.ts

@@ -10,8 +10,6 @@ const types = metadata.map((item) => item.type + ':').join('|');
 const commitRE = new RegExp(`^(${types}) .{1,80}$`);
 
 if (!commitRE.test(msg)) {
-  consola.error(
-    'Use [pnpm cz] to create a commit message in the correct format',
-  );
+  consola.error('Use [pnpm cz] to create a commit message in the correct format');
   process.exit(1);
 }
