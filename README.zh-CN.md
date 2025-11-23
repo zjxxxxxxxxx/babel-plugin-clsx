@@ -351,7 +351,7 @@ import _clsx from 'clsx';
 }
 ```
 
-## 实例
+## 示例
 
 ### react-jsx-v19
 

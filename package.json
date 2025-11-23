@@ -46,8 +46,7 @@
   "packageManager": "pnpm@10.22.0",
   "dependencies": {
     "@babel/core": "^7.28.5",
-    "@babel/plugin-syntax-jsx": "^7.27.1",
-    "babel-plugin-clsx": "link:"
+    "@babel/plugin-syntax-jsx": "^7.27.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.5",

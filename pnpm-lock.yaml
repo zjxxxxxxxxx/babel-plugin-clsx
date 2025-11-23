@@ -14,9 +14,6 @@ importers:
       '@babel/plugin-syntax-jsx':
         specifier: ^7.27.1
         version: 7.27.1(@babel/core@7.28.5)
-      babel-plugin-clsx:
-        specifier: 'link:'
-        version: 'link:'
     devDependencies:
       '@babel/preset-env':
         specifier: ^7.28.5
