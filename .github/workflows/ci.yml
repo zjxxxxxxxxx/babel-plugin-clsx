@@ -1,9 +1,13 @@
 name: CI
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+  push:
+    branches-ignore:
+      - main
+      - test/*
 
 jobs:
   ci:
@@ -25,6 +29,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm i
+
+      - name: Install Test dependencies
+        run: pnpm --filter test install
 
       - name: Typecheck
         run: pnpm typecheck

@@ -17,13 +17,13 @@ jobs:
         with:
           version: 10.22.0
 
-      - name: Set node
+      - name: Set Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
           cache: pnpm
 
-      - name: Install
+      - name: Install dependencies
         run: pnpm i
 
       - name: Build
