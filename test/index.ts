@@ -1,13 +1,13 @@
 import { readFileSync, readdirSync } from 'node:fs';
-import path from 'node:path';
-import { execSync } from 'node:child_process';
+import { resolve } from 'node:path';
 import { expect, test } from '@jest/globals';
 import { transformSync } from '@babel/core';
 import { format, resolveConfig } from 'prettier';
+import { run } from '../scripts/run';
 import clsx from '../src/index';
 
-const fixturesPath = path.resolve('test/fixtures');
-const typesPath = path.resolve('test/types');
+const fixturesPath = resolve('fixtures');
+const typesPath = resolve('types');
 const formatConfig = Object.assign({}, resolveConfig.sync(process.cwd()), {
   parser: 'babel',
 });
@@ -20,7 +20,7 @@ function tester() {
     expect(actual).toBe(expected);
   });
   test.each(readdirSync(typesPath))('%s', (name) => {
-    execSync(`pnpm tsc --project ${typesPath}/${name}/tsconfig.json`);
+    run(`tsc --project ${typesPath}/${name}/tsconfig.json`);
   });
 }
 

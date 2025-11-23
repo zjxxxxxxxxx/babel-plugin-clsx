@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "strict": true, 
     "lib": ["ESNext"],
     "module": "ESNext",
     "target": "es6",
@@ -11,6 +11,6 @@
     "skipDefaultLibCheck": true,
     "esModuleInterop": true
   },
-  "include": ["global.d.ts", "test", "scripts", "src"],
-  "exclude": ["node_modules", "test/types", "examples"]
+  "include": ["global.d.ts", "scripts", "src"],
+  "exclude": ["node_modules", "test", "examples"]
 }

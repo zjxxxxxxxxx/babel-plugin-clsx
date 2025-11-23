@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { cpSync, rmSync } from 'node:fs';
 import { consola } from 'consola';
-import { exec } from './exec';
+import { run } from './run';
 
 runBuild();
 
@@ -12,7 +12,7 @@ function runBuild() {
     const jsxDir = join(rootDir, './jsx');
 
     consola.info('Run Build Plugin...');
-    exec('tsc -p tsconfig.build.json');
+    run('tsc -p tsconfig.build.json');
     cpSync(libDir, rootDir, { recursive: true, force: true });
     rmSync(libDir, { recursive: true });
 

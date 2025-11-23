@@ -165,11 +165,7 @@ const className = classNames('c1', 'c2');
 您的代码
 
 ```jsx
-<Component
-  className={['c1', 'c2']}
-  headerClassName={['c1', 'c2']}
-  footerClassName={['c1', 'c2']}
-/>
+<Component className={['c1', 'c2']} headerClassName={['c1', 'c2']} footerClassName={['c1', 'c2']} />
 ```
 
 编译之后
@@ -342,7 +338,7 @@ import _clsx from 'clsx';
 
 如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
 
-```diff 
+```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
@@ -357,14 +353,22 @@ import _clsx from 'clsx';
 
 ## 实例
 
-### React
+### react-jsx-v19
 
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
-- [CodeSandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react)
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v19)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v19)
 
-### Nextjs
+### react-jsxdev-v19
 
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
-- [CodeSandbox](https://codesandbox.io/p/sandbox/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/nextjs)
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
+
+### react-jsx-v17
+
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v17)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v17)
+
+### react-jsxdev-v17
+
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v17)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v17)
