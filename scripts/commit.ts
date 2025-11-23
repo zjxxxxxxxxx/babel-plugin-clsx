@@ -1,7 +1,7 @@
 import enquirer from 'enquirer';
 import { consola } from 'consola';
 import metadata from './metadata';
-import { exec } from './exec';
+import { run } from './run';
 
 main();
 
@@ -32,7 +32,7 @@ async function main() {
     }
 
     consola.info('Git commit');
-    exec(`git commit -m '${type}: ${content}'`);
+    run(`git commit -m '${type}: ${content}'`);
   } catch {
     consola.error('exit');
     process.exit();

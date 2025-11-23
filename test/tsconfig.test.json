@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "ESNext",
+    "typeRoots": ["./node_modules/@types"],
+    "paths": {
+      "react/jsx-runtime": ["../jsx/jsx-runtime"],
+      "react/jsx-dev-runtime": ["../jsx/jsx-dev-runtime"]
+    },
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "disableSizeLimit": true
+  }
+}

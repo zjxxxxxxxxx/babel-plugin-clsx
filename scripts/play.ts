@@ -2,7 +2,7 @@ import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import enquirer from 'enquirer';
 import { consola } from 'consola';
-import { exec } from './exec';
+import { run } from './run';
 
 main();
 
@@ -37,8 +37,8 @@ async function main() {
     });
 
     consola.info(`Run ${example}:${script}`);
-    exec(`pnpm -C ${examplesName}/${example} link ${resolve()}`);
-    exec(`pnpm --filter @examples/${example} ${script}`);
+    run(`pnpm -C ${examplesName}/${example} link ${resolve()}`);
+    run(`pnpm --filter @examples/${example} ${script}`);
   } catch {
     consola.error('exit');
     process.exit();

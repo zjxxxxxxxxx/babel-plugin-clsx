@@ -23,7 +23,9 @@ es/
 test/types/**/*.jsx
 test/types/**/*.js
 
+/index.js
+/react.d.ts
 /jsx-runtime.d.ts
 /jsx-dev-runtime.d.ts
 /jsx-scope.d.ts
-/index.js
+ 

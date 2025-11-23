@@ -3,7 +3,7 @@ import path from 'node:path';
 import semver from 'semver';
 import enquirer from 'enquirer';
 import { consola } from 'consola';
-import { exec } from './exec';
+import { run } from './run';
 
 export const pkgPath = path.resolve('package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
@@ -20,23 +20,23 @@ async function main() {
   updateVersion(version);
 
   consola.info('Changelog');
-  exec('pnpm changelog');
+  run('pnpm changelog');
 
   consola.info('Git add');
-  exec('git add .');
-  exec(`git commit -m "chore: release v${version}"`);
-  exec(`git tag -a v${version} -m "v${version}"`);
+  run('git add .');
+  run(`git commit -m "chore: release v${version}"`);
+  run(`git tag -a v${version} -m "v${version}"`);
 
   consola.info('Git push');
-  exec('git push');
+  run('git push');
 
   consola.info('Git push tag');
-  exec(`git push origin v${version}`);
+  run(`git push origin v${version}`);
 }
 
 function checkBranch() {
   const releaseBranch = 'main';
-  const currentBranch = exec('git branch --show-current', {
+  const currentBranch = run('git branch --show-current', {
     stdio: 'pipe',
   })
     .toString()
