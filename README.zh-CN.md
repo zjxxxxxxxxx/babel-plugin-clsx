@@ -6,7 +6,7 @@
 
 在 [React](https://react.dev) 中为 `className` 自动添加 [clsx](https://github.com/lukeed/clsx)，无需导入和编写，享受同样的乐趣。
 
-值得注意的是，该库支持使用 `Typescript` 项目。目前尚未发现其他同类库可以做到这一点。
+值得注意的是，该库支持在 `Typescript` 项目中使用。目前为止，还没有其他类似的库提供此功能。
 
 > 在执行此操作之前，请确保已安装 [clsx](https://github.com/lukeed/clsx) 或项目存在其他可用的 `className` 处理程序。
 
@@ -223,8 +223,7 @@ import _clsx from 'classnames';
     [
       "clsx",
       {
-        "importSource": "@/utils",
-        "importName": "classNames"
+        "importName": "clsx"
       }
     ]
   ]
@@ -240,7 +239,7 @@ import _clsx from 'classnames';
 编译之后
 
 ```jsx
-import { classNames as _clsx } from '@/utils';
+import { clsx as _clsx } from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
 ```
 
@@ -291,15 +290,44 @@ import _clsx from 'clsx';
 
 ## Typescript
 
-只需要对`tsconfig.json`进行少量修改，即可支持在`Typescript`项目中使用该插件。
+> ⚠️ **最低版本要求**  
+> 为了在 TypeScript 项目中使用该插件，最低要求为 **React 17** 及 **TypeScript 4.1**，因为该版本组合正式支持 JSX 命名空间 `React.JSX`。
 
-- react-jsx
+只需对 `tsconfig.json` 进行少量修改，即可开启支持。
+
+### React.JSX
+
+如果您当前使用的 `React` 版本仅支持全局 `JSX`，请添加此配置，将 `globalThis.JSX` 转换为 `React.JSX`。
+
+```diff
+{
+  "compilerOptions": {
++   "types": ["babel-plugin-clsx/jsx-scope"],
+  }
+}
+```
+
+### react
 
 ```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react-jsx",
++   "jsx": "react",
++   "paths": {
++     "react": ["node_modules/babel-plugin-clsx/react"]
++   }
+  }
+}
+```
+
+### react-jsx
+
+```diff
+{
+  "compilerOptions": {
+    "baseUrl": "./",
++   "jsx": "react-jsx",
 +   "paths": {
 +     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
 +   }
@@ -307,28 +335,13 @@ import _clsx from 'clsx';
 }
 ```
 
-如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
+### react-jsxdev
 
 ```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-    }
-  }
-}
-```
-
-- react-jsxdev
-
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsxdev",
++   "jsx": "react-jsxdev",
 +   "paths": {
 +     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
 +   }
@@ -336,22 +349,12 @@ import _clsx from 'clsx';
 }
 ```
 
-如果您当前使用的`React`版本缺少`React.JSX`则需添加额外的配置。
-
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-    }
-  }
-}
-```
-
 ## 示例
+
+### react-v19
+
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)
 
 ### react-jsx-v19
 
@@ -362,6 +365,11 @@ import _clsx from 'clsx';
 
 - [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
 - [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
+
+### react-v17
+
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)
 
 ### react-jsx-v17
 

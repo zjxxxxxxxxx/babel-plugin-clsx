@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync } from 'node:fs';
-import path from 'node:path';
+import { resolve } from 'node:path';
 import semver from 'semver';
 import enquirer from 'enquirer';
 import { consola } from 'consola';
 import { run } from './run';
 
-export const pkgPath = path.resolve('package.json');
+export const pkgPath = resolve('package.json');
 const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
 const { version: currentVersion } = pkg;
 

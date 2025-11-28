@@ -1,37 +1,48 @@
-import { readFileSync, readdirSync } from 'node:fs';
+import { readdirSync } from 'node:fs';
+import { readFile } from 'node:fs/promises';
+import { exec } from 'node:child_process';
 import { resolve } from 'node:path';
-import { expect, test } from '@jest/globals';
-import { transformSync } from '@babel/core';
+import { promisify } from 'node:util';
+import { expect, test, describe } from '@jest/globals';
+import { transformAsync } from '@babel/core';
 import { format, resolveConfig } from 'prettier';
-import { run } from '../scripts/run';
 import clsx from '../src/index';
 
 const fixturesPath = resolve('fixtures');
 const typesPath = resolve('types');
-const formatConfig = Object.assign({}, resolveConfig.sync(process.cwd()), {
-  parser: 'babel',
-});
+const execAsync = promisify(exec);
+const formatConfigPromise = resolveConfig(process.cwd()).then((config) =>
+  Object.assign({}, config ?? {}, {
+    parser: 'babel',
+  }),
+);
 
-tester();
-
-function tester() {
-  test.each(readdirSync(fixturesPath))('%s', (name) => {
-    const { actual, expected } = getCodes(name);
+describe('fixtures tests', () => {
+  test.each(readdirSync(fixturesPath))('%s', async (name) => {
+    const { actual, expected } = await getCodes(name);
     expect(actual).toBe(expected);
   });
-  test.each(readdirSync(typesPath))('%s', (name) => {
-    run(`tsc --project ${typesPath}/${name}/tsconfig.json`);
-  });
-}
+});
 
-function getCodes(name: string) {
-  const options = JSON.parse(readCodeString(name, 'options.json'));
-  const input = readCodeString(name, 'input.jsx');
-  const output = readCodeString(name, 'output.jsx');
+describe('types tests', () => {
+  test.each(readdirSync(typesPath))('%s', async (name) => {
+    await execAsync(`tsc --project ${typesPath}/${name}/tsconfig.json`);
+  });
+});
+
+async function getCodes(name: string) {
+  const [options, input, output, formatConfig] = await Promise.all([
+    readCodeString(name, 'options.json'),
+    readCodeString(name, 'input.jsx'),
+    readCodeString(name, 'output.jsx'),
+    formatConfigPromise,
+  ]);
   const result =
-    transformSync(input, {
-      plugins: [[clsx, options]],
-    })?.code ?? '';
+    (
+      await transformAsync(input, {
+        plugins: [[clsx, JSON.parse(options)]],
+      })
+    )?.code ?? '';
 
   return {
     actual: format(result, formatConfig),
@@ -40,5 +51,5 @@ function getCodes(name: string) {
 }
 
 function readCodeString(name: string, filename: string) {
-  return readFileSync(`${fixturesPath}/${name}/${filename}`, 'utf-8');
+  return readFile(resolve(fixturesPath, name, filename), 'utf-8');
 }

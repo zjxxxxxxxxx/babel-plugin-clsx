@@ -25,7 +25,7 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
 
   const callId = t.identifier(IMPORT_NAMESPACE);
   // default: `import _clsx form 'clsx'`
-  // custom:  `import _clsx form '${importSource}'` or `import { importName as _clsx } from '${importSource}'`
+  // custom:  `import _clsx form '${importSource}'` or `import { ${importName} as _clsx } from '${importSource}'`
   const importDecl = t.importDeclaration(
     [
       opts.importName === IMPORT_NAME
@@ -61,10 +61,9 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
   function isIgnored(node: t.Node, token = CLSX_IGNORE_TOKEN) {
     return node.leadingComments
       ? node.leadingComments.some((comment) => {
-          const ignored = comment.value.trim() === token;
+          const ignored = comment.value.trim().startsWith(token);
           // Removes comments for ignoring
           if (ignored) comment.ignore = ignored;
-
           return ignored;
         })
       : false;
@@ -82,17 +81,6 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
     }
   }
 
-  // code `<div className={['c1', 'c2']} />`
-  // to   `<div className={_clsx('c1', 'c2')} />`
-  // code `<div className={{ c1: true, c2: true }} />`
-  // to   `<div className={_clsx({ c1: true, c2: true })} />`
-  function replaceNode(path: NodePath<t.Node>) {
-    const { node } = path;
-    const args = (t.isArrayExpression(node) ? node.elements : [node]) as t.Expression[];
-    const callExpr = t.callExpression(callId, args);
-    path.replaceWith(callExpr);
-  }
-
   return {
     name: 'clsx',
     inherits: syntaxJSX,
@@ -100,6 +88,7 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
     visitor: {
       Program: {
         enter(path, state) {
+          state.clsxImport = false;
           // `@clsx-ignore-global` exists in the header of the file
           state.clsxIgnoreGlobal = isIgnoredGlobal(path.node.body);
         },
@@ -120,7 +109,17 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
           isNeedTransform((node.value as t.JSXExpressionContainer).expression)
         ) {
           state.clsxImport = true;
-          replaceNode(path.get('value').get('expression') as NodePath<t.Node>);
+
+          // code `<div className={['c1', 'c2']} />`
+          // to   `<div className={_clsx('c1', 'c2')} />`
+          // code `<div className={{ c1: true, c2: true }} />`
+          // to   `<div className={_clsx({ c1: true, c2: true })} />`
+          const exprPath = path.get('value').get('expression') as NodePath<t.Node>;
+          const callArgs = (
+            t.isArrayExpression(exprPath.node) ? exprPath.node.elements : [exprPath.node]
+          ) as t.Expression[];
+          const callExpr = t.callExpression(callId, callArgs);
+          exprPath.replaceWith(callExpr);
         }
       },
     },

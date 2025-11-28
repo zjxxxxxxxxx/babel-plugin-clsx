@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react/index';
 
 declare type ClassName<Props = {}> = {
   [Key in keyof Props]: Key extends 'className' | `${string}ClassName` ? unknown : Props[Key];

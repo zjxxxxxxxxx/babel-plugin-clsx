@@ -7,7 +7,7 @@ const msgPath = resolve('.git/COMMIT_EDITMSG');
 const msg = readFileSync(msgPath, 'utf-8').trim();
 
 const types = metadata.map((item) => item.type + ':').join('|');
-const commitRE = new RegExp(`^(${types}) .{1,80}$`);
+const commitRE = new RegExp(`^(${types}) .{1,100}$`);
 
 if (!commitRE.test(msg)) {
   consola.error('Use [pnpm cz] to create a commit message in the correct format');
