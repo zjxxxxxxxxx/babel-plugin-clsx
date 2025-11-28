@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.0...v0.4.1) (2025-11-28)
+
+
+### Features
+
+* Support jsx: "react" types ([#10](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/issues/10)) ([51b45b2](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/commit/51b45b2ae64025ec7dc78db3305e0fd4e02e459c))
+
+
+
 # [0.4.0](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.0-beta.2...v0.4.0) (2025-11-22)
 
 
