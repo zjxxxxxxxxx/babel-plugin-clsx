@@ -30,11 +30,8 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
-      - name: Install Test dependencies
-        run: pnpm --filter test install
-
-      - name: Typecheck
-        run: pnpm typecheck
+      - name: Check type
+        run: pnpm type
 
       - name: Test
         run: pnpm test

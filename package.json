@@ -5,6 +5,7 @@
   "main": "./index.js",
   "files": [
     "index.js",
+    "react.d.ts",
     "jsx-runtime.d.ts",
     "jsx-dev-runtime.d.ts",
     "jsx-scope.d.ts",
@@ -37,7 +38,7 @@
     "format": "prettier -w '{src,test,scripts}/**/*.{ts,tsx,js,jsx}'",
     "release": "esno ./scripts/release.ts",
     "test": "pnpm --filter test run test",
-    "typecheck": "tsc --noEmit"
+    "type": "tsc --noEmit"
   },
   "engines": {
     "node": ">=20",
@@ -63,7 +64,7 @@
     "typescript": "^5.1.6"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format && pnpm typecheck && pnpm test",
+    "pre-commit": "pnpm format && pnpm type && pnpm test",
     "commit-msg": "pnpm esno ./scripts/check-commit.ts"
   }
 }

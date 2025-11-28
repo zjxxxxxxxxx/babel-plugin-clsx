@@ -6,7 +6,7 @@
 
 Automatically add [clsx](https://github.com/lukeed/clsx) for `className` in [React](https://react.dev) and have the same fun without importing and writing it.
 
-It is important to note that this library supports the use of `Typescript` projects. No other library of its kind has been found to do this.
+Notably, this library supports usage in TypeScript projects. So far, no other similar library has been found to offer this.
 
 > Before doing so, make sure that [clsx](https://github.com/lukeed/clsx) is installed or another available `className` handler exists for your project.
 
@@ -223,8 +223,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
     [
       "clsx",
       {
-        "importSource": "@/utils",
-        "importName": "classNames"
+        "importName": "clsx"
       }
     ]
   ]
@@ -240,7 +239,7 @@ Your code
 After compilation
 
 ```jsx
-import { classNames as _clsx } from '@/utils';
+import { clsx as _clsx } from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
 ```
 
@@ -291,15 +290,44 @@ After compilation
 
 ## Typescript
 
-You only need to make minor changes to `tsconfig.json` to support the use of the plugin in `Typescript` projects.
+> ⚠️ **Minimum Requirements**  
+> To use this plugin in a TypeScript project, you need **React 17** and **TypeScript 4.1** at minimum, as this combination officially supports the `React.JSX` namespace.
 
-- react-jsx
+A few small adjustments to your `tsconfig.json` are all that’s needed to enable support.
+
+### React.JSX
+
+If your current `React` version only supports global `JSX`, please add this configuration to map `globalThis.JSX` to `React.JSX`.
+
+```diff
+{
+  "compilerOptions": {
++   "types": ["babel-plugin-clsx/jsx-scope"],
+  }
+}
+```
+
+### react
 
 ```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react-jsx",
++   "jsx": "react",
++   "paths": {
++     "react": ["node_modules/babel-plugin-clsx/react"]
++   }
+  }
+}
+```
+
+### react-jsx
+
+```diff
+{
+  "compilerOptions": {
+    "baseUrl": "./",
++   "jsx": "react-jsx",
 +   "paths": {
 +     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
 +   }
@@ -307,28 +335,13 @@ You only need to make minor changes to `tsconfig.json` to support the use of the
 }
 ```
 
-If the React version you are currently using lacks React.JSX, you will need to add additional configuration.
+### react-jsxdev
 
 ```diff
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-    }
-  }
-}
-```
-
-- react-jsxdev
-
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsxdev",
++   "jsx": "react-jsxdev",
 +   "paths": {
 +     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
 +   }
@@ -336,22 +349,12 @@ If the React version you are currently using lacks React.JSX, you will need to a
 }
 ```
 
-If the React version you are currently using lacks React.JSX, you will need to add additional configuration.
-
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": "./",
-    "jsx": "react-jsx",
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-    "paths": {
-      "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-    }
-  }
-}
-```
-
 ## Examples
+
+### react-v19
+
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)
 
 ### react-jsx-v19
 
@@ -362,6 +365,11 @@ If the React version you are currently using lacks React.JSX, you will need to a
 
 - [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
 - [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
+
+### react-v17
+
+- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)
+- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)
 
 ### react-jsx-v17
 
