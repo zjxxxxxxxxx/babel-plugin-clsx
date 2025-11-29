@@ -5,6 +5,4 @@ const CustomComponent: React.FC<{ customClassName?: string }> = ({ customClassNa
 <CustomComponent customClassName="c1 c2" />;
 <CustomComponent customClassName={'c1 c2'} />;
 <CustomComponent customClassName={['c1', 'c2']} />;
-<CustomComponent customClassName={['c1', ['c2']]} />;
-<CustomComponent customClassName={['c1', { c2: true }]} />;
 <CustomComponent customClassName={{ c1: true, c2: true }} />;

@@ -55,7 +55,7 @@ import _clsx from 'clsx';
 <div className={_clsx({ c3: true, c4: true })} />;
 ```
 
-如果希望变量值也能被自动应用 `clsx`，请将其放入静态 `array` 中。
+如果您希望变量值也能被自动应用 `clsx`，请将其放入静态 `array` 中。
 
 您的代码
 
@@ -80,7 +80,7 @@ const cs2 = { c3: true, c4: true };
 
 ## 选项
 
-options.[ [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
+options.[ [`strict`](#optionsstrict) | [`importName`](#optionsimportname) | [`importSource`](#optionsimportsource) ]
 
 ```ts
 interface Options {
@@ -89,13 +89,13 @@ interface Options {
    */
   strict?: boolean;
   /**
-   * @default 'clsx'
-   */
-  importSource?: string;
-  /**
    * @default 'default'
    */
   importName?: string;
+  /**
+   * @default 'clsx'
+   */
+  importSource?: string;
 }
 ```
 
@@ -135,38 +135,6 @@ import _clsx from 'clsx';
 />;
 ```
 
-### `options.importSource`
-
-[clsx](https://github.com/lukeed/clsx) 是默认支持的库，如果您有其他选择，你可以用 `importSource` 替换它。
-
-添加 [babel](https://babel.dev/docs/plugins) 配置
-
-```json
-{
-  "plugins": [
-    [
-      "clsx",
-      {
-        "importSource": "classnames"
-      }
-    ]
-  ]
-}
-```
-
-您的代码
-
-```jsx
-<div className={['c1', 'c2']} />
-```
-
-编译之后
-
-```jsx
-import _clsx from 'classnames';
-<div className={_clsx('c1', 'c2')} />;
-```
-
 ### `options.importName`
 
 如果您的自定义导入源没有可用的默认导出，您可以使用 `importName` 指定导入名称。
@@ -179,7 +147,7 @@ import _clsx from 'classnames';
     [
       "clsx",
       {
-        "importName": "clsx"
+        "importName": "customClsx"
       }
     ]
   ]
@@ -195,7 +163,39 @@ import _clsx from 'classnames';
 编译之后
 
 ```jsx
-import { clsx as _clsx } from 'clsx';
+import { customClsx as _clsx } from 'clsx';
+<div className={_clsx('c1', 'c2')} />;
+```
+
+### `options.importSource`
+
+[clsx](https://github.com/lukeed/clsx) 是默认支持的库，如果您有其他选择，你可以用 `importSource` 替换它。
+
+添加 [babel](https://babel.dev/docs/plugins) 配置
+
+```json
+{
+  "plugins": [
+    [
+      "clsx",
+      {
+        "importSource": "@/utils/custom-clsx"
+      }
+    ]
+  ]
+}
+```
+
+您的代码
+
+```jsx
+<div className={['c1', 'c2']} />
+```
+
+编译之后
+
+```jsx
+import _clsx from '@/utils/custom-clsx';
 <div className={_clsx('c1', 'c2')} />;
 ```
 
@@ -203,7 +203,7 @@ import { clsx as _clsx } from 'clsx';
 
 如果您觉得有不必要的转换，可以添加注释，以便在转换过程中忽略它。
 
-### 局部忽略
+### 忽略行
 
 您可以通过在上面添加注释来忽略此行的转换。
 
@@ -212,7 +212,7 @@ import { clsx as _clsx } from 'clsx';
 ```jsx
 <div className={['c1', 'c2']} />;
 <div
-  // @clsx-ignore
+  // @clsx-ignore-line
   className={['c3', 'c4']}
 />;
 ```
@@ -222,17 +222,20 @@ import { clsx as _clsx } from 'clsx';
 ```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
-<div className={['c3', 'c4']} />;
+<div
+  // @clsx-ignore-line
+  className={['c3', 'c4']}
+/>;
 ```
 
-### 全局忽略
+### 忽略文件
 
 您可以通过在文件顶部添加注释来省略整个文件的转换。
 
 您的代码
 
 ```jsx
-// @clsx-ignore-global
+// @clsx-ignore-file
 <div className={['c1', 'c2']} />;
 <div className={['c3', 'c4']} />;
 ```
@@ -240,6 +243,7 @@ import _clsx from 'clsx';
 编译之后
 
 ```jsx
+// @clsx-ignore-file
 <div className={['c1', 'c2']} />;
 <div className={['c3', 'c4']} />;
 ```

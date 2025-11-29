@@ -80,7 +80,7 @@ const cs2 = { c3: true, c4: true };
 
 ## Options
 
-options.[ [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
+options.[ [`strict`](#optionsstrict) | [`importName`](#optionsimportname) | [`importSource`](#optionsimportsource) ]
 
 ```ts
 interface Options {
@@ -89,13 +89,13 @@ interface Options {
    */
   strict?: boolean;
   /**
-   * @default 'clsx'
-   */
-  importSource?: string;
-  /**
    * @default 'default'
    */
   importName?: string;
+  /**
+   * @default 'clsx'
+   */
+  importSource?: string;
 }
 ```
 
@@ -135,38 +135,6 @@ import _clsx from 'clsx';
 />;
 ```
 
-### `options.importSource`
-
-[clsx](https://github.com/lukeed/clsx) is the supported library by default, and if you have your choice, you can replace it with `importSource`.
-
-Add the [babel](https://babel.dev/docs/plugins) configuration
-
-```json
-{
-  "plugins": [
-    [
-      "clsx",
-      {
-        "importSource": "classnames"
-      }
-    ]
-  ]
-}
-```
-
-Your code
-
-```jsx
-<div className={['c1', 'c2']} />
-```
-
-After compilation
-
-```jsx
-import _clsx from 'classnames';
-<div className={_clsx('c1', 'c2')} />;
-```
-
 ### `options.importName`
 
 If your custom import source does not have a default export available, you can specify the import name with `importName`.
@@ -179,7 +147,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
     [
       "clsx",
       {
-        "importName": "clsx"
+        "importName": "customClsx"
       }
     ]
   ]
@@ -195,7 +163,39 @@ Your code
 After compilation
 
 ```jsx
-import { clsx as _clsx } from 'clsx';
+import { customClsx as _clsx } from 'clsx';
+<div className={_clsx('c1', 'c2')} />;
+```
+
+### `options.importSource`
+
+[clsx](https://github.com/lukeed/clsx) is the default supported library. If you prefer a different one, you may replace it using the `importSource` option.
+
+Add the [babel](https://babel.dev/docs/plugins) configuration
+
+```json
+{
+  "plugins": [
+    [
+      "clsx",
+      {
+        "importSource": "@/utils/custom-clsx"
+      }
+    ]
+  ]
+}
+```
+
+Your code
+
+```jsx
+<div className={['c1', 'c2']} />
+```
+
+After compilation
+
+```jsx
+import _clsx from '@/utils/custom-clsx';
 <div className={_clsx('c1', 'c2')} />;
 ```
 
@@ -203,7 +203,7 @@ import { clsx as _clsx } from 'clsx';
 
 If you feel that there is an unnecessary transformation, you can add a comment so that it is ignored during the transformation.
 
-### Local ignore
+### Ignore line
 
 You can ignore the conversion of this line by adding a comment above.
 
@@ -212,7 +212,7 @@ Your code
 ```jsx
 <div className={['c1', 'c2']} />;
 <div
-  // @clsx-ignore
+  // @clsx-ignore-line
   className={['c3', 'c4']}
 />;
 ```
@@ -222,17 +222,20 @@ After compilation
 ```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
-<div className={['c3', 'c4']} />;
+<div
+  // @clsx-ignore-line
+  className={['c3', 'c4']}
+/>;
 ```
 
-### Global ignore
+### Ignore file
 
 You can omit the conversion of the entire file by adding a comment at the top of the file.
 
 Your code
 
 ```jsx
-// @clsx-ignore-global
+// @clsx-ignore-file
 <div className={['c1', 'c2']} />;
 <div className={['c3', 'c4']} />;
 ```
@@ -240,6 +243,7 @@ Your code
 After compilation
 
 ```jsx
+// @clsx-ignore-file
 <div className={['c1', 'c2']} />;
 <div className={['c3', 'c4']} />;
 ```
