@@ -32,7 +32,7 @@ pnpm add babel-plugin-clsx -D
 
 ## 使用
 
-添加 [babel](https://babel.dev/docs/plugins) 配置
+添加 [Babel](https://babel.dev/docs/plugins) 配置，使 `className` 为静态 `array` 或静态 `object` 时自动应用 `clsx`。
 
 ```json
 {
@@ -44,7 +44,7 @@ pnpm add babel-plugin-clsx -D
 
 ```jsx
 <div className={['c1', 'c2']} />;
-<div className={{ c1: true, c2: true }} />;
+<div className={{ c3: true, c4: true }} />;
 ```
 
 编译之后
@@ -52,19 +52,38 @@ pnpm add babel-plugin-clsx -D
 ```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
-<div className={_clsx({ c1: true, c2: true })} />;
+<div className={_clsx({ c3: true, c4: true })} />;
+```
+
+如果希望变量值也能被自动应用 `clsx`，请将其放入静态 `array` 中。
+
+您的代码
+
+```jsx
+const cs1 = ['c1', 'c2'];
+const cs2 = { c3: true, c4: true };
+<div className={[cs1]} />;
+<div className={[cs2]} />;
+<div className={[handler('c5', 'c6')]} />;
+```
+
+编译之后
+
+```jsx
+import _clsx from 'clsx';
+const cs1 = ['c1', 'c2'];
+const cs2 = { c3: true, c4: true };
+<div className={_clsx(cs1)} />;
+<div className={_clsx(cs2)} />;
+<div className={_clsx(handler('c5', 'c6'))} />;
 ```
 
 ## 选项
 
-options.[ [`static`](#optionsstatic) | [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
+options.[ [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
 
 ```ts
 interface Options {
-  /**
-   * @default true
-   */
-  static?: boolean;
   /**
    * @default true
    */
@@ -78,69 +97,6 @@ interface Options {
    */
   importName?: string;
 }
-```
-
-### `options.static`
-
-默认情况下，启用静态模式，该模式下仅转换 `array` 和 `object`，有效避免了 `className` 的重复处理。当然，虽然不建议这样做，但你仍然可以关闭此选项，此后，由你来处理或忽略不必要的转换。
-
-添加 [babel](https://babel.dev/docs/plugins) 配置
-
-```json
-{
-  "plugins": [
-    [
-      "clsx",
-      {
-        "static": false
-      }
-    ]
-  ]
-}
-```
-
-您的代码
-
-```jsx
-const className = ['c1', 'c2'];
-<div className={className} />;
-```
-
-编译之后
-
-```jsx
-import _clsx from 'clsx';
-const className = ['c1', 'c2'];
-<div className={_clsx(className)} />;
-```
-
-在现有的项目中，可能有很多这样的代码，如果关闭静态模式，就会有很多重复。
-
-您的代码
-
-```jsx
-import classNames from 'clsx';
-
-// 👎 这将重复该过程
-const className = classNames('c1', 'c2');
-<div className={className} />;
-
-// 👍 这并不重复过程
-<div className={classNames('c1', 'c2')} />;
-```
-
-编译之后
-
-```jsx
-import _clsx from 'clsx';
-import classNames from 'clsx';
-
-// 👎 这将重复该过程
-const className = classNames('c1', 'c2');
-<div className={_clsx(className)} />;
-
-// 👍 这并不重复过程
-<div className={classNames('c1', 'c2')} />;
 ```
 
 ### `options.strict`
@@ -165,7 +121,7 @@ const className = classNames('c1', 'c2');
 您的代码
 
 ```jsx
-<Component className={['c1', 'c2']} headerClassName={['c1', 'c2']} footerClassName={['c1', 'c2']} />
+<Component className={['c1', 'c2']} headerClassName={['c3', 'c4']} footerClassName={['c5', 'c6']} />
 ```
 
 编译之后
@@ -174,8 +130,8 @@ const className = classNames('c1', 'c2');
 import _clsx from 'clsx';
 <Component
   className={_clsx('c1', 'c2')}
-  headerClassName={_clsx('c1', 'c2')}
-  footerClassName={_clsx('c1', 'c2')}
+  headerClassName={_clsx('c3', 'c4')}
+  footerClassName={_clsx('c5', 'c6')}
 />;
 ```
 
@@ -257,7 +213,7 @@ import { clsx as _clsx } from 'clsx';
 <div className={['c1', 'c2']} />;
 <div
   // @clsx-ignore
-  className={['c1', 'c2']}
+  className={['c3', 'c4']}
 />;
 ```
 
@@ -266,7 +222,7 @@ import { clsx as _clsx } from 'clsx';
 ```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
-<div className={['c1', 'c2']} />;
+<div className={['c3', 'c4']} />;
 ```
 
 ### 全局忽略
@@ -278,14 +234,14 @@ import _clsx from 'clsx';
 ```jsx
 // @clsx-ignore-global
 <div className={['c1', 'c2']} />;
-<div className={['c1', 'c2']} />;
+<div className={['c3', 'c4']} />;
 ```
 
 编译之后
 
 ```jsx
 <div className={['c1', 'c2']} />;
-<div className={['c1', 'c2']} />;
+<div className={['c3', 'c4']} />;
 ```
 
 ## Typescript
@@ -295,19 +251,7 @@ import _clsx from 'clsx';
 
 只需对 `tsconfig.json` 进行少量修改，即可开启支持。
 
-### React.JSX
-
-如果您当前使用的 `React` 版本仅支持全局 `JSX`，请添加此配置，将 `globalThis.JSX` 转换为 `React.JSX`。
-
-```diff
-{
-  "compilerOptions": {
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-  }
-}
-```
-
-### react
+### jsx: react
 
 ```diff
 {
@@ -321,7 +265,7 @@ import _clsx from 'clsx';
 }
 ```
 
-### react-jsx
+### jsx: react-jsx
 
 ```diff
 {
@@ -335,7 +279,7 @@ import _clsx from 'clsx';
 }
 ```
 
-### react-jsxdev
+### jsx: react-jsxdev
 
 ```diff
 {
@@ -345,6 +289,32 @@ import _clsx from 'clsx';
 +   "paths": {
 +     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
 +   }
+  }
+}
+```
+
+### React.JSX
+
+如果您当前使用的 `React` 版本仅支持全局 `JSX`，请补充额外的配置，将 `globalThis.JSX` 转换为 `React.JSX`。
+
+```diff
+{
+  "compilerOptions": {
++   "types": ["babel-plugin-clsx/jsx-scope"],
+  }
+}
+```
+
+### react/index
+
+如果您当前使用的 `React` 版本缺少 `'react/index'` 路径，请补充额外的配置。
+
+```diff
+{
+  "compilerOptions": {
+    "paths": {
++     "react/index": ["node_modules/@types/react/index"]
+    }
   }
 }
 ```

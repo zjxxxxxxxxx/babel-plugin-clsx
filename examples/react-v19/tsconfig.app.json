@@ -5,7 +5,6 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "typeRoots": ["node_modules", "node_modules/@types"],
     "types": ["vite/client"],
     "skipLibCheck": true,
 
@@ -17,6 +16,7 @@
     "noEmit": true,
     "jsx": "react",
     "paths": {
+      "react/index": ["node_modules/@types/react/index"],
       "react": ["node_modules/babel-plugin-clsx/react"]
     },
 

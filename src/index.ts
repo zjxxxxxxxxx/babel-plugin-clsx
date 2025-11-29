@@ -3,7 +3,6 @@ import { types as t } from '@babel/core';
 import syntaxJSX from '@babel/plugin-syntax-jsx';
 
 export interface Options {
-  static?: boolean;
   strict?: boolean;
   importSource?: string;
   importName?: string;
@@ -18,7 +17,6 @@ const IMPORT_NAME = 'default';
 const IMPORT_NAMESPACE = '_clsx';
 
 export default (_: unknown, opts: Options = {}): PluginObj => {
-  opts.static ??= true;
   opts.strict ??= true;
   opts.importSource ??= IMPORT_SOURCE;
   opts.importName ??= IMPORT_NAME;
@@ -69,16 +67,18 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
       : false;
   }
 
-  function isNeedTransform(jsxExpr: t.JSXEmptyExpression | t.Expression) {
-    if (opts.static) {
-      // include `<div className={['c1', 'c2']} />`
-      // include `<div className={{ c1: true, c2: true }} />`
-      return t.isArrayExpression(jsxExpr) || t.isObjectExpression(jsxExpr);
-    } else {
-      // exclude `<div className={classNameHandler('c1', 'c2')} />`
-      // exclude `<div className={'c1 c2'} />`
-      return !t.isCallExpression(jsxExpr) && !t.isStringLiteral(jsxExpr);
-    }
+  function shouldTransform(
+    jsxAttrValue:
+      | t.StringLiteral
+      | t.JSXElement
+      | t.JSXExpressionContainer
+      | t.JSXFragment
+      | null
+      | undefined,
+  ) {
+    if (!t.isJSXExpressionContainer(jsxAttrValue)) return false;
+    const jsxExpr = jsxAttrValue.expression;
+    return t.isArrayExpression(jsxExpr) || t.isObjectExpression(jsxExpr);
   }
 
   return {
@@ -106,7 +106,7 @@ export default (_: unknown, opts: Options = {}): PluginObj => {
           isDynamicClassName(node) &&
           !isIgnored(node) &&
           !state.clsxIgnoreGlobal &&
-          isNeedTransform((node.value as t.JSXExpressionContainer).expression)
+          shouldTransform(node.value)
         ) {
           state.clsxImport = true;
 

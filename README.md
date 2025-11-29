@@ -32,7 +32,7 @@ pnpm add babel-plugin-clsx -D
 
 ## Usage
 
-Add the [babel](https://babel.dev/docs/plugins) configuration
+Add a [Babel](https://babel.dev/docs/plugins) configuration to automatically apply `clsx` when `className` is a static `array` or static `object`.
 
 ```json
 {
@@ -55,16 +55,35 @@ import _clsx from 'clsx';
 <div className={_clsx({ c1: true, c2: true })} />;
 ```
 
+If you want variable values to be automatically applied with `clsx`, place them in a static `array`.
+
+Your code
+
+```jsx
+const cs1 = ['c1', 'c2'];
+const cs2 = { c3: true, c4: true };
+<div className={[cs1]} />;
+<div className={[cs2]} />;
+<div className={[handler('c5', 'c6')]} />;
+```
+
+After compilation
+
+```jsx
+import _clsx from 'clsx';
+const cs1 = ['c1', 'c2'];
+const cs2 = { c3: true, c4: true };
+<div className={_clsx(cs1)} />;
+<div className={_clsx(cs2)} />;
+<div className={_clsx(handler('c5', 'c6'))} />;
+```
+
 ## Options
 
-options.[ [`static`](#optionsstatic) | [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
+options.[ [`strict`](#optionsstrict) | [`importSource`](#optionsimportsource) | [`importName`](#optionsimportname) ]
 
 ```ts
 interface Options {
-  /**
-   * @default true
-   */
-  static?: boolean;
   /**
    * @default true
    */
@@ -78,69 +97,6 @@ interface Options {
    */
   importName?: string;
 }
-```
-
-### `options.static`
-
-By default, static mode is enabled, in which only `array` and `object` are converted, effectively avoiding duplicate processing of `className`. Of course, although it is not recommended to do so, you can still turn off this option, and after that, it will be up to you to handle or ignore unnecessary transformations.
-
-Add the [babel](https://babel.dev/docs/plugins) configuration
-
-```json
-{
-  "plugins": [
-    [
-      "clsx",
-      {
-        "static": false
-      }
-    ]
-  ]
-}
-```
-
-Your code
-
-```jsx
-const className = ['c1', 'c2'];
-<div className={className} />;
-```
-
-After compilation
-
-```jsx
-import _clsx from 'clsx';
-const className = ['c1', 'c2'];
-<div className={_clsx(className)} />;
-```
-
-In an existing project, there may be a lot of code like this, and if you turn off static mode, there will be a lot of duplication.
-
-Your code
-
-```jsx
-import classNames from 'clsx';
-
-// 👎 This will repeat the process
-const className = classNames('c1', 'c2');
-<div className={className} />;
-
-// 👍 This does not repeat the process
-<div className={classNames('c1', 'c2')} />;
-```
-
-After compilation
-
-```jsx
-import _clsx from 'clsx';
-import classNames from 'clsx';
-
-// 👎 This will repeat the process
-const className = classNames('c1', 'c2');
-<div className={_clsx(className)} />;
-
-// 👍 This does not repeat the process
-<div className={classNames('c1', 'c2')} />;
 ```
 
 ### `options.strict`
@@ -165,7 +121,7 @@ Add the [babel](https://babel.dev/docs/plugins) configuration
 Your code
 
 ```jsx
-<Component className={['c1', 'c2']} headerClassName={['c1', 'c2']} footerClassName={['c1', 'c2']} />
+<Component className={['c1', 'c2']} headerClassName={['c3', 'c4']} footerClassName={['c5', 'c6']} />
 ```
 
 After compilation
@@ -174,8 +130,8 @@ After compilation
 import _clsx from 'clsx';
 <Component
   className={_clsx('c1', 'c2')}
-  headerClassName={_clsx('c1', 'c2')}
-  footerClassName={_clsx('c1', 'c2')}
+  headerClassName={_clsx('c3', 'c4')}
+  footerClassName={_clsx('c5', 'c6')}
 />;
 ```
 
@@ -257,7 +213,7 @@ Your code
 <div className={['c1', 'c2']} />;
 <div
   // @clsx-ignore
-  className={['c1', 'c2']}
+  className={['c3', 'c4']}
 />;
 ```
 
@@ -266,7 +222,7 @@ After compilation
 ```jsx
 import _clsx from 'clsx';
 <div className={_clsx('c1', 'c2')} />;
-<div className={['c1', 'c2']} />;
+<div className={['c3', 'c4']} />;
 ```
 
 ### Global ignore
@@ -278,14 +234,14 @@ Your code
 ```jsx
 // @clsx-ignore-global
 <div className={['c1', 'c2']} />;
-<div className={['c1', 'c2']} />;
+<div className={['c3', 'c4']} />;
 ```
 
 After compilation
 
 ```jsx
 <div className={['c1', 'c2']} />;
-<div className={['c1', 'c2']} />;
+<div className={['c3', 'c4']} />;
 ```
 
 ## Typescript
@@ -295,19 +251,7 @@ After compilation
 
 A few small adjustments to your `tsconfig.json` are all that’s needed to enable support.
 
-### React.JSX
-
-If your current `React` version only supports global `JSX`, please add this configuration to map `globalThis.JSX` to `React.JSX`.
-
-```diff
-{
-  "compilerOptions": {
-+   "types": ["babel-plugin-clsx/jsx-scope"],
-  }
-}
-```
-
-### react
+### jsx: react
 
 ```diff
 {
@@ -321,7 +265,7 @@ If your current `React` version only supports global `JSX`, please add this conf
 }
 ```
 
-### react-jsx
+### jsx: react-jsx
 
 ```diff
 {
@@ -335,7 +279,7 @@ If your current `React` version only supports global `JSX`, please add this conf
 }
 ```
 
-### react-jsxdev
+### jsx: react-jsxdev
 
 ```diff
 {
@@ -345,6 +289,32 @@ If your current `React` version only supports global `JSX`, please add this conf
 +   "paths": {
 +     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
 +   }
+  }
+}
+```
+
+### React.JSX
+
+If your current version of `React` only supports the global `JSX` namespace, please add the following configuration to map `globalThis.JSX` to `React.JSX`.
+
+```diff
+{
+  "compilerOptions": {
++   "types": ["babel-plugin-clsx/jsx-scope"],
+  }
+}
+```
+
+### react/index
+
+If your current version of `React` is missing the `react/index` path, please add the additional configuration.
+
+```diff
+{
+  "compilerOptions": {
+    "paths": {
++     "react/index": ["node_modules/@types/react/index"]
+    }
   }
 }
 ```
