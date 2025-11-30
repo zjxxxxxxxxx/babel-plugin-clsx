@@ -2,9 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "target": "ESNext",
-    "typeRoots": ["node_modules", "node_modules/@types"],
-    "types": ["@jest/globals"],
     "paths": {
+      "react/index": ["node_modules/@types/react/index"],
       "react": ["../jsx/react"],
       "react/jsx-runtime": ["../jsx/jsx-runtime"],
       "react/jsx-dev-runtime": ["../jsx/jsx-dev-runtime"]

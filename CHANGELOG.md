@@ -1,3 +1,13 @@
+# [0.5.0](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.1...v0.5.0) (2025-11-30)
+
+
+### Features
+
+* Modify ignored token ([#12](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/issues/12)) ([f0681d0](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/commit/f0681d0ee307bd6235cc5d990c382fa58d91fcf6))
+* remove option static ([#11](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/issues/11)) ([56a285c](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/commit/56a285c4518e0baa77e77b84bd5fa902ae63dbfc))
+
+
+
 ## [0.4.1](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.0...v0.4.1) (2025-11-28)
 
 
