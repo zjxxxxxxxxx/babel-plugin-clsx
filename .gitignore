@@ -20,8 +20,8 @@ es/
 
 # Tests
 .coverage
-test/types/**/*.jsx
-test/types/**/*.js
+tests/types/**/*.jsx
+tests/types/**/*.js
 
 /index.js
 /react.d.ts

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "target": "ESNext",
     "paths": {
       "react/index": ["node_modules/@types/react/index"],

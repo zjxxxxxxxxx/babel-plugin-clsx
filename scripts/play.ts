@@ -12,6 +12,7 @@ import enquirer from 'enquirer';
 import { consola } from 'consola';
 import { run } from './run';
 
+const { name, version, files } = JSON.parse(readFileSync(resolve('./package.json'), 'utf-8'));
 const examplesName = 'examples';
 
 main();
@@ -21,7 +22,10 @@ async function main() {
     const example = await selectExample(examplesName);
     const script = await selectScript(example);
 
-    buildIfNeeded();
+    consola.info(`Run Build ${name}@${version}`);
+    run('pnpm build');
+
+    consola.info(`Install ${name}@${version} to ${example}`);
     installModule(example);
 
     consola.info(`Run ${example}:${script}`);
@@ -64,37 +68,22 @@ async function selectScript(example: string) {
   return script;
 }
 
-/** Build the project if index.js does not exist */
-function buildIfNeeded() {
-  const indexPath = resolve('./index.js');
-  if (!existsSync(indexPath)) {
-    consola.info('Run Build');
-    run('pnpm build');
-  }
-}
-
 /** Install the current package into the example's node_modules */
 function installModule(example: string) {
-  const pkgPath = resolve('./package.json');
-  const { name: pkgName, files: pkgFiles } = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-  const pkgModulePath = resolve(examplesName, example, 'node_modules', pkgName);
-
-  consola.info(`Install ${pkgName}`);
-
-  if (existsSync(pkgModulePath)) {
-    const stat = lstatSync(pkgModulePath);
+  const modPath = resolve(examplesName, example, 'node_modules', name);
+  if (existsSync(modPath)) {
+    const stat = lstatSync(modPath);
     if (stat.isSymbolicLink()) {
-      rmSync(pkgModulePath);
+      rmSync(modPath);
     } else {
-      rmSync(pkgModulePath, { recursive: true, force: true });
+      rmSync(modPath, { recursive: true, force: true });
     }
   }
-
-  mkdirSync(pkgModulePath);
+  mkdirSync(modPath);
 
   // Copy package files into the module directory
-  const pkgModuleFilePaths: string[] = [...pkgFiles, 'package.json'];
-  pkgModuleFilePaths.forEach((file) => {
-    copyFileSync(resolve(file), resolve(pkgModulePath, file));
+  const modFilePaths: string[] = [...files, 'package.json'];
+  modFilePaths.forEach((filePath) => {
+    copyFileSync(resolve(filePath), resolve(modPath, filePath));
   });
 }

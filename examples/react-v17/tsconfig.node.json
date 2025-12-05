@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "target": "ES2023",
     "lib": ["ES2023"],
     "module": "ESNext",
