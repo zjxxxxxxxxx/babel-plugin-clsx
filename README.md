@@ -260,11 +260,11 @@ A few small adjustments to your `tsconfig.json` are all that’s needed to enabl
 ```diff
 {
   "compilerOptions": {
-    "baseUrl": "./",
-+   "jsx": "react",
-+   "paths": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "paths": {
 +     "react": ["node_modules/babel-plugin-clsx/react"]
-+   }
+    }
   }
 }
 ```
@@ -274,11 +274,11 @@ A few small adjustments to your `tsconfig.json` are all that’s needed to enabl
 ```diff
 {
   "compilerOptions": {
-    "baseUrl": "./",
-+   "jsx": "react-jsx",
-+   "paths": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
 +     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-+   }
+    }
   }
 }
 ```
@@ -288,11 +288,11 @@ A few small adjustments to your `tsconfig.json` are all that’s needed to enabl
 ```diff
 {
   "compilerOptions": {
-    "baseUrl": "./",
-+   "jsx": "react-jsxdev",
-+   "paths": {
+    "baseUrl": ".",
+    "jsx": "react-jsxdev",
+    "paths": {
 +     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-+   }
+    }
   }
 }
 ```
@@ -304,7 +304,7 @@ If your current version of `React` only supports the global `JSX` namespace, ple
 ```diff
 {
   "compilerOptions": {
-+   "types": ["babel-plugin-clsx/jsx-scope"],
++   "types": ["babel-plugin-clsx/jsx-scope"]
   }
 }
 ```
@@ -325,32 +325,11 @@ If your current version of `React` is missing the `react/index` path, please add
 
 ## Examples
 
-### react-v19
-
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)
-
-### react-jsx-v19
-
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v19)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v19)
-
-### react-jsxdev-v19
-
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19)
-
-### react-v17
-
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)
-
-### react-jsx-v17
-
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v17)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v17)
-
-### react-jsxdev-v17
-
-- [Source](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v17)
-- [StackBlitz](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v17)
+| Version Type     | Source Code                                                                                                                                                                                                     | Live Demo                                                                                                                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| react-v19        | [![Open in GitHub](https://img.shields.io/badge/Open%20in-GitHub-24292F?logo=github&logoColor=white&style=for-the-badge)](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)        | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v19)        |
+| react-jsx-v19    | [![Open in GitHub](https://img.shields.io/badge/Open%20in-GitHub-24292F?logo=github&logoColor=white&style=for-the-badge)](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v19)    | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v19)    |
+| react-jsxdev-v19 | [![Open in GitHub](https://img.shields.io/badge/Open%20in-GitHub-24292F?logo=github&logoColor=white&style=for-the-badge)](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19) | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v19) |
+| react-v17        | [![Open in GitHub](https://img.shields.io/badge/Open%20in-GitHub-24292F?logo=github&logoColor=white&style=for-the-badge)](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)        | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-v17)        |
+| react-jsx-v17    | [![Open in GitHub](https://img.shields.io/badge/Open%20in-GitHub-24292F?logo=github&logoColor=white&style=for-the-badge)](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v17)    | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsx-v17)    |
+| react-jsxdev-v17 | [![Open in GitHub](https://img.shields.io/badge/Open%20in-GitHub-24292F?logo=github&logoColor=white&style=for-the-badge)](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v17) | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/zjxxxxxxxxx/babel-plugin-clsx/tree/main/examples/react-jsxdev-v17) |

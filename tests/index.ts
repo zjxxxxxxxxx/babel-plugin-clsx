@@ -24,6 +24,22 @@ describe('fixtures tests', () => {
   });
 });
 
+describe('error tests', () => {
+  test('throws error if _clsx variable already exists', async () => {
+    const code = `
+      const _clsx = 123;
+      <div className={['c1', 'c2']} />;
+    `;
+
+    await expect(
+      transformAsync(code, {
+        filename: 'example.jsx',
+        plugins: [[clsx]],
+      }),
+    ).rejects.toThrow(/\[babel-plugin-clsx\]: '_clsx' is a reserved identifier for clsx import\. Do not declare or use '_clsx' in this file\./);
+  });
+});
+
 describe('types tests', () => {
   test.each(readdirSync(typesPath))('%s', async (name) => {
     await execAsync(`tsc --project ${typesPath}/${name}/tsconfig.json`);
@@ -40,6 +56,7 @@ async function getCodes(name: string) {
   const result =
     (
       await transformAsync(input, {
+        filename: resolve(fixturesPath, name, 'input.jsx'),
         plugins: [[clsx, JSON.parse(options)]],
       })
     )?.code ?? '';

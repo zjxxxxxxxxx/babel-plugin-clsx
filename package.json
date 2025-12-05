@@ -37,7 +37,7 @@
     "play": "esno ./scripts/play.ts",
     "format": "prettier -w '{src,test,scripts}/**/*.{ts,tsx,js,jsx}'",
     "release": "esno ./scripts/release.ts",
-    "test": "pnpm --filter test run test",
+    "test": "pnpm --filter tests run test",
     "type": "tsc --noEmit"
   },
   "engines": {
