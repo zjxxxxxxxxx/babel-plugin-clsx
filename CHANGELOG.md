@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.5.0...v0.5.1) (2025-12-06)
+
+
+### Features
+
+* reserve _clsx and improve auto-import ([#13](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/issues/13)) ([9738b66](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/commit/9738b668a760f257246b5b46af39bd217f2ce856))
+
+
+
 # [0.5.0](https://github.com/zjxxxxxxxxx/babel-plugin-clsx/compare/v0.4.1...v0.5.0) (2025-11-30)
 
 
