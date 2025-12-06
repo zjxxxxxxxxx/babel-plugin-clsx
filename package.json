@@ -33,12 +33,11 @@
   "scripts": {
     "build": "esno ./scripts/build.ts",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "cz": "simple-git-hooks & esno ./scripts/commit.ts",
     "play": "esno ./scripts/play.ts",
     "format": "prettier -w '{src,test,scripts}/**/*.{ts,tsx,js,jsx}'",
     "release": "esno ./scripts/release.ts",
     "test": "pnpm --filter tests run test",
-    "type": "tsc --noEmit"
+    "postinstall": "simple-git-hooks"
   },
   "engines": {
     "node": ">=20",
@@ -64,7 +63,7 @@
     "typescript": "^5.1.6"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm format && pnpm type && pnpm test",
-    "commit-msg": "pnpm esno ./scripts/check-commit.ts"
+    "pre-commit": "pnpm format && pnpm tsc --noEmit && pnpm test",
+    "commit-msg": "pnpm esno ./scripts/commit-msg.ts"
   }
 }

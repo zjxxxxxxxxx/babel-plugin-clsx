@@ -31,7 +31,7 @@ jobs:
         run: pnpm i
 
       - name: Check type
-        run: pnpm type
+        run: pnpm tsc --noEmit
 
       - name: Test
         run: pnpm test
