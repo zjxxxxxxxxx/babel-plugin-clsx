@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
-  const scale = !!(count % 2);
+  const bgColor = !!(count % 2);
 
   return (
     <>
@@ -16,7 +16,7 @@ function App() {
             className={[
               'logo',
               {
-                scale,
+                'bg-color': bgColor,
               },
             ]}
             alt="Vite logo"
@@ -29,20 +29,32 @@ function App() {
               'logo',
               'react',
               {
-                scale,
+                'bg-color': bgColor,
               },
             ]}
             alt="React logo"
           />
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <h2>react-jsxdev-v19</h2>
+      <h1
+        className={{
+          'bg-color': bgColor,
+        }}
+      >
+        Vite + React
+      </h1>
+      <h2
+        className={{
+          'bg-color': bgColor,
+        }}
+      >
+        react-jsxdev-v19
+      </h2>
       <div
         className={[
           'card',
           {
-            scale,
+            'bg-color': bgColor,
           },
         ]}
       >
@@ -55,7 +67,7 @@ function App() {
         className={[
           'read-the-docs',
           {
-            scale,
+            'bg-color': bgColor,
           },
         ]}
       >

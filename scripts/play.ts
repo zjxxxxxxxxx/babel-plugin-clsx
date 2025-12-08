@@ -23,13 +23,13 @@ async function main() {
     const script = await selectScript(example);
 
     consola.info(`Run Build ${name}@${version}`);
-    run('pnpm build');
+    run('pnpm', ['build']);
 
     consola.info(`Install ${name}@${version} to ${example}`);
     installModule(example);
 
     consola.info(`Run ${example}:${script}`);
-    run(`pnpm --filter @${examplesName}/${example} ${script}`);
+    run('pnpm', [['--filter', `@${examplesName}/${example} ${script}`]]);
   } catch (err) {
     consola.error('Process exited', err);
     process.exit(1);

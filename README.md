@@ -4,11 +4,19 @@
 
 <a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a>
 
-Automatically add [clsx](https://github.com/lukeed/clsx) for `className` in [React](https://react.dev) and have the same fun without importing and writing it.
-
-Notably, this library supports usage in TypeScript projects. So far, no other similar library has been found to offer this.
+A `className` syntax-sugar plugin designed for `React` that automatically converts static `array` or `object` forms of `className` in `JSX` into [clsx](https://github.com/lukeed/clsx) calls at compile time, eliminating the need for manual imports or writing, and making style composition effortless.
 
 > Before doing so, make sure that [clsx](https://github.com/lukeed/clsx) is installed or another available `className` handler exists for your project.
+
+## Features
+
+- 🔌 Automatically injects `clsx`, removing the need for repeated imports.
+- ⚙️ Customizable imports: supports `importName` / `importSource`, adaptable to various project setups.
+- 🧩 `strict` mode can match `*ClassName` attributes, ideal for component libraries or design system conventions.
+- 🎨 Unifies team `className` formatting.
+- 🎯 Supports `@clsx-ignore-line` and `@clsx-ignore-file` for precise control over transformations.
+- 💠 `TailwindCSS` friendly: arrays naturally organize utility classes by semantics, breakpoints, and states.
+- 📚 Fully compatible with `TypeScript` and `React JSX runtime` (React >= 17 / TS >= 4.1).
 
 ## Install
 
@@ -169,7 +177,7 @@ import { customClsx as _clsx } from 'clsx';
 
 ### `options.importSource`
 
-[clsx](https://github.com/lukeed/clsx) is the default supported library. If you prefer a different one, you may replace it using the `importSource` option.
+[clsx](https://github.com/lukeed/clsx) is the default supported library, but you can use `importSource` to substitute it with another library if needed.
 
 Add the [babel](https://babel.dev/docs/plugins) configuration
 
@@ -248,58 +256,24 @@ After compilation
 <div className={['c3', 'c4']} />;
 ```
 
-## Typescript
+## TypeScript Configuration
 
-> ⚠️ **Minimum Requirements**  
-> To use this plugin in a TypeScript project, you need **React 17** and **TypeScript 4.1** at minimum, as this combination officially supports the `React.JSX` namespace.
+> ⚠️ To use `babel-plugin-clsx` in a TypeScript project, React >= 17 and TypeScript >= 4.1 are required.  
+> A few adjustments in `tsconfig.json` are needed to ensure TypeScript recognizes the JSX support provided by the plugin.
 
-A few small adjustments to your `tsconfig.json` are all that’s needed to enable support.
+### JSX Runtime Path Mapping
 
-### jsx: react
+To make `babel-plugin-clsx` work correctly in a TypeScript project, configure the corresponding JSX runtime in `compilerOptions.paths`.
 
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react",
-    "paths": {
-+     "react": ["node_modules/babel-plugin-clsx/react"]
-    }
-  }
-}
-```
+| JSX Setting      | Paths Configuration                                                           | Use Case                                                      |
+| ---------------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `"react"`        | `"react": ["node_modules/babel-plugin-clsx/react"]`                           | Classic JSX runtime, for `jsx: react`                         |
+| `"react-jsx"`    | `"react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]`         | New JSX transform, for `jsx: react-jsx`                       |
+| `"react-jsxdev"` | `"react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]` | New JSX transform (development mode), for `jsx: react-jsxdev` |
 
-### jsx: react-jsx
+### Converting Global JSX to Local JSX (React.JSX shim)
 
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react-jsx",
-    "paths": {
-+     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-    }
-  }
-}
-```
-
-### jsx: react-jsxdev
-
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react-jsxdev",
-    "paths": {
-+     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-    }
-  }
-}
-```
-
-### React.JSX
-
-If your current version of `React` only supports the global `JSX` namespace, please add the following configuration to map `globalThis.JSX` to `React.JSX`.
+If your project only has global `JSX` definitions, you need to map the `globalThis.JSX` to the local `React.JSX` so that TypeScript can correctly recognize it:
 
 ```diff
 {
@@ -309,9 +283,9 @@ If your current version of `React` only supports the global `JSX` namespace, ple
 }
 ```
 
-### react/index
+### Adding Missing react/index Path
 
-If your current version of `React` is missing the `react/index` path, please add the additional configuration.
+If your project is missing the `'react/index'` path, add it as follows:
 
 ```diff
 {
