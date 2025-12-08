@@ -12,7 +12,7 @@ function runBuild() {
     const jsxDir = join(rootDir, './jsx');
 
     consola.info('Run Build Plugin...');
-    run('tsc -p tsconfig.build.json');
+    run('tsc', [['-p', 'tsconfig.build.json']]);
     cpSync(libDir, rootDir, { recursive: true, force: true });
     rmSync(libDir, { recursive: true });
 

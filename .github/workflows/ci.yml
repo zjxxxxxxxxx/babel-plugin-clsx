@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: pnpm i
 
-      - name: Check type
+      - name: Check TypeScript
         run: pnpm tsc --noEmit
 
       - name: Test

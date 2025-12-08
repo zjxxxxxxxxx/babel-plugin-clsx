@@ -4,11 +4,19 @@
 
 <a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a>
 
-在 [React](https://react.dev) 中为 `className` 自动添加 [clsx](https://github.com/lukeed/clsx)，无需导入和编写，享受同样的乐趣。
-
-值得注意的是，该库支持在 `Typescript` 项目中使用。目前为止，还没有其他类似的库提供此功能。
+一个专为 `React` 设计的 `className` 语法糖插件，编译时会自动将 `JSX` 中的静态 `array` 或 `object` 形式的 `className` 转换为 [clsx](https://github.com/lukeed/clsx) 调用，无需手动导入或书写，轻松管理样式组合。
 
 > 在执行此操作之前，请确保已安装 [clsx](https://github.com/lukeed/clsx) 或项目存在其他可用的 `className` 处理程序。
+
+## 特点
+
+- 🔌 自动注入 `clsx`，免去重复导入。
+- ⚙️ 可自定义导入：`importName` / `importSource`，灵活适配各种项目。
+- 🧩 `strict` 模式可匹配 `*ClassName`，适合组件库/设计系统约定。
+- 🎨 统一团队 `className` 书写风格。
+- 🎯 支持 `@clsx-ignore-line` 和 `@clsx-ignore-file`，精确控制转换。
+- 💠 与 `TailwindCSS` 高度契合，数组方便按语义、断点、状态组织 Utility 类。
+- 📚 完全支持 `TypeScript` 与 `React JSX runtime`（React >= 17 / TS >= 4.1）。
 
 ## 安装
 
@@ -248,58 +256,24 @@ import _clsx from 'clsx';
 <div className={['c3', 'c4']} />;
 ```
 
-## Typescript
+## TypeScript 配置
 
-> ⚠️ **最低版本要求**  
-> 为了在 TypeScript 项目中使用该插件，最低要求为 **React 17** 及 **TypeScript 4.1**，因为该版本组合正式支持 JSX 命名空间 `React.JSX`。
+> ⚠️ 为了在 TypeScript 项目中使用 `babel-plugin-clsx`，要求 React >= 17 和 TypeScript >= 4.1。  
+> 需要在 `tsconfig.json` 中进行少量配置，让 TypeScript 正确识别插件提供的 JSX 支持。
 
-只需对 `tsconfig.json` 进行少量修改，即可开启支持。
+### JSX Runtime 路径映射
 
-### jsx: react
+为确保 `babel-plugin-clsx` 在 TS 项目中正常工作，需要在 `compilerOptions.paths` 中配置对应的 JSX runtime。
 
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react",
-    "paths": {
-+     "react": ["node_modules/babel-plugin-clsx/react"]
-    }
-  }
-}
-```
+| jsx 配置值       | paths 配置                                                                    | 适用场景                                            |
+| ---------------- | ----------------------------------------------------------------------------- | --------------------------------------------------- |
+| `"react"`        | `"react": ["node_modules/babel-plugin-clsx/react"]`                           | 传统 JSX runtime，适用于 `jsx: react`               |
+| `"react-jsx"`    | `"react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]`         | 新 JSX 转换，适用于 `jsx: react-jsx`                |
+| `"react-jsxdev"` | `"react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]` | 新 JSX 转换（开发模式），适用于 `jsx: react-jsxdev` |
 
-### jsx: react-jsx
+### 全局 JSX 支持（React.JSX shim）
 
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react-jsx",
-    "paths": {
-+     "react/jsx-runtime": ["node_modules/babel-plugin-clsx/jsx-runtime"]
-    }
-  }
-}
-```
-
-### jsx: react-jsxdev
-
-```diff
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "jsx": "react-jsxdev",
-    "paths": {
-+     "react/jsx-dev-runtime": ["node_modules/babel-plugin-clsx/jsx-dev-runtime"]
-    }
-  }
-}
-```
-
-### React.JSX
-
-如果您当前使用的 `React` 版本仅支持全局 `JSX`，请补充额外的配置，将 `globalThis.JSX` 转换为 `React.JSX`。
+如果项目使用全局 JSX，需要将 `globalThis.JSX` 指向 `React.JSX`，以便 TypeScript 正确识别：
 
 ```diff
 {
@@ -309,9 +283,9 @@ import _clsx from 'clsx';
 }
 ```
 
-### react/index
+### 补充缺少的 react/index 路径
 
-如果您当前使用的 `React` 版本缺少 `'react/index'` 路径，请补充额外的配置。
+如果项目缺少 `'react/index'` 路径，请补充：
 
 ```diff
 {

@@ -26,6 +26,6 @@
   color: #888;
 }
 
-.scale {
-  transform: scale(1.05);
+.bg-color {
+  background-color: #9810fa;
 }

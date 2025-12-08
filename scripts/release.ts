@@ -20,23 +20,23 @@ async function main() {
   updateVersion(version);
 
   consola.info('Changelog');
-  run('pnpm changelog');
+  run('pnpm', ['changelog']);
 
   consola.info('Git add');
-  run('git add .');
-  run(`git commit -m "chore: release v${version}"`);
-  run(`git tag -a v${version} -m "v${version}"`);
+  run('git', ['add', '.']);
+  run('git', ['commit', ['-m', `chore: release v${version}`]]);
+  run('git', ['tag', ['-a', `v${version}`], ['-m', `"v${version}"`]]);
 
   consola.info('Git push');
-  run('git push');
+  run('git', ['push']);
 
   consola.info('Git push tag');
-  run(`git push origin v${version}`);
+  run('git', ['push', 'origin', `v${version}`]);
 }
 
 function checkBranch() {
   const releaseBranch = 'main';
-  const currentBranch = run('git branch --show-current', {
+  const currentBranch = run('git', ['branch', '--show-current'], {
     stdio: 'pipe',
   })
     .toString()
@@ -64,7 +64,7 @@ async function inputVersion() {
     }>({
       type: 'input',
       name: 'version',
-      message: 'Enter a custom version number',
+      message: 'Enter a custom version',
       initial: currentVersion,
     });
     targetVersion = version;
@@ -73,7 +73,7 @@ async function inputVersion() {
   }
 
   if (!semver.valid(targetVersion) || !semver.lt(currentVersion, targetVersion)) {
-    exit(`Invalid version number: ${targetVersion}`);
+    exit(`Invalid version: ${targetVersion}`);
   }
 
   const { yes: confirmRelease } = await enquirer.prompt<{ yes: boolean }>({
@@ -109,7 +109,7 @@ function createReleases() {
 function exit(msg: string) {
   updateVersion(currentVersion);
   consola.error(msg || 'exit');
-  process.exit();
+  process.exit(1);
 }
 
 function updateVersion(version: string) {
